@@ -96,7 +96,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <link rel="alternate" type="text/markdown" href="/llms.txt" title="llms.txt — AI-readable summary" />
         <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="llms-full.txt — full AI-readable content" />
       </head>
-      <body className="flex min-h-dvh flex-col">
+      <body id="top" className="flex min-h-dvh flex-col">
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-gold focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-ink"

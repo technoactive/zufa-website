@@ -9,6 +9,8 @@ import type { NextConfig } from "next";
  * source to the explicit third parties we use: Google Analytics (consent-gated) and
  * the SevenRooms reservation widget.
  */
+const isDev = process.env.NODE_ENV === "development";
+
 const contentSecurityPolicy = [
   "default-src 'self'",
   "base-uri 'self'",
@@ -16,7 +18,8 @@ const contentSecurityPolicy = [
   "frame-ancestors 'none'",
   "form-action 'self'",
   "upgrade-insecure-requests",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.sevenrooms.com",
+  // React dev tooling (Fast Refresh, source-mapped stacks) needs eval; production never does.
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://*.sevenrooms.com`,
   "style-src 'self' 'unsafe-inline' https://*.sevenrooms.com",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data: https://*.sevenrooms.com",

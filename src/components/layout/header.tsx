@@ -3,11 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Menu as MenuIcon, X, Phone } from "lucide-react";
-import { navigation, site } from "@/content/site";
+import { X, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import { navigation, openingHours, site } from "@/content/site";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { InstagramIcon } from "@/components/ui/icons";
 import { Logo } from "./logo";
+import { OpenStatus } from "./open-status";
+
+const allLinks = [...navigation.primary, ...navigation.secondary];
+// Desktop bar carries the six commercial destinations; the drawer (always available) lists everything.
+const desktopLinks = allLinks.filter((item) => !["/our-story", "/contact"].includes(item.href));
 
 export function Header() {
   const pathname = usePathname();
@@ -46,101 +52,172 @@ export function Header() {
   }, [open]);
 
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
-  const allLinks = [...navigation.primary, ...navigation.secondary];
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-500",
-        scrolled ? "bg-ink/85 shadow-[0_1px_0_0_rgb(255_205_117/0.15)] backdrop-blur-md" : "bg-transparent",
-      )}
-    >
-      <div className="container-content flex h-(--header-height) items-center justify-between gap-6">
-        <Logo priority />
-
-        <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
-          {navigation.primary.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={isActive(item.href) ? "page" : undefined}
-              className={cn(
-                "relative text-[0.8125rem] font-semibold uppercase tracking-[0.16em] text-cream/85 transition-colors hover:text-gold",
-                "after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-gold after:transition-transform after:duration-300 hover:after:scale-x-100",
-                isActive(item.href) && "text-gold after:scale-x-100",
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-3">
+    <header className="fixed inset-x-0 top-0 z-50">
+      {/* ---- Utility strip: desktop only, folds away once the page scrolls ---- */}
+      <div
+        className={cn(
+          "hidden overflow-hidden transition-[max-height,opacity] duration-500 ease-(--ease-out-expo) lg:block",
+          scrolled ? "max-h-0 opacity-0" : "max-h-10 opacity-100",
+        )}
+        aria-hidden={scrolled}
+      >
+        <div className="container-content flex h-10 items-center justify-between text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-cream/60">
           <a
-            href={`tel:${site.phone.e164}`}
-            className="hidden items-center gap-2 text-sm text-cream/80 transition-colors hover:text-gold md:inline-flex lg:hidden xl:inline-flex"
+            href={site.maps.google}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 transition-colors hover:text-cream"
+            tabIndex={scrolled ? -1 : undefined}
           >
-            <Phone className="size-4" aria-hidden />
-            <span>{site.phone.display}</span>
+            <MapPin className="size-3 text-gold" aria-hidden />
+            {site.address.full}
           </a>
-          <Button href="/bookings" size="sm" className="hidden sm:inline-flex">
-            Book a table
-          </Button>
-          <button
-            type="button"
-            onClick={() => setOpen(true)}
-            aria-expanded={open}
-            aria-controls="mobile-navigation"
-            aria-label="Open menu"
-            className="inline-flex size-11 items-center justify-center rounded-full border border-cream/15 text-cream transition-colors hover:border-gold hover:text-gold"
-          >
-            <MenuIcon className="size-5" aria-hidden />
-          </button>
+          <div className="flex items-center gap-5">
+            <OpenStatus className="text-[0.6875rem] uppercase tracking-[0.18em]" />
+            <span className="h-3 w-px bg-cream/15" aria-hidden />
+            <a href={`tel:${site.phone.e164}`} className="inline-flex items-center gap-2 transition-colors hover:text-cream" tabIndex={scrolled ? -1 : undefined}>
+              <Phone className="size-3 text-gold" aria-hidden />
+              {site.phone.display}
+            </a>
+            <span className="h-3 w-px bg-cream/15" aria-hidden />
+            <a
+              href={site.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 transition-colors hover:text-cream"
+              tabIndex={scrolled ? -1 : undefined}
+            >
+              <InstagramIcon className="size-3 text-gold" />
+              {site.social.instagramHandle}
+            </a>
+          </div>
+        </div>
+        <div className="container-content">
+          <div className="h-px bg-gradient-to-r from-transparent via-cream/15 to-transparent" aria-hidden />
         </div>
       </div>
 
+      {/* ---- Main bar ---- */}
+      <div
+        className={cn(
+          "relative transition-[background-color,backdrop-filter] duration-500",
+          scrolled ? "bg-ink/85 backdrop-blur-xl supports-[backdrop-filter]:bg-ink/70" : "bg-transparent",
+        )}
+      >
+        <div className="container-content grid h-(--header-height) grid-cols-[auto_1fr_auto] items-center gap-4 lg:grid-cols-[1fr_auto_1fr]">
+          <Logo priority className="justify-self-start" />
+
+          <nav aria-label="Primary" className="hidden items-center lg:flex">
+            {desktopLinks.map((item) => {
+              const active = isActive(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "relative inline-flex h-10 items-center rounded-full px-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.16em] whitespace-nowrap transition-[color,background-color] duration-300",
+                    active ? "text-gold" : "text-cream/75 hover:bg-cream/[0.07] hover:text-cream",
+                    // Active indicator: a small gold point beneath the label (no underline).
+                    "after:absolute after:bottom-1 after:left-1/2 after:size-1 after:-translate-x-1/2 after:rounded-full after:bg-gold after:opacity-0 after:transition-opacity after:duration-300",
+                    active && "after:opacity-100",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="flex items-center justify-self-end gap-2 sm:gap-3">
+            <a
+              href={`tel:${site.phone.e164}`}
+              className="hidden h-10 items-center gap-2 rounded-full border border-cream/12 px-4 text-[0.75rem] font-semibold tracking-[0.08em] text-cream/80 transition-colors hover:border-cream/30 hover:text-cream md:inline-flex lg:hidden"
+            >
+              <Phone className="size-3.5 text-gold" aria-hidden />
+              {site.phone.display}
+            </a>
+            <Button href="/bookings" size="sm" className="hidden sm:inline-flex">
+              Book a table
+            </Button>
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-expanded={open}
+              aria-controls="site-navigation"
+              aria-label="Open navigation"
+              className="group inline-flex size-11 flex-col items-center justify-center gap-[5px] rounded-full border border-cream/12 text-cream transition-colors hover:border-gold/60"
+            >
+              <span className="block h-px w-[18px] bg-current transition-[width,background-color] duration-300 group-hover:bg-gold" aria-hidden />
+              <span className="block h-px w-[11px] bg-current transition-[width,background-color] duration-300 group-hover:w-[18px] group-hover:bg-gold" aria-hidden />
+            </button>
+          </div>
+        </div>
+
+        {/* Bottom hairline appears with the frosted background */}
+        <div
+          className={cn("hairline absolute inset-x-0 bottom-0 transition-opacity duration-500", scrolled ? "opacity-60" : "opacity-0")}
+          aria-hidden
+        />
+      </div>
+
+      {/* ---- Navigation drawer ---- */}
       <dialog
         ref={dialogRef}
-        id="mobile-navigation"
+        id="site-navigation"
         aria-label="Site navigation"
         onClose={() => setOpen(false)}
         onClick={(event) => {
           if (event.target === event.currentTarget) setOpen(false);
         }}
-        className="m-0 h-dvh max-h-none w-full max-w-none bg-transparent p-0 text-cream backdrop:bg-ink/70 backdrop:backdrop-blur-sm open:animate-fade-in"
+        className="m-0 h-dvh max-h-none w-full max-w-none bg-transparent p-0 text-cream backdrop:bg-ink/60 backdrop:backdrop-blur-sm open:animate-fade-in"
       >
-        <div className="ml-auto flex h-full w-full max-w-md flex-col bg-ink shadow-2xl ring-1 ring-gold/15">
-          <div className="flex h-(--header-height) items-center justify-between px-5 sm:px-8">
+        <div className="relative ml-auto flex h-full w-full max-w-md flex-col overflow-hidden bg-ink shadow-2xl ring-1 ring-gold/15 animate-slide-in-right">
+          <div
+            className="pointer-events-none absolute inset-0 bg-[url('/brand/arabesque-tile.png')] bg-[length:148px_148px] opacity-[0.05]"
+            aria-hidden
+          />
+          <div className="pointer-events-none absolute -top-32 -right-32 size-72 rounded-full bg-gold/10 blur-3xl" aria-hidden />
+
+          <div className="relative flex h-(--header-height) items-center justify-between px-6 sm:px-8">
             <Logo />
             <button
               type="button"
               onClick={() => setOpen(false)}
-              aria-label="Close menu"
-              className="inline-flex size-11 items-center justify-center rounded-full border border-cream/15 text-cream transition-colors hover:border-gold hover:text-gold"
+              aria-label="Close navigation"
+              className="inline-flex size-11 items-center justify-center rounded-full border border-cream/12 text-cream transition-colors hover:border-gold/60 hover:text-gold"
             >
               <X className="size-5" aria-hidden />
             </button>
           </div>
 
-          <nav aria-label="Mobile" className="flex-1 overflow-y-auto px-5 pb-8 pt-4 sm:px-8">
-            <ul className="space-y-1">
-              {allLinks.map((item, index) => (
-                <li key={item.href} style={{ animationDelay: `${index * 40}ms` }} className="animate-fade-up">
-                  <Link
-                    href={item.href}
-                    aria-current={isActive(item.href) ? "page" : undefined}
-                    className={cn(
-                      "flex items-center justify-between border-b border-cream/10 py-4 font-display text-3xl text-cream transition-colors hover:text-gold",
-                      isActive(item.href) && "text-gold",
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <nav aria-label="Site" className="relative flex-1 overflow-y-auto px-6 pt-6 pb-10 sm:px-8">
+            <ol className="space-y-1">
+              {allLinks.map((item, index) => {
+                const active = isActive(item.href);
+                return (
+                  <li key={item.href} style={{ animationDelay: `${80 + index * 45}ms` }} className="animate-fade-up">
+                    <Link
+                      href={item.href}
+                      aria-current={active ? "page" : undefined}
+                      className={cn(
+                        "group flex items-baseline gap-4 py-3 font-display text-[2rem] leading-none transition-colors",
+                        active ? "text-gold" : "text-cream hover:text-gold",
+                      )}
+                    >
+                      <span className="w-6 font-sans text-[0.625rem] font-semibold tracking-[0.2em] text-gold/60 transition-colors group-hover:text-gold">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="transition-transform duration-300 group-hover:translate-x-1">{item.label}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ol>
 
-            <div className="mt-8 space-y-4">
+            <div className="mt-8 grid gap-3 animate-fade-up [animation-delay:480ms]">
               <Button href="/bookings" className="w-full">
                 Book a table
               </Button>
@@ -149,19 +226,41 @@ export function Header() {
               </Button>
             </div>
 
-            <address className="mt-10 space-y-2 text-sm not-italic text-sand">
-              <p>{site.address.full}</p>
-              <p>
-                <a href={`tel:${site.phone.e164}`} className="hover:text-gold">
-                  {site.phone.display}
-                </a>
-              </p>
-              <p>
-                <a href={`mailto:${site.email}`} className="hover:text-gold">
-                  {site.email}
-                </a>
-              </p>
-            </address>
+            <div className="mt-10 grid gap-6 border-t border-cream/10 pt-8 text-sm text-sand animate-fade-up [animation-delay:560ms] sm:grid-cols-2">
+              <div className="space-y-3">
+                <p className="eyebrow text-[0.625rem]">Visit</p>
+                <address className="not-italic leading-relaxed">
+                  {site.address.street}
+                  <br />
+                  {site.address.locality}, {site.address.postalCode}
+                </address>
+                <p>
+                  <a href={`tel:${site.phone.e164}`} className="transition-colors hover:text-gold">
+                    {site.phone.display}
+                  </a>
+                </p>
+              </div>
+              <div className="space-y-3">
+                <p className="eyebrow text-[0.625rem]">Hours</p>
+                <ul className="space-y-1 leading-relaxed">
+                  {openingHours.map((period) => (
+                    <li key={period.label}>{period.label}</li>
+                  ))}
+                </ul>
+                <OpenStatus className="text-xs" />
+              </div>
+            </div>
+
+            <a
+              href={site.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-cream/70 transition-colors hover:text-gold animate-fade-up [animation-delay:620ms]"
+            >
+              <InstagramIcon className="size-4" />
+              {site.social.instagramHandle}
+              <ArrowUpRight className="size-3.5" aria-hidden />
+            </a>
           </nav>
         </div>
       </dialog>
