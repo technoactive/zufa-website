@@ -55,15 +55,24 @@ export function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
+      {/* Scrim: keeps the bar legible over bright hero photography until the frosted bar takes over. */}
+      <div
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute inset-x-0 top-0 h-[calc(var(--header-height)+9rem)] bg-gradient-to-b from-ink/95 via-ink/65 via-45% to-transparent transition-opacity duration-500",
+          scrolled ? "opacity-0" : "opacity-100",
+        )}
+      />
+
       {/* ---- Utility strip: desktop only, folds away once the page scrolls ---- */}
       <div
         className={cn(
-          "hidden overflow-hidden transition-[max-height,opacity] duration-500 ease-(--ease-out-expo) lg:block",
+          "relative hidden overflow-hidden transition-[max-height,opacity] duration-500 ease-(--ease-out-expo) lg:block",
           scrolled ? "max-h-0 opacity-0" : "max-h-10 opacity-100",
         )}
         aria-hidden={scrolled}
       >
-        <div className="container-content flex h-10 items-center justify-between text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-cream/60">
+        <div className="container-content flex h-10 items-center justify-between text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-cream/75">
           <a
             href={site.maps.google}
             target="_blank"
@@ -118,11 +127,11 @@ export function Header() {
                   href={item.href}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "relative inline-flex h-10 items-center rounded-full px-3.5 text-[0.75rem] font-semibold uppercase tracking-[0.16em] whitespace-nowrap transition-[color,background-color] duration-300",
-                    active ? "text-gold" : "text-cream/75 hover:bg-cream/[0.07] hover:text-cream",
-                    // Active indicator: a small gold point beneath the label (no underline).
-                    "after:absolute after:bottom-1 after:left-1/2 after:size-1 after:-translate-x-1/2 after:rounded-full after:bg-gold after:opacity-0 after:transition-opacity after:duration-300",
-                    active && "after:opacity-100",
+                    "relative inline-flex h-10 items-center rounded-full px-4 text-[0.75rem] font-semibold uppercase tracking-[0.16em] whitespace-nowrap transition-[color,background-color,box-shadow] duration-300",
+                    // Active page: a frosted gold pill with a fine gold keyline. Hover: soft cream pill.
+                    active
+                      ? "bg-gold/[0.14] text-gold shadow-[inset_0_0_0_1px_rgb(255_205_117/0.4),0_0_24px_-8px_rgb(255_205_117/0.5)] backdrop-blur-sm"
+                      : "text-cream hover:bg-cream/[0.08] hover:text-gold",
                   )}
                 >
                   {item.label}
@@ -134,7 +143,7 @@ export function Header() {
           <div className="flex items-center justify-self-end gap-2 sm:gap-3">
             <a
               href={`tel:${site.phone.e164}`}
-              className="hidden h-10 items-center gap-2 rounded-full border border-cream/12 px-4 text-[0.75rem] font-semibold tracking-[0.08em] text-cream/80 transition-colors hover:border-cream/30 hover:text-cream md:inline-flex lg:hidden"
+              className="hidden h-10 items-center gap-2 rounded-full border border-cream/15 px-4 text-[0.75rem] font-semibold tracking-[0.08em] text-cream transition-colors hover:border-gold/60 hover:text-gold md:inline-flex lg:hidden"
             >
               <Phone className="size-3.5 text-gold" aria-hidden />
               {site.phone.display}
@@ -148,7 +157,7 @@ export function Header() {
               aria-expanded={open}
               aria-controls="site-navigation"
               aria-label="Open navigation"
-              className="group inline-flex size-11 flex-col items-center justify-center gap-[5px] rounded-full border border-cream/12 text-cream transition-colors hover:border-gold/60"
+              className="group inline-flex size-11 flex-col items-center justify-center gap-[5px] rounded-full border border-cream/15 text-cream transition-colors hover:border-gold/60"
             >
               <span className="block h-px w-[18px] bg-current transition-[width,background-color] duration-300 group-hover:bg-gold" aria-hidden />
               <span className="block h-px w-[11px] bg-current transition-[width,background-color] duration-300 group-hover:w-[18px] group-hover:bg-gold" aria-hidden />
