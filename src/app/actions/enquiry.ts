@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { site } from "@/content/site";
+import { site, SITE_URL } from "@/content/site";
 
 export type EnquiryTopic = "catering" | "private-hire" | "general";
 
@@ -57,7 +57,7 @@ function escapeHtml(value: string): string {
 async function deliver(data: z.infer<typeof schema>): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.ENQUIRY_TO_EMAIL ?? site.email;
-  const from = process.env.ENQUIRY_FROM_EMAIL ?? `Zufa Website <website@${new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://zufa.co.uk").hostname}>`;
+  const from = process.env.ENQUIRY_FROM_EMAIL?.trim() || `Zufa Website <website@${new URL(SITE_URL).hostname}>`;
 
   const subject = `${topicLabels[data.topic]} from ${data.name}`;
   const rows: Array<[string, string | undefined]> = [

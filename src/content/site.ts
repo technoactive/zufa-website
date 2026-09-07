@@ -4,7 +4,23 @@
  * so a change in one place propagates everywhere.
  */
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://zufa.co.uk").replace(/\/$/, "");
+const DEFAULT_SITE_URL = "https://zufa.co.uk";
+
+/**
+ * Canonical origin. Falls back to the production domain when NEXT_PUBLIC_SITE_URL
+ * is unset, empty (as hosting dashboards often leave it) or not an absolute URL.
+ */
+function resolveSiteUrl(): string {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (!raw) return DEFAULT_SITE_URL;
+  try {
+    return new URL(raw).origin;
+  } catch {
+    return DEFAULT_SITE_URL;
+  }
+}
+
+export const SITE_URL = resolveSiteUrl();
 
 export const site = {
   name: "Zufa",

@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { site } from "@/content/site";
+import { site, SITE_URL } from "@/content/site";
 
 const schema = z.object({
   email: z.email("Please enter a valid email address").max(200),
@@ -17,7 +17,7 @@ export interface NewsletterState {
 async function deliver(email: string): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.ENQUIRY_TO_EMAIL ?? site.email;
-  const from = process.env.ENQUIRY_FROM_EMAIL ?? `Zufa Website <website@${new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://zufa.co.uk").hostname}>`;
+  const from = process.env.ENQUIRY_FROM_EMAIL?.trim() || `Zufa Website <website@${new URL(SITE_URL).hostname}>`;
   const text = `New newsletter subscriber via zufa.co.uk\n\nEmail: ${email}\nDate: ${new Date().toISOString()}`;
 
   if (!apiKey) {
