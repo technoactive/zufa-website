@@ -1,26 +1,239 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ------------------------------------------------------------------ */
+/* Design tokens                                                        */
+/* ------------------------------------------------------------------ */
+@theme {
+  /* Palette — warm, candle-lit, gold on near-black, with a cream counterpoint. */
+  --color-ink: #0c0b09;
+  --color-ink-soft: #14120f;
+  --color-charcoal: #1c1915;
+  --color-stone: #26221c;
+  --color-stone-light: #35302a;
+  --color-smoke: #8a8378;
+  --color-sand: #cdbfa6;
+  --color-cream: #f5eee1;
+  --color-cream-deep: #eadfca;
+  --color-parchment: #fbf7ef;
+  --color-gold: #ffcd75;
+  --color-gold-deep: #c9a24f;
+  --color-gold-dark: #8a6a26;
+  --color-terracotta: #c8582b;
+  --color-olive: #6f7150;
+  --color-danger: #e5484d;
+  --color-success: #3dbf7a;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Typography */
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-montserrat), Montserrat, "Helvetica Neue", Arial, sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Fluid type scale */
+  --text-display-xl: clamp(2.75rem, 2rem + 4vw, 6rem);
+  --text-display-xl--line-height: 0.98;
+  --text-display-xl--letter-spacing: -0.01em;
+  --text-display-lg: clamp(2.25rem, 1.6rem + 3vw, 4.25rem);
+  --text-display-lg--line-height: 1.02;
+  --text-display-lg--letter-spacing: -0.01em;
+  --text-display-md: clamp(1.75rem, 1.3rem + 1.8vw, 2.75rem);
+  --text-display-md--line-height: 1.1;
+  --text-display-sm: clamp(1.375rem, 1.15rem + 1vw, 1.875rem);
+  --text-display-sm--line-height: 1.2;
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1rem;
+  --text-eyebrow--letter-spacing: 0.22em;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-fade-up: fade-up 0.8s var(--ease-out-expo) both;
+  --animate-fade-in: fade-in 0.6s ease-out both;
+  --animate-consent-in: fade-up 0.6s var(--ease-out-expo) 1.2s both;
+  --animate-marquee: marquee 40s linear infinite;
+
+  /* Layout */
+  --container-content: 72rem;
+  --container-prose: 44rem;
+
+  /* Shadows */
+  --shadow-glow: 0 0 0 1px rgb(255 205 117 / 0.18), 0 24px 60px -24px rgb(255 205 117 / 0.25);
+  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 20px 40px -20px rgb(0 0 0 / 0.6);
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ------------------------------------------------------------------ */
+/* Base                                                                 */
+/* ------------------------------------------------------------------ */
+@layer base {
+  :root {
+    color-scheme: dark;
+    --header-height: 4.5rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: calc(var(--header-height) + 1rem);
+  }
+
+  body {
+    @apply bg-ink text-cream font-sans antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
+    min-height: 100dvh;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-medium text-balance;
+  }
+
+  p {
+    @apply text-pretty;
+  }
+
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  img,
+  video {
+    @apply block max-w-full;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Components / utilities                                               */
+/* ------------------------------------------------------------------ */
+@utility container-content {
+  @apply mx-auto w-full max-w-(--container-content) px-5 sm:px-8 lg:px-10;
+}
+
+@utility eyebrow {
+  @apply font-sans text-eyebrow font-semibold uppercase text-gold;
+}
+
+@utility hairline {
+  background-image: linear-gradient(90deg, transparent, var(--color-gold-deep), transparent);
+  height: 1px;
+}
+
+/* Subtle arabesque motif — tiled brand pattern with very low opacity. */
+@utility arabesque {
+  position: relative;
+  isolation: isolate;
+}
+@utility arabesque-overlay {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: url("/brand/arabesque-tile.png");
+  background-size: 148px 148px;
+  pointer-events: none;
+}
+
+/* Dotted price leader for menu rows. */
+@utility leader {
+  flex: 1 1 auto;
+  min-width: 1.25rem;
+  margin: 0 0.5rem;
+  border-bottom: 1px dotted currentColor;
+  opacity: 0.35;
+  transform: translateY(-0.35em);
+}
+
+/* Reveal-on-scroll: hidden until `.is-visible` is added by the Reveal component.
+   Visible by default when JS is disabled or motion is reduced. */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s var(--ease-out-expo),
+    transform 0.8s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible,
+.no-js .reveal {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Themed scrollbar for menu tab strips. */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media print {
+  header,
+  footer,
+  nav,
+  .print-hidden {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
 }
