@@ -1,6 +1,7 @@
 import type {
   BreadcrumbList,
   FAQPage,
+  ItemList,
   Menu as SchemaMenu,
   MenuItem as SchemaMenuItem,
   MenuSection as SchemaMenuSection,
@@ -16,6 +17,7 @@ import type {
 import { absoluteUrl, openingHours, site, SITE_URL, type DayOfWeek } from "@/content/site";
 import { menus, type Menu, type MenuItem } from "@/content/menus";
 import type { Faq } from "@/content/faqs";
+import type { Offer as SiteOffer } from "@/content/offers";
 
 export const RESTAURANT_ID = `${SITE_URL}/#restaurant`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
@@ -141,6 +143,33 @@ export function faqSchema(faqs: readonly Faq[]): WithContext<FAQPage> {
       "@type": "Question",
       name: faq.question,
       acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
+}
+
+/** What's On: every recurring offer and event as an ItemList of schema.org Offers. */
+export function offersSchema(items: readonly SiteOffer[], path = "/whats-on"): WithContext<ItemList> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${absoluteUrl(path)}#offers`,
+    name: `What’s on at ${site.name}`,
+    itemListOrder: "https://schema.org/ItemListOrderAscending",
+    numberOfItems: items.length,
+    itemListElement: items.map((offer, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Offer",
+        "@id": `${absoluteUrl(path)}#${offer.id}`,
+        name: offer.headline,
+        description: [offer.description, offer.details].filter(Boolean).join(" "),
+        url: absoluteUrl(`${path}#${offer.id}`),
+        availability: "https://schema.org/InStock",
+        availableAtOrFrom: { "@id": RESTAURANT_ID },
+        offeredBy: { "@id": RESTAURANT_ID },
+        ...(offer.image ? { image: absoluteUrl(offer.image.src) } : {}),
+      },
     })),
   };
 }

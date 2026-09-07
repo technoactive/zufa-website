@@ -28,6 +28,11 @@ export function formatTime(hhmm: string): string {
   return m === 0 ? `${hour}${suffix}` : `${hour}:${String(m).padStart(2, "0")}${suffix}`;
 }
 
+/** Weekday name for a given instant in the restaurant's time zone. */
+export function getLondonWeekday(now: Date, timeZone = "Europe/London"): DayOfWeek {
+  return new Intl.DateTimeFormat("en-GB", { timeZone, weekday: "long" }).format(now) as DayOfWeek;
+}
+
 export interface OpenStatus {
   isOpen: boolean;
   /** Human-readable next transition, e.g. "Closes at 11pm" or "Opens at 11am". */
