@@ -8,7 +8,7 @@ export default function Image() {
   return renderOgImage({
     title: "Zufa,",
     accent: "delivered",
-    subtitle: "Order for collection or delivery via Deliveroo, Uber Eats and Just Eat. 20% off your first online order.",
+    subtitle: "Order collection or delivery on this website — 20% off your first order here. Or use Deliveroo, Uber Eats and Just Eat.",
     image: "/images/dishes-detail.webp",
   });
 }

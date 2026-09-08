@@ -44,14 +44,14 @@ export default function TakeawayPage() {
         <div className="container-content">
           <Reveal className="mx-auto max-w-2xl text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-gold">
-              <Percent className="size-3.5" aria-hidden /> 20% off your first online order
+              <Percent className="size-3.5" aria-hidden /> 20% off your first order on this form
             </span>
             <SectionHeading
               align="center"
               className="mt-6"
               eyebrow="Order direct"
               title="Order from the kitchen, not the app"
-              description="Choose collection or delivery, pick your mezze and grills, and pay securely. Your order goes straight to our kitchen in Hatch End."
+              description="Choose collection or delivery, pick your mezze and grills, and pay securely. Your first order here is 20% off. That discount is only for this form — not Deliveroo, Uber Eats or Just Eat."
             />
           </Reveal>
           <div className="mt-12 lg:mt-16">
@@ -64,7 +64,7 @@ export default function TakeawayPage() {
       <Section tone="parchment">
         <div className="container-content">
           <Reveal className="mx-auto max-w-2xl text-center">
-            <SectionHeading light align="center" eyebrow="Prefer an app?" title="We’re on the delivery apps too" description="Same kitchen, same chefs, same fresh ingredients, if you already have an account and would rather order there." />
+            <SectionHeading light align="center" eyebrow="Prefer an app?" title="We’re on the delivery apps too" description="Same kitchen, same chefs, same fresh ingredients. The 20% first-order offer is only on the form above, not on these apps." />
           </Reveal>
 
           <ul className="mt-14 grid gap-6 md:grid-cols-3">

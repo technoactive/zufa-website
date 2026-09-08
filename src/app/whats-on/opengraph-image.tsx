@@ -8,7 +8,7 @@ export default function Image() {
   return renderOgImage({
     title: "What’s",
     accent: "On",
-    subtitle: "Corkage-free Mondays, 2-for-1 cocktails, weekday lunch deals and belly dancing nights.",
-    image: "/images/belly-dancer.jpg",
+    subtitle: "Corkage-free Mondays, 2-for-1 cocktails, weekday lunch deals and private parties.",
+    image: "/images/feast-table.jpg",
   });
 }

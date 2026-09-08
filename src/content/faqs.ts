@@ -38,7 +38,7 @@ export const generalFaqs: readonly Faq[] = [
   {
     question: "Does Zufa do takeaway or delivery?",
     answer:
-      "Yes. You can collect from the restaurant or order delivery through Deliveroo, Uber Eats and Just Eat. First-time online orders receive 20% off.",
+      "Yes. You can order collection or delivery on this website (20% off your first order, on that form only), collect by calling us, or use Deliveroo, Uber Eats and Just Eat. The 20% does not apply on the apps.",
   },
   {
     question: "Is Zufa licensed? Can I bring my own wine?",
@@ -71,9 +71,9 @@ export const privateHireFaqs: readonly Faq[] = [
     answer: `For tables or events of more than ${site.reservations.eventPartySize} guests, please call us on ${site.phone.display} or send an enquiry through our private hire form and a member of the team will be in touch.`,
   },
   {
-    question: "Can you arrange entertainment for my party?",
+    question: "Can we bring our own music or make a speech?",
     answer:
-      "Yes. Belly dancing shows are a Zufa favourite and can be arranged for private events. Tell us what you have in mind when you enquire and we’ll sort the timing around the food.",
+      "Yes. Bring a playlist and we’ll put it on, and there is space for a short speech. Tell us when you enquire if you’d like a cake plated with the coffee.",
   },
   {
     question: "How does private hire pricing work?",
@@ -133,6 +133,6 @@ export const cateringFaqs: readonly Faq[] = [
   },
   {
     question: "Could we hold the event at the restaurant instead?",
-    answer: `Yes. Zufa can be hired privately for up to ${site.capacity.seated} guests seated or ${site.capacity.standing} standing, with a licensed bar, patio and belly dancing on request. See our private hire page.`,
+    answer: `Yes. Zufa can be hired privately for up to ${site.capacity.seated} guests seated or ${site.capacity.standing} standing, with a licensed bar and patio. See our private hire page.`,
   },
 ];

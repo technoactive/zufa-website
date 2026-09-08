@@ -84,11 +84,7 @@ export default function BookingsPage() {
               </li>
             </ul>
             <p className="rounded-2xl border border-ink/10 bg-parchment p-5 text-sm leading-relaxed text-ink/70">
-              Celebrating something? Let us know in your booking notes and we’ll make the evening special.{" "}
-              <Link href="/whats-on#belly-dancing" className="text-gold-dark underline underline-offset-4">
-                Belly dancing shows
-              </Link>{" "}
-              run on selected evenings — ask when you book. Deciding what to eat? Have a look at the{" "}
+              Celebrating something? Let us know in your booking notes and we’ll make the evening special. Deciding what to eat? Have a look at the{" "}
               <Link href="/menu/a-la-carte" className="text-gold-dark underline underline-offset-4">
                 à la carte
               </Link>{" "}

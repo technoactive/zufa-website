@@ -250,7 +250,6 @@ export function privateHireSchema(): WithContext<EventVenue> {
       { "@type": "LocationFeatureSpecification", name: "Standing capacity", value: site.capacity.standing },
       { "@type": "LocationFeatureSpecification", name: "Fully licensed bar", value: true },
       { "@type": "LocationFeatureSpecification", name: "Outdoor patio", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Live entertainment (belly dancing)", value: true },
       { "@type": "LocationFeatureSpecification", name: "Free Wi-Fi", value: true },
       { "@type": "LocationFeatureSpecification", name: "Children's menu", value: true },
     ],

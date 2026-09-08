@@ -38,7 +38,7 @@ const tonightOffers: TonightOffer[] = regularOffers
 
 const tickerItems: TickerItem[] = [
   ...regularOffers.filter((offer) => offer.days?.length).map((offer) => ({ label: `${offer.short ?? offer.title} · ${offer.when}`, href: "/whats-on" })),
-  { label: "Live belly dancing nights", href: "/whats-on" },
+  { label: "20% off your first order on this website", href: "/takeaway#order-online" },
   { label: `Private hire for up to ${site.capacity.standing}`, href: "/private-hire" },
   { label: "Lebanese catering across North West London", href: "/catering" },
   { label: `Family-run since ${site.foundingYear}, Tannourine to Hatch End`, href: "/our-story" },
@@ -47,11 +47,11 @@ const tickerItems: TickerItem[] = [
 
 const marqueePhotos: MarqueePhoto[] = [
   { src: "/images/feast-table.jpg", alt: "A table of Lebanese dishes seen from above: lamb, salads, fatayer and a cocktail" },
-  { src: "/images/belly-dancer.jpg", alt: "A belly dancer performing between the tables at Zufa", portrait: true },
+  { src: "/images/sharing-table.jpg", alt: "A round table laden with sharing dishes and cocktails at Zufa", portrait: true },
   { src: "/images/restaurant-interior.jpg", alt: "The dining room at Zufa with its glass-leaf chandelier" },
   { src: "/images/warak-enab.jpg", alt: "Warak enab plated with pomegranate and yoghurt", portrait: true },
   { src: "/images/dinner-for-two.jpg", alt: "Grilled lamb and salmon with wine at Zufa" },
-  { src: "/images/sharing-table.jpg", alt: "A round table laden with sharing dishes and cocktails", portrait: true },
+  { src: "/images/mezze-spread.jpg", alt: "A spread of Lebanese mezze dishes at Zufa", portrait: true },
 ];
 
 const signatures = [
@@ -75,7 +75,7 @@ const signatures = [
   },
 ] as const;
 
-const bellyDancing = getOffer("belly-dancing")!;
+const corkageMonday = getOffer("byo-monday")!;
 
 export default function HomePage() {
   return (
@@ -350,19 +350,19 @@ function WhatsOn() {
       <div className="container-content grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
         <Reveal className="relative isolate flex min-h-[28rem] flex-col justify-end overflow-hidden rounded-[2rem] p-8 sm:p-10 lg:min-h-full">
           <Image
-            src={bellyDancing.image!.src}
-            alt={bellyDancing.image!.alt}
+            src={corkageMonday.image!.src}
+            alt={corkageMonday.image!.alt}
             fill
             sizes="(min-width: 1024px) 45vw, 100vw"
             className="-z-20 object-cover"
           />
           <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/60 to-ink/10" />
-          <p className="eyebrow">{bellyDancing.when}</p>
-          <h3 className="mt-4 max-w-sm font-display text-display-md text-cream">{bellyDancing.headline}</h3>
-          <p className="mt-3 max-w-sm text-[0.9375rem] leading-relaxed text-sand">{bellyDancing.description}</p>
+          <p className="eyebrow">{corkageMonday.when}</p>
+          <h3 className="mt-4 max-w-sm font-display text-display-md text-cream">{corkageMonday.headline}</h3>
+          <p className="mt-3 max-w-sm text-[0.9375rem] leading-relaxed text-sand">{corkageMonday.description}</p>
           <div className="mt-6">
-            <Button href={bellyDancing.cta.href} variant="secondary" size="sm">
-              <Phone className="size-3.5" aria-hidden /> {bellyDancing.cta.label}
+            <Button href={corkageMonday.cta.href} variant="secondary" size="sm">
+              {corkageMonday.cta.label}
             </Button>
           </div>
         </Reveal>
@@ -461,7 +461,7 @@ function EventsPanels() {
       text: "Close the doors, dim the lights and have the whole restaurant to yourselves for the evening. We look after the food, the bar and the music.",
       points: [
         `Up to ${site.capacity.seated} seated or ${site.capacity.standing} standing`,
-        "Licensed bar, patio and a belly dancer if you want one",
+        "Licensed bar, patio and the whole room to yourselves",
         "Engagements, birthdays, baby showers and work parties",
       ],
       href: "/private-hire",
@@ -573,28 +573,29 @@ function Takeaway() {
             align="center"
             eyebrow="Takeaway & delivery"
             title="Zufa at home"
-            description="Order for collection or have it delivered across Hatch End, Pinner and Harrow. 20% off your first online order."
+            description="Order for collection or have it delivered across Hatch End, Pinner and Harrow. 20% off when you order on this website — not on the apps."
           />
         </Reveal>
-        <Reveal delay={100} className="flex flex-wrap items-center justify-center gap-4">
-          {site.delivery.map((partner) => (
-            <a
-              key={partner.name}
-              href={partner.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Order Zufa on ${partner.name} (opens in a new tab)`}
-              className="inline-flex h-16 items-center gap-3 rounded-2xl border border-cream/10 bg-white pr-6 pl-3 text-ink transition-[border-color,transform] hover:-translate-y-0.5 hover:border-gold"
-            >
-              <Image src={partner.logo} alt="" width={96} height={128} className="h-11 w-auto object-contain" />
-              <span className="text-sm font-semibold">{partner.name}</span>
-            </a>
-          ))}
-        </Reveal>
-        <Reveal delay={200}>
-          <Button href="/takeaway" variant="secondary">
-            Takeaway options
+        <Reveal delay={100} className="flex flex-col items-center gap-6">
+          <Button href="/takeaway#order-online" size="lg">
+            Order on this website
           </Button>
+          <p className="text-sm text-sand">The apps are still there if you prefer — the 20% does not apply on them</p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            {site.delivery.map((partner) => (
+              <a
+                key={partner.name}
+                href={partner.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Order Zufa on ${partner.name} (opens in a new tab)`}
+                className="inline-flex h-16 items-center gap-3 rounded-2xl border border-cream/10 bg-white pr-6 pl-3 text-ink transition-[border-color,transform] hover:-translate-y-0.5 hover:border-gold"
+              >
+                <Image src={partner.logo} alt="" width={96} height={128} className="h-11 w-auto object-contain" />
+                <span className="text-sm font-semibold">{partner.name}</span>
+              </a>
+            ))}
+          </div>
         </Reveal>
       </div>
     </Section>

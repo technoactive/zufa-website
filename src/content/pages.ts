@@ -67,7 +67,7 @@ export const pages: readonly PageEntry[] = [
     path: "/takeaway",
     title: "Takeaway & Delivery",
     description:
-      "Order Zufa direct for collection or delivery in Hatch End, Pinner and Harrow — or use Deliveroo, Uber Eats and Just Eat. 20% off your first online order.",
+      "Order Zufa on this website for collection or delivery in Hatch End, Pinner and Harrow. 20% off your first order here — not on the apps.",
     changeFrequency: "monthly",
     priority: 0.8,
     lastModified: CONTENT_UPDATED,
@@ -78,11 +78,11 @@ export const pages: readonly PageEntry[] = [
     path: "/whats-on",
     title: "What’s On",
     description:
-      "Offers and events at Zufa: corkage-free Mondays, 2-for-1 cocktails Monday to Friday, weekday lunch deals, belly dancing nights and private parties.",
+      "Offers and events at Zufa: corkage-free Mondays, 2-for-1 cocktails Monday to Friday, weekday lunch deals and private parties.",
     changeFrequency: "weekly",
     priority: 0.8,
     lastModified: CONTENT_UPDATED,
-    image: "/images/belly-dancer.jpg",
+    image: "/images/feast-table.jpg",
     section: "Events & Services",
   },
   {
@@ -102,7 +102,7 @@ export const pages: readonly PageEntry[] = [
     title: "Private Hire & Party Venue in Hatch End | Zufa",
     absoluteTitle: true,
     description:
-      "Hire Zufa in Hatch End for birthdays, engagements, baby showers and work parties. Up to 60 seated or 80 standing, licensed bar, patio and belly dancing.",
+      "Hire Zufa in Hatch End for birthdays, engagements, baby showers and work parties. Up to 60 seated or 80 standing, licensed bar and patio.",
     changeFrequency: "monthly",
     priority: 0.9,
     lastModified: SERVICES_UPDATED,

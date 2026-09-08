@@ -27,7 +27,7 @@ const whatToTellUs = [
   "The occasion",
   "Sit-down dinner or standing with mezze",
   "Anyone vegetarian, vegan or with allergies",
-  "Belly dancer, cake, speeches, playlist",
+  "Cake, speeches, playlist",
 ];
 
 export default function PrivateHirePage() {
@@ -153,8 +153,8 @@ export default function PrivateHirePage() {
             <Button href="/menu/drinks" variant="light" size="sm">
               Drinks
             </Button>
-            <Button href="/whats-on#belly-dancing" variant="light" size="sm">
-              Belly dancing nights
+            <Button href="/whats-on" variant="light" size="sm">
+              What’s on this week
             </Button>
           </Reveal>
         </div>
@@ -194,7 +194,7 @@ export default function PrivateHirePage() {
             <p className="mt-3 text-base leading-relaxed text-ink/70">Dates, numbers, the occasion. We’ll do the rest.</p>
             <EnquiryForm
               topic="private-hire"
-              placeholder="Occasion, whether you’d like a set menu or à la carte, belly dancing, a cake, dietary requirements…"
+              placeholder="Occasion, whether you’d like a set menu or à la carte, a cake, dietary requirements…"
               submitLabel="Check availability"
               className="mt-8"
             />

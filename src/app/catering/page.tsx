@@ -267,7 +267,7 @@ export default function CateringPage() {
             Rather not host? <em className="italic text-gold">Hire the restaurant.</em>
           </>
         }
-        description={`Zufa can be yours for the night: up to ${site.capacity.seated} seated or ${site.capacity.standing} standing, a licensed bar, the patio and a belly dancer if you want one.`}
+        description={`Zufa can be yours for the night: up to ${site.capacity.seated} seated or ${site.capacity.standing} standing, a licensed bar and the patio.`}
         primary={{ label: "Private hire", href: "/private-hire" }}
         secondary={{ label: "See what’s on", href: "/whats-on" }}
       />

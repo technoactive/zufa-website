@@ -45,7 +45,7 @@ export function Footer() {
               So is good news.
             </h2>
             <p className="mt-6 max-w-lg text-[0.9375rem] leading-relaxed text-sand">
-              Seasonal set menus, belly dancing nights, corkage-free Mondays and the occasional recipe from Tannourine — once or twice a
+              Seasonal set menus, corkage-free Mondays and the occasional recipe from Tannourine — once or twice a
               month, never more.
             </p>
           </div>
@@ -182,10 +182,11 @@ export function Footer() {
         {/* ---- 3. Partners ---- */}
         <div className="flex flex-col gap-6 py-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-sand">
-            Order Zufa at home —{" "}
-            <Link href="/takeaway" className="text-cream underline-offset-4 transition-colors hover:text-gold hover:underline">
-              20% off your first online order
+            Prefer the apps? We’re on Deliveroo, Uber Eats and Just Eat. To get{" "}
+            <Link href="/takeaway#order-online" className="text-cream underline-offset-4 transition-colors hover:text-gold hover:underline">
+              20% off your first order, use the form on this website
             </Link>
+            .
           </p>
           <ul className="flex items-center gap-3">
             {site.delivery.map((partner) => (

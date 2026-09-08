@@ -118,7 +118,7 @@ export const privateHire = {
   path: "/private-hire",
   name: "Zufa private hire",
   serviceType: "Private venue hire",
-  summary: `Hire Zufa in Hatch End for birthdays, engagements, baby showers, hen and stag nights and company parties: up to ${site.capacity.seated} guests seated or ${site.capacity.standing} standing, a licensed bar with Lebanese wines and cocktails, an al fresco patio and belly dancing on request.`,
+  summary: `Hire Zufa in Hatch End for birthdays, engagements, baby showers, hen and stag nights and company parties: up to ${site.capacity.seated} guests seated or ${site.capacity.standing} standing, a licensed bar with Lebanese wines and cocktails, and an al fresco patio.`,
   intro: `On the nights you take over the restaurant, it’s yours: the dining room, the patio, the bar and the kitchen behind it. Up to ${site.capacity.seated} people sit down to a proper Lebanese spread, or ${site.capacity.standing} stand with a glass of Ksara and a plate of mezze. Hatch End Overground is a short walk and there’s parking on the street.`,
   facts: [
     { value: String(site.capacity.seated), label: "Guests seated around shared tables" },
@@ -129,7 +129,6 @@ export const privateHire = {
   features: [
     "Fully licensed bar: Lebanese wines, arak, Almaza and house cocktails",
     "Al fresco patio for summer parties and a breath of air between courses",
-    "Live belly dancing arranged for your night",
     "Set menus from £36.75 per person, or à la carte for smaller parties",
     "Vegetarian, vegan and allergen information on every dish",
     "Kids menu for family celebrations",
@@ -147,7 +146,7 @@ export const privateHire = {
     },
     {
       title: "Hen and stag nights",
-      text: "Cocktails from the bar, sharing platters that keep coming, and a belly dancer who will absolutely pull the bride-to-be up to dance.",
+      text: "Cocktails from the bar, sharing platters that keep coming, and the whole restaurant to yourselves for the night.",
     },
     {
       title: "Baby showers and christenings",
@@ -173,13 +172,13 @@ export const privateHire = {
     },
     {
       title: "Sort the drinks and the extras",
-      text: "Wines from Château Ksara, Musar and Belle-Vue, arak, Almaza, our own cocktails and mocktails for anyone driving. Ask about a belly dancing show, a playlist of your own or a cake we can plate for you.",
+      text: "Wines from Château Ksara, Musar and Belle-Vue, arak, Almaza, our own cocktails and mocktails for anyone driving. Bring a playlist, or a cake we can plate with the coffee.",
     },
   ] as const satisfies readonly ServiceStep[],
   gallery: [
     { src: "/images/restaurant-interior.jpg", alt: "The dining room at Zufa set for an evening, with the bar lit behind" },
     { src: "/images/feast-table.jpg", alt: "A long table of Lebanese sharing dishes at a private party at Zufa" },
-    { src: "/images/belly-dancer.jpg", alt: "A belly dancer performing between the tables at a private event at Zufa" },
+    { src: "/images/sharing-table.jpg", alt: "A long table of Lebanese sharing dishes at a private party at Zufa" },
     { src: "/images/dinner-for-two.jpg", alt: "Wine and chargrilled dishes on a table at Zufa" },
   ] as const,
 } as const;

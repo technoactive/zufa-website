@@ -3,8 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Route } from "next";
 import type { ReactNode } from "react";
-import { ArrowRight, Clock, Martini, MessageCircle, Music, PartyPopper, Phone, ShoppingBag, Sparkles, UtensilsCrossed, Wine } from "lucide-react";
-import { InstagramIcon as Instagram } from "@/components/ui/icons";
+import { ArrowRight, Clock, Martini, PartyPopper, Phone, ShoppingBag, Sparkles, UtensilsCrossed, Wine } from "lucide-react";
 import { PageHero } from "@/components/blocks/page-hero";
 import { CtaBand } from "@/components/blocks/cta-band";
 import { WeekPlanner, type PlannerDay } from "@/components/blocks/week-planner";
@@ -28,7 +27,6 @@ const icons: Record<string, ReactNode> = {
   "cocktails-241": <Martini className="size-5" aria-hidden />,
   lunch: <UtensilsCrossed className="size-5" aria-hidden />,
   "first-order": <ShoppingBag className="size-5" aria-hidden />,
-  "belly-dancing": <Music className="size-5" aria-hidden />,
   "private-hire": <PartyPopper className="size-5" aria-hidden />,
 };
 
@@ -47,7 +45,6 @@ const plannerDays: PlannerDay[] = dayOrder.map((day) => {
   };
 });
 
-const bellyDancing = getOffer("belly-dancing")!;
 const privateHire = getOffer("private-hire")!;
 
 export default function WhatsOnPage() {
@@ -60,8 +57,8 @@ export default function WhatsOnPage() {
             Offers, nights out and <em className="italic text-gold">celebrations</em>
           </>
         }
-        description="Corkage-free Mondays, two-for-one cocktails, weekday lunch deals, belly dancing nights and private parties — there is always a reason to visit Zufa."
-        image={{ src: "/images/belly-dancer.jpg", alt: "A belly dancer performing at Zufa" }}
+        description="Corkage-free Mondays, two-for-one cocktails, weekday lunch deals and private parties — there is always a reason to visit Zufa."
+        image={{ src: "/images/feast-table.jpg", alt: "A table of Lebanese dishes at Zufa Hatch End" }}
         crumbs={[{ name: "What’s On", path: "/whats-on" }]}
       >
         <Button href="/bookings" size="lg">
@@ -74,7 +71,6 @@ export default function WhatsOnPage() {
 
       <WeekAtZufa />
       <Offers />
-      <BellyDancing />
       <PressQuote />
       <PrivateHire />
       <CtaBand />
@@ -244,89 +240,6 @@ function OfferCard({ offer, index }: { offer: Offer; index: number }) {
         {offer.cta.label} <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" aria-hidden />
       </Link>
     </article>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-
-function BellyDancing() {
-  const offer = bellyDancing;
-  const points = [
-    "A live show between courses on selected evenings",
-    "Tables go fast — book ahead and ask for the next date",
-    "Shows can be arranged for private parties and celebrations",
-  ];
-
-  return (
-    <Section tone="charcoal" id={offer.id} className="relative overflow-hidden scroll-mt-20">
-      <div aria-hidden className="pointer-events-none absolute -left-40 bottom-0 -z-10 size-[34rem] rounded-full bg-terracotta/10 blur-3xl" />
-      <div className="container-content grid items-stretch gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
-        <Reveal className="relative">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-card lg:aspect-auto lg:h-full lg:min-h-[32rem]">
-            {offer.image ? (
-              <Image src={offer.image.src} alt={offer.image.alt} fill sizes="(min-width: 1024px) 50vw, 100vw" quality={85} className="object-cover" />
-            ) : null}
-            <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />
-            <p className="absolute left-6 top-6 inline-flex items-center gap-2 rounded-full border border-cream/20 bg-ink/60 px-3.5 py-1.5 text-[0.6875rem] font-semibold uppercase tracking-[0.16em] text-cream backdrop-blur-md sm:left-8 sm:top-8">
-              <span aria-hidden className="size-1.5 rounded-full bg-gold" /> Live at Zufa
-            </p>
-          </div>
-          <div className="absolute -bottom-6 left-6 flex items-center gap-4 rounded-2xl border border-gold/25 bg-ink/90 px-5 py-4 shadow-glow backdrop-blur-md sm:-bottom-8 sm:left-10">
-            <span className="inline-flex size-11 items-center justify-center rounded-full bg-gold text-ink">
-              <Music className="size-5" aria-hidden />
-            </span>
-            <div>
-              <p className="font-display text-2xl leading-none text-cream">Selected evenings</p>
-              <p className="mt-1.5 text-xs uppercase tracking-[0.16em] text-sand">Call for the next show</p>
-            </div>
-          </div>
-        </Reveal>
-
-        <Reveal delay={120} className="flex flex-col justify-center lg:pl-4">
-          <SectionHeading eyebrow="Live entertainment" title="Belly dancing nights" description={offer.description} />
-
-          <ul className="mt-8 space-y-3">
-            {points.map((point) => (
-              <li key={point} className="flex items-start gap-3 text-base text-cream/90">
-                <Sparkles className="mt-1 size-4 shrink-0 text-gold" aria-hidden />
-                <span>{point}</span>
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Button href={offer.cta.href}>
-              <Phone className="size-4" aria-hidden /> {offer.cta.label}
-            </Button>
-            <Button href="/private-hire" variant="secondary">
-              Plan a private party
-            </Button>
-          </div>
-
-          <div className="mt-10 border-t border-cream/10 pt-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Hear about the next show first</p>
-            <div className="mt-4 flex flex-wrap gap-3">
-              <a
-                href={site.social.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-cream/15 px-4 py-2.5 text-sm text-cream transition-colors hover:border-gold hover:text-gold"
-              >
-                <Instagram className="size-4" aria-hidden /> {site.social.instagramHandle}
-              </a>
-              <a
-                href={site.whatsapp.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-cream/15 px-4 py-2.5 text-sm text-cream transition-colors hover:border-gold hover:text-gold"
-              >
-                <MessageCircle className="size-4" aria-hidden /> WhatsApp {site.whatsapp.display}
-              </a>
-            </div>
-          </div>
-        </Reveal>
-      </div>
-    </Section>
   );
 }
 
