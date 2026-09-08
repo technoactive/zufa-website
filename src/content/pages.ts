@@ -23,7 +23,7 @@ export const pages: readonly PageEntry[] = [
     path: "/",
     title: "Zufa — Authentic Lebanese Restaurant in Hatch End",
     description:
-      "Family-run Lebanese restaurant in Hatch End, London. Fresh mezze, chargrilled meats, saj bread, Lebanese wines and cocktails. Book a table, order takeaway or enquire about catering and private hire.",
+      "Family-run Lebanese restaurant in Hatch End, London. Fresh mezze, charcoal grills, saj bread and Lebanese wines. Book a table, order takeaway or hire the room.",
     changeFrequency: "weekly",
     priority: 1,
     lastModified: CONTENT_UPDATED,
@@ -43,7 +43,8 @@ export const pages: readonly PageEntry[] = [
   },
   ...menus.map<PageEntry>((menu) => ({
     path: `/menu/${menu.slug}`,
-    title: menu.title,
+    // Long menu titles get the short form so the full <title> stays under ~60 characters.
+    title: menu.title.length > 24 ? menu.shortTitle : menu.title,
     description: menu.summary,
     changeFrequency: "monthly",
     priority: 0.8,
@@ -89,7 +90,7 @@ export const pages: readonly PageEntry[] = [
     title: "Lebanese Catering in Harrow, Pinner & NW London | Zufa",
     absoluteTitle: true,
     description:
-      "Lebanese catering for weddings, birthdays, family gatherings and office lunches across Harrow, Pinner, Northwood, Ruislip, Stanmore and Watford. Mezze, charcoal grills and desserts made from scratch. Get a per-head quote.",
+      "Lebanese catering for weddings, parties and office lunches across Harrow, Pinner, Northwood and Watford. Mezze and charcoal grills made from scratch.",
     changeFrequency: "monthly",
     priority: 0.9,
     lastModified: SERVICES_UPDATED,
@@ -101,7 +102,7 @@ export const pages: readonly PageEntry[] = [
     title: "Private Hire & Party Venue in Hatch End | Zufa",
     absoluteTitle: true,
     description:
-      "Hire Zufa for birthdays, engagements, baby showers, hen nights and company parties. Up to 60 seated or 80 standing, licensed bar, patio and belly dancing, minutes from Pinner and Harrow.",
+      "Hire Zufa in Hatch End for birthdays, engagements, baby showers and work parties. Up to 60 seated or 80 standing, licensed bar, patio and belly dancing.",
     changeFrequency: "monthly",
     priority: 0.9,
     lastModified: SERVICES_UPDATED,

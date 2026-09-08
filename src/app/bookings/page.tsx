@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Phone, Users, Clock, MapPin, MessageCircle } from "lucide-react";
 import { PageHero } from "@/components/blocks/page-hero";
 import { ReservationWidget } from "@/components/blocks/reservation-widget";
@@ -51,9 +52,9 @@ export default function BookingsPage() {
                       {site.phone.display}
                     </a>
                     . Events for more than {site.reservations.eventPartySize} can be arranged through{" "}
-                    <a href="/private-hire" className="text-gold-dark underline underline-offset-4">
+                    <Link href="/private-hire" className="text-gold-dark underline underline-offset-4">
                       private hire
-                    </a>
+                    </Link>
                     .
                   </p>
                 </div>
@@ -83,7 +84,23 @@ export default function BookingsPage() {
               </li>
             </ul>
             <p className="rounded-2xl border border-ink/10 bg-parchment p-5 text-sm leading-relaxed text-ink/70">
-              Celebrating something? Let us know in your booking notes and we’ll make the evening special. Belly dancing shows run on selected evenings — ask when you book.
+              Celebrating something? Let us know in your booking notes and we’ll make the evening special.{" "}
+              <Link href="/whats-on#belly-dancing" className="text-gold-dark underline underline-offset-4">
+                Belly dancing shows
+              </Link>{" "}
+              run on selected evenings — ask when you book. Deciding what to eat? Have a look at the{" "}
+              <Link href="/menu/a-la-carte" className="text-gold-dark underline underline-offset-4">
+                à la carte
+              </Link>{" "}
+              or, for groups, the{" "}
+              <Link href="/menu/set-menus" className="text-gold-dark underline underline-offset-4">
+                set menus
+              </Link>
+              . Mondays are{" "}
+              <Link href="/whats-on#byo-monday" className="text-gold-dark underline underline-offset-4">
+                corkage-free
+              </Link>
+              , so bring a bottle.
             </p>
           </Reveal>
 
