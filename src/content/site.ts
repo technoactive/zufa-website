@@ -109,7 +109,7 @@ export const site = {
     },
     {
       name: "Just Eat",
-      url: "https://www.just-eat.co.uk/restaurants-zufa-pinner/menu",
+      url: "https://www.just-eat.co.uk/restaurants-zufa-hatch-end-pinner/menu",
       logo: "/brand/just-eat-logo.png",
     },
   ],
