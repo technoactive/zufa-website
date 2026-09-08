@@ -12,8 +12,31 @@ import { Logo } from "./logo";
 import { OpenStatus } from "./open-status";
 
 const allLinks = [...navigation.primary, ...navigation.secondary];
-// Desktop bar carries the six commercial destinations; the drawer (always available) lists everything.
-const desktopLinks = allLinks.filter((item) => !["/our-story", "/contact"].includes(item.href));
+// Desktop bar: links flank a centred logo. Bookings is covered by the gold CTA, and the
+// drawer (always available) lists everything including Our Story and Contact.
+const leftLinks = navigation.primary.filter((item) => item.href !== "/bookings");
+const rightLinks = navigation.secondary.filter((item) => !["/our-story", "/contact"].includes(item.href));
+
+interface NavItemProps {
+  item: (typeof allLinks)[number];
+  active: boolean;
+}
+
+/** Serif nav link: cream, gold on hover; the current page is set in gold italic. */
+function NavItem({ item, active }: NavItemProps) {
+  return (
+    <Link
+      href={item.href}
+      aria-current={active ? "page" : undefined}
+      className={cn(
+        "inline-flex h-10 items-center px-3.5 font-display text-[1.125rem] font-medium leading-none tracking-[0.02em] whitespace-nowrap transition-colors duration-300",
+        active ? "italic text-gold" : "text-cream hover:text-gold",
+      )}
+    >
+      {item.label}
+    </Link>
+  );
+}
 
 export function Header() {
   const pathname = usePathname();
@@ -108,68 +131,65 @@ export function Header() {
         </div>
       </div>
 
-      {/* ---- Main bar ---- */}
-      <div
-        className={cn(
-          "relative transition-[background-color,backdrop-filter] duration-500",
-          scrolled ? "bg-ink/85 backdrop-blur-xl supports-[backdrop-filter]:bg-ink/70" : "bg-transparent",
-        )}
-      >
-        <div className="container-content grid h-(--header-height) grid-cols-[auto_1fr_auto] items-center gap-4 lg:grid-cols-[1fr_auto_1fr]">
-          <Logo priority className="justify-self-start" />
+      {/* ---- Main bar: full-bleed over the hero, condenses into a floating frosted capsule on scroll ---- */}
+      <div className={cn("relative transition-[padding] duration-500 ease-(--ease-out-expo)", scrolled && "px-3 pt-2.5 sm:px-5 sm:pt-3")}>
+        <div
+          className={cn(
+            "relative mx-auto border transition-[max-width,border-color,background-color,border-radius,box-shadow] duration-500 ease-(--ease-out-expo)",
+            scrolled
+              ? "max-w-[76rem] rounded-full border-gold/20 bg-ink/80 shadow-[0_24px_60px_-24px_rgb(0_0_0/0.85),inset_0_1px_0_rgb(255_205_117/0.14)] backdrop-blur-xl supports-[backdrop-filter]:bg-ink/70"
+              : "max-w-none rounded-none border-transparent bg-transparent",
+          )}
+        >
+          <div
+            className={cn(
+              "container-content grid grid-cols-[auto_1fr] items-center gap-3 transition-[height] duration-500 ease-(--ease-out-expo) lg:grid-cols-[1fr_auto_1fr] lg:gap-6",
+              scrolled ? "h-16" : "h-(--header-height)",
+            )}
+          >
+            {/* Left nav (desktop) */}
+            <nav aria-label="Primary" className="hidden items-center justify-self-start lg:flex">
+              {leftLinks.map((item) => (
+                <NavItem key={item.href} item={item} active={isActive(item.href)} />
+              ))}
+            </nav>
 
-          <nav aria-label="Primary" className="hidden items-center lg:flex">
-            {desktopLinks.map((item) => {
-              const active = isActive(item.href);
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  aria-current={active ? "page" : undefined}
-                  className={cn(
-                    "relative inline-flex h-10 items-center rounded-full px-4 text-[0.75rem] font-semibold uppercase tracking-[0.16em] whitespace-nowrap transition-[color,background-color,box-shadow] duration-300",
-                    // Active page: a frosted gold pill with a fine gold keyline. Hover: soft cream pill.
-                    active
-                      ? "bg-gold/[0.14] text-gold shadow-[inset_0_0_0_1px_rgb(255_205_117/0.4),0_0_24px_-8px_rgb(255_205_117/0.5)] backdrop-blur-sm"
-                      : "text-cream hover:bg-cream/[0.08] hover:text-gold",
-                  )}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
+            {/* Logo: leads on mobile, sits centred on desktop */}
+            <div className={cn("justify-self-start transition-transform duration-500 ease-(--ease-out-expo) lg:justify-self-center", scrolled && "scale-[0.86]")}>
+              <Logo priority />
+            </div>
 
-          <div className="flex items-center justify-self-end gap-2 sm:gap-3">
-            <a
-              href={`tel:${site.phone.e164}`}
-              className="hidden h-10 items-center gap-2 rounded-full border border-cream/15 px-4 text-[0.75rem] font-semibold tracking-[0.08em] text-cream transition-colors hover:border-gold/60 hover:text-gold md:inline-flex lg:hidden"
-            >
-              <Phone className="size-3.5 text-gold" aria-hidden />
-              {site.phone.display}
-            </a>
-            <Button href="/bookings" size="sm" className="hidden sm:inline-flex">
-              Book a table
-            </Button>
-            <button
-              type="button"
-              onClick={() => setOpen(true)}
-              aria-expanded={open}
-              aria-controls="site-navigation"
-              aria-label="Open navigation"
-              className="group inline-flex size-11 flex-col items-center justify-center gap-[5px] rounded-full border border-cream/15 text-cream transition-colors hover:border-gold/60"
-            >
-              <span className="block h-px w-[18px] bg-current transition-[width,background-color] duration-300 group-hover:bg-gold" aria-hidden />
-              <span className="block h-px w-[11px] bg-current transition-[width,background-color] duration-300 group-hover:w-[18px] group-hover:bg-gold" aria-hidden />
-            </button>
+            {/* Right nav + actions */}
+            <div className="flex items-center justify-self-end gap-2 sm:gap-3">
+              <nav aria-label="Services" className="hidden items-center lg:flex lg:mr-3">
+                {rightLinks.map((item) => (
+                  <NavItem key={item.href} item={item} active={isActive(item.href)} />
+                ))}
+              </nav>
+              <a
+                href={`tel:${site.phone.e164}`}
+                className="hidden h-10 items-center gap-2 rounded-full border border-cream/15 px-4 text-[0.75rem] font-semibold tracking-[0.08em] text-cream transition-colors hover:border-gold/60 hover:text-gold md:inline-flex lg:hidden"
+              >
+                <Phone className="size-3.5 text-gold" aria-hidden />
+                {site.phone.display}
+              </a>
+              <Button href="/bookings" size="sm" className="hidden sm:inline-flex">
+                Book a table
+              </Button>
+              <button
+                type="button"
+                onClick={() => setOpen(true)}
+                aria-expanded={open}
+                aria-controls="site-navigation"
+                aria-label="Open navigation"
+                className="group inline-flex size-11 flex-col items-center justify-center gap-[5px] rounded-full border border-cream/15 text-cream transition-colors hover:border-gold/60"
+              >
+                <span className="block h-px w-[18px] bg-current transition-[width,background-color] duration-300 group-hover:bg-gold" aria-hidden />
+                <span className="block h-px w-[11px] bg-current transition-[width,background-color] duration-300 group-hover:w-[18px] group-hover:bg-gold" aria-hidden />
+              </button>
+            </div>
           </div>
         </div>
-
-        {/* Bottom hairline appears with the frosted background */}
-        <div
-          className={cn("hairline absolute inset-x-0 bottom-0 transition-opacity duration-500", scrolled ? "opacity-60" : "opacity-0")}
-          aria-hidden
-        />
       </div>
 
       {/* ---- Navigation drawer ---- */}
