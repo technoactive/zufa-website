@@ -40,14 +40,13 @@ export default function TakeawayPage() {
         </Button>
       </PageHero>
 
-      <Section tone="cream" pattern id="order-online" className="scroll-mt-20">
+      <Section tone="ink" pattern id="order-online" className="scroll-mt-20 overflow-hidden">
         <div className="container-content">
           <Reveal className="mx-auto max-w-2xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-gold-deep/40 bg-gold/20 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-gold-dark">
+            <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-gold">
               <Percent className="size-3.5" aria-hidden /> 20% off your first online order
             </span>
             <SectionHeading
-              light
               align="center"
               className="mt-6"
               eyebrow="Order direct"
@@ -55,7 +54,7 @@ export default function TakeawayPage() {
               description="Choose collection or delivery, pick your mezze and grills, and pay securely. Your order goes straight to our kitchen in Hatch End."
             />
           </Reveal>
-          <div className="mt-12">
+          <div className="mt-12 lg:mt-16">
             <OrderingWidget />
           </div>
           <Script src={site.ordering.script} strategy="afterInteractive" />

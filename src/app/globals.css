@@ -274,6 +274,198 @@
   }
 }
 
+/* ------------------------------------------------------------------ */
+/* Flipdish ordering embed — restyle the vendor UI to sit on Zufa.       */
+/* Target only stable .fd-* / .Mui* selectors (budapest* classes change). */
+/* ------------------------------------------------------------------ */
+#flipdish-menu {
+  --fdPrimaryColor: var(--color-gold-deep);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+}
+
+#flipdish-menu #flipdish-budapest,
+#flipdish-menu #flipdish-budapest > div,
+#flipdish-menu .fd-page,
+#flipdish-menu .fd-content__main,
+#flipdish-menu .fd-section__profile-panel {
+  width: 100% !important;
+  max-width: none !important;
+  background: transparent !important;
+  color: var(--color-cream) !important;
+  font-family: var(--font-sans) !important;
+}
+
+/* We already introduce the restaurant; Flipdish's own title duplicates it. */
+#flipdish-menu .fd-header {
+  display: none !important;
+}
+
+#flipdish-menu .fd-text,
+#flipdish-menu .MuiTypography-root,
+#flipdish-menu .MuiButton-root,
+#flipdish-menu .MuiTab-root,
+#flipdish-menu input,
+#flipdish-menu textarea,
+#flipdish-menu button {
+  font-family: var(--font-sans) !important;
+}
+
+#flipdish-menu .fd-text__h1,
+#flipdish-menu .fd-text__h2,
+#flipdish-menu .MuiTypography-h1,
+#flipdish-menu .MuiTypography-h2 {
+  font-family: var(--font-display) !important;
+  font-weight: 500 !important;
+  color: var(--color-cream) !important;
+  letter-spacing: -0.01em;
+}
+
+#flipdish-menu .fd-text__body1,
+#flipdish-menu .fd-text__body2,
+#flipdish-menu .fd-text__body2-secondary {
+  color: var(--color-sand) !important;
+}
+
+#flipdish-menu .fd-noticebar,
+#flipdish-menu .fd-noticebar__info {
+  background: color-mix(in srgb, var(--color-gold) 16%, var(--color-ink)) !important;
+  color: var(--color-cream) !important;
+  border: 1px solid rgb(255 205 117 / 0.28) !important;
+  border-radius: 1rem !important;
+  box-shadow: none !important;
+}
+
+#flipdish-menu .fd-card,
+#flipdish-menu .fd-menucard,
+#flipdish-menu .MuiCard-root,
+#flipdish-menu .MuiPaper-root,
+#flipdish-menu .MuiAccordion-root {
+  background: var(--color-charcoal) !important;
+  color: var(--color-cream) !important;
+  border: 1px solid rgb(245 238 225 / 0.08) !important;
+  border-radius: 1.25rem !important;
+  box-shadow: none !important;
+}
+
+#flipdish-menu .fd-card__content,
+#flipdish-menu .fd-card__content > div {
+  background: transparent !important;
+}
+
+#flipdish-menu .fd-section__menu-nav button,
+#flipdish-menu .fd-section__menu-nav .MuiIconButton-root,
+#flipdish-menu .fd-section__menu-nav [role="button"] {
+  background: rgb(255 205 117 / 0.12) !important;
+  color: var(--color-gold) !important;
+  border-radius: 999px !important;
+  border: 0 !important;
+}
+
+#flipdish-menu .MuiAccordion-root:before {
+  display: none !important;
+}
+
+#flipdish-menu .fd-accordion__summary,
+#flipdish-menu .MuiAccordionSummary-root {
+  background: transparent !important;
+  color: var(--color-cream) !important;
+}
+
+#flipdish-menu .fd-tabsnav,
+#flipdish-menu .fd-section__menu-nav,
+#flipdish-menu .MuiTabs-root {
+  background: transparent !important;
+  border-bottom: 1px solid rgb(245 238 225 / 0.1) !important;
+}
+
+#flipdish-menu .MuiTab-root {
+  color: var(--color-sand) !important;
+  text-transform: none !important;
+  letter-spacing: 0.04em !important;
+}
+
+#flipdish-menu .Mui-selected.MuiTab-root {
+  color: var(--color-gold) !important;
+}
+
+#flipdish-menu .MuiTabs-indicator {
+  background-color: var(--color-gold) !important;
+}
+
+#flipdish-menu .MuiIconButton-root,
+#flipdish-menu .fd-iconbutton {
+  color: var(--color-gold) !important;
+  background: rgb(255 205 117 / 0.1) !important;
+  border-radius: 999px !important;
+}
+
+#flipdish-menu .MuiIconButton-root:hover,
+#flipdish-menu .fd-iconbutton:hover {
+  background: rgb(255 205 117 / 0.22) !important;
+}
+
+#flipdish-menu .MuiButton-contained,
+#flipdish-menu .MuiButton-containedPrimary {
+  background-color: var(--color-gold) !important;
+  color: var(--color-ink) !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+
+#flipdish-menu .MuiButton-contained:hover,
+#flipdish-menu .MuiButton-containedPrimary:hover {
+  background-color: var(--color-cream) !important;
+}
+
+#flipdish-menu .MuiButton-outlined,
+#flipdish-menu .MuiButton-outlinedPrimary {
+  border-color: rgb(255 205 117 / 0.45) !important;
+  color: var(--color-gold) !important;
+  border-radius: 999px !important;
+}
+
+#flipdish-menu input,
+#flipdish-menu .MuiInputBase-root,
+#flipdish-menu .MuiOutlinedInput-root {
+  background: var(--color-ink) !important;
+  color: var(--color-cream) !important;
+  border-radius: 999px !important;
+}
+
+#flipdish-menu .MuiOutlinedInput-notchedOutline {
+  border-color: rgb(245 238 225 / 0.16) !important;
+}
+
+#flipdish-menu .fd-label {
+  color: var(--color-gold) !important;
+}
+
+/* Checkout / address drawers portal to document.body (MUI). We don't use MUI elsewhere. */
+.MuiDrawer-paper,
+.MuiDialog-paper,
+.MuiPopover-paper {
+  background: var(--color-charcoal) !important;
+  color: var(--color-cream) !important;
+  font-family: var(--font-sans) !important;
+}
+
+.MuiDrawer-paper .MuiTypography-root,
+.MuiDialog-paper .MuiTypography-root {
+  font-family: var(--font-sans) !important;
+  color: var(--color-cream) !important;
+}
+
+.MuiDrawer-paper .MuiButton-containedPrimary,
+.MuiDialog-paper .MuiButton-containedPrimary {
+  background-color: var(--color-gold) !important;
+  color: var(--color-ink) !important;
+  border-radius: 999px !important;
+}
+
 @media print {
   header,
   footer,
