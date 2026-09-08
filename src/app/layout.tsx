@@ -71,6 +71,9 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
   other: {
     "geo.region": "GB-HRW",
     "geo.placename": "Hatch End, London",
