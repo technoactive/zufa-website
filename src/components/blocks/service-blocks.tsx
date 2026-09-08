@@ -15,9 +15,9 @@ export function FactsStrip({ facts, className }: { facts: readonly ServiceFact[]
       <div className="container-content">
         <dl className="grid grid-cols-2 divide-cream/[0.08] lg:grid-cols-4 lg:divide-x">
           {facts.map((fact, index) => (
-            <Reveal key={fact.label} delay={index * 60} className="py-8 lg:px-8 lg:py-10 lg:first:pl-0 lg:last:pr-0">
-              <dd className="font-display text-4xl leading-none text-gold sm:text-5xl">{fact.value}</dd>
-              <dt className="mt-3 max-w-[16rem] text-sm leading-snug text-sand">{fact.label}</dt>
+            <Reveal key={fact.label} delay={index * 60} className="flex flex-col py-8 lg:px-8 lg:py-10 lg:first:pl-0 lg:last:pr-0">
+              <dt className="order-2 mt-3 max-w-[16rem] text-sm leading-snug text-sand">{fact.label}</dt>
+              <dd className="order-1 font-display text-4xl leading-none text-gold sm:text-5xl">{fact.value}</dd>
             </Reveal>
           ))}
         </dl>

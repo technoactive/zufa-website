@@ -1,47 +1,79 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, Clock, MapPin, Flame, Wheat, UtensilsCrossed } from "lucide-react";
+import type { Route } from "next";
+import { ArrowRight, ArrowUpRight, MapPin, Phone } from "lucide-react";
 import { InstagramIcon as Instagram } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { CtaBand } from "@/components/blocks/cta-band";
 import { FaqList } from "@/components/blocks/faq-list";
-import { OpenStatus } from "@/components/layout/open-status";
+import { MenuIndex } from "@/components/blocks/menu-index";
+import { PhotoMarquee, type MarqueePhoto } from "@/components/blocks/photo-marquee";
+import { Ticker, type TickerItem } from "@/components/blocks/ticker";
+import { TonightCard, type TonightOffer } from "@/components/blocks/tonight-card";
 import { JsonLd } from "@/components/seo/json-ld";
 import { pageMetadata } from "@/lib/metadata";
 import { webPageSchema } from "@/lib/schema";
 import { getPage } from "@/content/pages";
 import { menus } from "@/content/menus";
-import { offers } from "@/content/offers";
+import { getOffer, regularOffers } from "@/content/offers";
 import { generalFaqs } from "@/content/faqs";
-import { openingHours, site } from "@/content/site";
+import { site } from "@/content/site";
 
 export const metadata: Metadata = pageMetadata("/");
 
 const page = getPage("/")!;
 
+/* ------------------------------------------------------------------ */
+/* Data derived from content                                            */
+/* ------------------------------------------------------------------ */
+
+const tonightOffers: TonightOffer[] = regularOffers
+  .filter((offer) => offer.days?.length)
+  .map((offer) => ({ id: offer.id, label: offer.short ?? offer.title, hours: offer.hours, href: offer.cta.href, days: offer.days! }));
+
+const tickerItems: TickerItem[] = [
+  ...regularOffers.filter((offer) => offer.days?.length).map((offer) => ({ label: `${offer.short ?? offer.title} · ${offer.when}`, href: "/whats-on" })),
+  { label: "Live belly dancing nights", href: "/whats-on" },
+  { label: `Private hire for up to ${site.capacity.standing}`, href: "/private-hire" },
+  { label: "Lebanese catering across North West London", href: "/catering" },
+  { label: `Family-run since ${site.foundingYear}, Tannourine to Hatch End`, href: "/our-story" },
+  { label: "Lebanese wines, arak and house cocktails", href: "/menu/drinks" },
+];
+
+const marqueePhotos: MarqueePhoto[] = [
+  { src: "/images/feast-table.jpg", alt: "A table of Lebanese dishes seen from above: lamb, salads, fatayer and a cocktail" },
+  { src: "/images/belly-dancer.jpg", alt: "A belly dancer performing between the tables at Zufa", portrait: true },
+  { src: "/images/restaurant-interior.jpg", alt: "The dining room at Zufa with its glass-leaf chandelier" },
+  { src: "/images/warak-enab.jpg", alt: "Warak enab plated with pomegranate and yoghurt", portrait: true },
+  { src: "/images/dinner-for-two.jpg", alt: "Grilled lamb and salmon with wine at Zufa" },
+  { src: "/images/sharing-table.jpg", alt: "A round table laden with sharing dishes and cocktails", portrait: true },
+];
+
 const signatures = [
   {
-    icon: Wheat,
     title: "Home-made saj bread",
-    text: "Baked to order on a traditional domed griddle and served on hand-cut olive wood boards brought from Lebanon.",
+    text: "Baked to order on a domed iron griddle the way it is in the mountains, filled with zaatar, cheese or kafta, then chargrilled and served on olive-wood boards cut in Lebanon.",
     href: "/menu/a-la-carte#saj-bread",
+    cue: "Zaatar · Jibneh · Kafta-jibneh",
   },
   {
-    icon: Flame,
-    title: "Sizzling hot mezze",
-    text: "Hot mezze arrive in handmade clay pans so they stay warm and fragrant until the very last bite.",
+    title: "Hot mezze in clay pans",
+    text: "Sambousek, kebbeh, jawaneh, arayes and sojok arrive sizzling in handmade clay pans, so the last bite is as warm as the first.",
     href: "/menu/a-la-carte#hot-mezze",
+    cue: "Kebbeh · Sambousek · Jawaneh",
   },
   {
-    icon: UtensilsCrossed,
-    title: "Charcoal grill",
-    text: "Shish taouk, kafta, lamb cutlets and free-range baby chicken, marinated overnight and chargrilled to order.",
+    title: "The charcoal grill",
+    text: "Shish taouk, kafta meshwi, lamb cutlets and free-range baby chicken, marinated overnight and grilled over charcoal to order.",
     href: "/menu/a-la-carte#grill",
+    cue: "Shish taouk · Castaletta · Mixed grill",
   },
 ] as const;
+
+const bellyDancing = getOffer("belly-dancing")!;
 
 export default function HomePage() {
   return (
@@ -49,8 +81,9 @@ export default function HomePage() {
       <Hero />
       <Story />
       <Signatures />
+      <PhotoMarquee photos={marqueePhotos} className="bg-ink" />
       <MenuShowcase />
-      <WhatsOnTeaser />
+      <WhatsOn />
       <PressQuote />
       <EventsPanels />
       <Takeaway />
@@ -62,116 +95,143 @@ export default function HomePage() {
 }
 
 /* ------------------------------------------------------------------ */
+/* Hero                                                                 */
+/* ------------------------------------------------------------------ */
 
 function Hero() {
   return (
-    <section className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-ink text-cream">
-      <Image
-        src="/images/mezze-spread.jpg"
-        alt="A table covered in Lebanese mezze: hommos with lamb and pine nuts, tabbouleh, fattoush, sambousek and fried cauliflower"
-        fill
-        priority
-        fetchPriority="high"
-        sizes="100vw"
-        quality={75}
-        className="-z-20 object-cover object-center"
-      />
-      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/55 to-ink/30" />
-      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/60 to-transparent" />
+    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink text-cream">
+      <div aria-hidden className="absolute inset-0 -z-20 animate-ken-burns motion-reduce:animate-none">
+        <Image
+          src="/images/mezze-spread.jpg"
+          alt=""
+          fill
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+          quality={75}
+          className="object-cover object-center"
+        />
+      </div>
+      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/55 to-ink/25" />
+      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/75 via-ink/30 to-transparent" />
 
-      <div className="container-content relative pb-16 pt-[calc(var(--header-height)+5rem)] sm:pb-24">
-        <div className="max-w-3xl">
-          <p className="eyebrow mb-6 animate-fade-up">Hatch End · North West London</p>
-          <h1 className="text-display-xl animate-fade-up [animation-delay:80ms]">
-            Authentic Lebanese <em className="font-normal italic text-gold">Cuisine</em>
-          </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-sand animate-fade-up [animation-delay:160ms] sm:text-xl">
-            A taste of Lebanon, where flavoursome dishes and warm hospitality create an unforgettable dining experience.
-          </p>
-          <div className="mt-10 flex flex-col gap-4 animate-fade-up [animation-delay:240ms] sm:flex-row">
-            <Button href="/bookings" size="lg">
-              Book your table
-            </Button>
-            <Button href="/menu" variant="secondary" size="lg">
-              Explore the menu
-            </Button>
-          </div>
-        </div>
-
-        <dl className="mt-16 grid gap-6 border-t border-cream/15 pt-8 text-sm text-sand animate-fade-up [animation-delay:320ms] sm:grid-cols-3">
-          <div className="flex gap-3">
-            <MapPin className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
-            <div>
-              <dt className="sr-only">Address</dt>
-              <dd>
-                <a href={site.maps.google} target="_blank" rel="noopener noreferrer" className="hover:text-gold">
+      <div className="container-content relative flex flex-1 flex-col justify-end pb-12 pt-[calc(var(--header-height)+5rem)] sm:pb-16 lg:pt-[calc(var(--header-height)+7rem)]">
+        <div className="grid items-end gap-12 lg:grid-cols-[1.35fr_1fr] lg:gap-16">
+          <div className="max-w-3xl">
+            <p className="eyebrow mb-6 animate-fade-up">Family-run Lebanese restaurant · Hatch End</p>
+            <h1 className="text-display-xl animate-fade-up [animation-delay:80ms]">
+              The Lebanese table, <em className="font-normal italic text-gold">in Hatch End</em>
+            </h1>
+            <p className="mt-7 max-w-xl text-lg leading-relaxed text-sand animate-fade-up [animation-delay:160ms] sm:text-xl">
+              Home-made saj bread, hot mezze in clay pans and a charcoal grill that runs until late. Two brothers from Tannourine, cooking the way our
+              parents have since {site.foundingYear}, on Uxbridge Road between Pinner and Harrow.
+            </p>
+            <div className="mt-10 flex flex-col gap-4 animate-fade-up [animation-delay:240ms] sm:flex-row">
+              <Button href="/bookings" size="lg">
+                Book a table
+              </Button>
+              <Button href="/menu" variant="secondary" size="lg">
+                See the menus
+              </Button>
+            </div>
+            <ul className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-sand animate-fade-up [animation-delay:320ms]">
+              <li>
+                <a href={site.maps.google} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-gold">
+                  <MapPin className="size-3.5 text-gold" aria-hidden />
                   {site.address.full}
                 </a>
-              </dd>
-            </div>
+              </li>
+              <li>
+                <a href={`tel:${site.phone.e164}`} className="inline-flex items-center gap-2 hover:text-gold">
+                  <Phone className="size-3.5 text-gold" aria-hidden />
+                  {site.phone.display}
+                </a>
+              </li>
+            </ul>
           </div>
-          <div className="flex gap-3">
-            <Clock className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
-            <div>
-              <dt className="sr-only">Opening hours</dt>
-              {openingHours.map((p) => (
-                <dd key={p.label}>{p.label}</dd>
-              ))}
-            </div>
+
+          <div className="animate-fade-up [animation-delay:360ms] lg:justify-self-end lg:w-full lg:max-w-sm">
+            <TonightCard offers={tonightOffers} />
           </div>
-          <div className="flex items-start gap-3 sm:justify-end">
-            <dt className="sr-only">Status</dt>
-            <dd>
-              <OpenStatus />
-            </dd>
-          </div>
-        </dl>
+        </div>
+      </div>
+
+      <div className="relative animate-fade-up [animation-delay:480ms]">
+        <Ticker items={tickerItems} />
       </div>
     </section>
   );
 }
 
+/* ------------------------------------------------------------------ */
+/* Story                                                                */
+/* ------------------------------------------------------------------ */
+
 function Story() {
   return (
-    <Section tone="ink" pattern>
-      <div className="container-content grid items-center gap-14 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
-        <Reveal className="relative">
-          <div className="relative aspect-[3/4] overflow-hidden rounded-[2rem] sm:aspect-[4/5]">
+    <Section tone="ink" pattern className="overflow-hidden">
+      <p
+        aria-hidden
+        className="pointer-events-none absolute -top-10 left-1/2 -z-10 -translate-x-1/2 select-none font-display text-[clamp(10rem,30vw,26rem)] leading-none text-cream/[0.035]"
+      >
+        {site.foundingYear}
+      </p>
+      <div className="container-content grid items-center gap-16 lg:grid-cols-[1fr_1fr] lg:gap-24">
+        <Reveal className="relative mx-auto w-full max-w-md lg:max-w-none">
+          <div className="relative aspect-[3/4] overflow-hidden rounded-[2rem]">
             <Image
               src="/images/dinner-for-two.jpg"
               alt="Dinner for two at Zufa: grilled lamb, salmon and prawns with a glass of red and white wine"
               fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
+              sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"
             />
           </div>
-          <div className="absolute -bottom-6 -right-4 hidden rounded-2xl border border-gold/25 bg-ink/90 px-6 py-5 backdrop-blur-md sm:block lg:-right-10">
-            <p className="font-display text-5xl text-gold">1990</p>
-            <p className="mt-1 text-xs uppercase tracking-[0.18em] text-sand">Est. Tannourine, Lebanon</p>
+          <div className="absolute -bottom-8 -right-4 w-[46%] animate-float motion-reduce:animate-none sm:-right-8">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] border-[6px] border-ink shadow-card">
+              <Image src="/images/warak-enab.jpg" alt="Warak enab, stuffed vine leaves, plated with pomegranate and yoghurt" fill sizes="(min-width: 1024px) 20vw, 45vw" className="object-cover" />
+            </div>
+          </div>
+          <div className="absolute -left-3 top-8 rounded-full border border-gold/40 bg-ink/85 px-5 py-3 backdrop-blur-md sm:-left-8">
+            <p className="font-display text-3xl leading-none text-gold">{site.foundingYear}</p>
+            <p className="mt-1 text-[0.625rem] uppercase tracking-[0.18em] text-sand">Tannourine, Lebanon</p>
           </div>
         </Reveal>
 
-        <Reveal delay={120}>
+        <Reveal delay={120} className="pt-8 lg:pt-0">
           <SectionHeading
             eyebrow="Our story"
             title={
               <>
-                Our story begins in Tannourine, a village in the mountains of <em className="italic text-gold">North Lebanon</em>
+                Two brothers, one village, <em className="italic text-gold">one way of cooking</em>
               </>
             }
             description={
               <>
                 <p>
-                  Our parents opened the family restaurant in 1990 and it remains one of the most loved restaurants in North Lebanon. The story
-                  continued in London when my brother and I pursued our passion for Lebanese food.
+                  Our parents opened their restaurant in Tannourine, high in the mountains of North Lebanon, in {site.foundingYear}. It is still one of the
+                  best-loved places to eat in the north of the country. Zufa is what happened when my brother and I brought that kitchen to London.
                 </p>
                 <p className="mt-4">
-                  For years we have offered our valued guests a mouth-watering selection of Lebanese dishes, all made from scratch using fresh,
-                  top-quality ingredients.
+                  The rules have not changed. Everything is made from scratch, every day: the bread on the saj, the mezze, the marinades, the syrups for the
+                  sweets. What has changed is the postcode.
                 </p>
               </>
             }
           />
+          <dl className="mt-10 grid grid-cols-3 gap-6 border-t border-cream/10 pt-8">
+            {[
+              { label: "Founded", value: String(site.foundingYear) },
+              { label: "Made from scratch", value: "100%" },
+              { label: "Seats for a party", value: String(site.capacity.seated) },
+            ].map((fact) => (
+              <div key={fact.label} className="flex flex-col">
+                <dt className="order-2 mt-1 text-xs uppercase tracking-[0.16em] text-smoke">{fact.label}</dt>
+                <dd className="order-1 font-display text-3xl text-cream sm:text-4xl">{fact.value}</dd>
+              </div>
+            ))}
+          </dl>
           <div className="mt-8">
             <Button href="/our-story" variant="ghost" className="gap-3">
               Read our story <ArrowRight className="size-4 transition-transform group-hover/btn:translate-x-1" aria-hidden />
@@ -183,132 +243,172 @@ function Story() {
   );
 }
 
+/* ------------------------------------------------------------------ */
+/* Signatures                                                           */
+/* ------------------------------------------------------------------ */
+
 function Signatures() {
   return (
-    <Section tone="charcoal">
-      <div className="container-content">
-        <Reveal>
-          <SectionHeading
-            eyebrow="Zufa specialities"
-            title="Three things you must not miss"
-            description="At Zufa we preserve tradition — the freshest Lebanese dishes, made from locally sourced ingredients and an essential blend of Lebanese herbs and spices."
-            align="center"
-          />
-        </Reveal>
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {signatures.map((item, index) => (
-            <Reveal key={item.title} delay={index * 100}>
-              <Link
-                href={item.href}
-                className="group flex h-full flex-col rounded-3xl border border-cream/10 bg-ink/60 p-8 transition-[border-color,transform,box-shadow] duration-500 hover:-translate-y-1 hover:border-gold/40 hover:shadow-glow"
-              >
-                <span className="inline-flex size-12 items-center justify-center rounded-full border border-gold/30 text-gold">
-                  <item.icon className="size-5" aria-hidden />
-                </span>
-                <h3 className="mt-6 font-display text-3xl">{item.title}</h3>
-                <p className="mt-3 flex-1 text-base leading-relaxed text-sand">{item.text}</p>
-                <span className="mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-gold">
-                  See the dishes <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" aria-hidden />
-                </span>
-              </Link>
-            </Reveal>
-          ))}
+    <Section tone="charcoal" className="relative overflow-hidden">
+      <div aria-hidden className="pointer-events-none absolute -left-40 top-1/3 -z-10 size-[36rem] rounded-full bg-gold/[0.06] blur-3xl" />
+      <div className="container-content grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+        <div>
+          <Reveal>
+            <SectionHeading
+              eyebrow="Order these first"
+              title="Three things Zufa is known for"
+              description="If it is your first visit, start here. Everything else on the menu follows on from these."
+            />
+          </Reveal>
+          <ol className="mt-12 divide-y divide-cream/10">
+            {signatures.map((item, index) => (
+              <Reveal as="li" key={item.title} delay={index * 90}>
+                <Link href={item.href as Route} className="group grid grid-cols-[3.5rem_1fr_auto] items-start gap-4 py-7 sm:gap-6">
+                  <span className="font-display text-4xl leading-none text-gold/50 transition-colors group-hover:text-gold">{String(index + 1).padStart(2, "0")}</span>
+                  <span>
+                    <span className="block font-display text-[1.875rem] leading-tight text-cream transition-colors group-hover:text-gold sm:text-[2.25rem]">{item.title}</span>
+                    <span className="mt-3 block text-[0.9375rem] leading-relaxed text-sand">{item.text}</span>
+                    <span className="mt-3 block text-xs uppercase tracking-[0.16em] text-smoke">{item.cue}</span>
+                  </span>
+                  <ArrowUpRight className="mt-2 size-5 text-cream/30 transition-[color,transform] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-gold" aria-hidden />
+                </Link>
+              </Reveal>
+            ))}
+          </ol>
         </div>
+
+        <Reveal delay={120} className="relative lg:sticky lg:top-[calc(var(--header-height)+2rem)] lg:self-start">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] sm:aspect-[5/6]">
+            <Image
+              src="/images/feast-table.jpg"
+              alt="A Zufa table from above: chargrilled lamb, fattoush, hommos, fatayer, lamb shank on rice and a pomegranate cocktail"
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+            />
+            <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
+            <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4">
+              <p className="max-w-xs text-sm leading-relaxed text-cream/90">Mezze first, then the grill. Lebanese meals are built to be shared, so bring people.</p>
+              <Button href="/menu/set-menus" size="sm" variant="secondary" className="shrink-0 border-cream/40 text-cream hover:border-gold hover:bg-gold hover:text-ink">
+                Set menus
+              </Button>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </Section>
   );
 }
 
+/* ------------------------------------------------------------------ */
+/* Menus                                                                */
+/* ------------------------------------------------------------------ */
+
 function MenuShowcase() {
   return (
-    <Section tone="cream" pattern>
+    <Section tone="cream" pattern className="overflow-hidden">
       <div className="container-content">
         <Reveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading
             light
-            eyebrow="Our menus"
+            eyebrow="The menus"
             title="From mezze to midnight cocktails"
-            description="Every menu is online in full, with prices and allergen information — no PDFs to squint at."
+            description="Every menu is online in full with prices and allergens. Hover a menu to see what it looks like on the table."
           />
           <Button href="/menu" variant="light" className="shrink-0">
             All menus
           </Button>
         </Reveal>
-
-        <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {menus.map((menu, index) => (
-            <Reveal key={menu.slug} as="li" delay={index * 80}>
-              <Link
-                href={`/menu/${menu.slug}`}
-                className="group relative flex aspect-[4/3] flex-col justify-end overflow-hidden rounded-3xl bg-ink text-cream shadow-card"
-              >
-                <Image
-                  src={menu.image}
-                  alt=""
-                  fill
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-700 ease-(--ease-out-expo) group-hover:scale-105"
-                />
-                <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink from-20% via-ink/80 via-55% to-ink/20" />
-                <div className="relative p-7">
-                  <h3 className="font-display text-3xl">{menu.shortTitle}</h3>
-                  <p className="mt-1 text-sm text-sand line-clamp-2">{menu.availability ?? menu.summary}</p>
-                  <span className="mt-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-gold">
-                    View menu <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" aria-hidden />
-                  </span>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
-        </ul>
+        <Reveal delay={100} className="mt-12">
+          <MenuIndex
+            items={menus.map((menu) => ({
+              slug: menu.slug,
+              title: menu.shortTitle,
+              summary: menu.summary,
+              availability: menu.availability,
+              image: menu.image,
+              imageAlt: menu.imageAlt,
+            }))}
+          />
+        </Reveal>
       </div>
     </Section>
   );
 }
 
-function WhatsOnTeaser() {
-  const highlights = offers.slice(0, 3);
+/* ------------------------------------------------------------------ */
+/* What's on                                                            */
+/* ------------------------------------------------------------------ */
+
+function WhatsOn() {
+  const weekly = regularOffers.filter((offer) => offer.days?.length);
   return (
-    <Section tone="ink">
-      <div className="container-content">
-        <Reveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <SectionHeading eyebrow="What’s on" title="Good reasons to come back" description="Corkage-free Mondays, two-for-one cocktails and a weekday lunch that keeps Hatch End well fed." />
-          <Button href="/whats-on" variant="secondary" className="shrink-0">
-            Everything on
-          </Button>
+    <Section tone="ink" className="relative overflow-hidden">
+      <div aria-hidden className="pointer-events-none absolute -right-40 bottom-0 -z-10 size-[36rem] rounded-full bg-gold/[0.07] blur-3xl" />
+      <div className="container-content grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+        <Reveal className="relative isolate flex min-h-[28rem] flex-col justify-end overflow-hidden rounded-[2rem] p-8 sm:p-10 lg:min-h-full">
+          <Image
+            src={bellyDancing.image!.src}
+            alt={bellyDancing.image!.alt}
+            fill
+            sizes="(min-width: 1024px) 45vw, 100vw"
+            className="-z-20 object-cover"
+          />
+          <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/60 to-ink/10" />
+          <p className="eyebrow">{bellyDancing.when}</p>
+          <h3 className="mt-4 max-w-sm font-display text-display-md text-cream">{bellyDancing.headline}</h3>
+          <p className="mt-3 max-w-sm text-[0.9375rem] leading-relaxed text-sand">{bellyDancing.description}</p>
+          <div className="mt-6">
+            <Button href={bellyDancing.cta.href} variant="secondary" size="sm">
+              <Phone className="size-3.5" aria-hidden /> {bellyDancing.cta.label}
+            </Button>
+          </div>
         </Reveal>
-        <div className="mt-14 grid gap-px overflow-hidden rounded-3xl border border-cream/10 bg-cream/10 md:grid-cols-3">
-          {highlights.map((offer, index) => (
-            <Reveal key={offer.id} delay={index * 100} className="flex flex-col bg-ink p-8">
-              <p className="eyebrow">{offer.when}</p>
-              <h3 className="mt-4 font-display text-3xl">{offer.headline}</h3>
-              <p className="mt-3 flex-1 text-base leading-relaxed text-sand">{offer.description}</p>
-              <Button href={offer.cta.href} variant="ghost" className="mt-6 justify-start gap-3">
-                {offer.cta.label} <ArrowRight className="size-4" aria-hidden />
-              </Button>
-            </Reveal>
-          ))}
+
+        <div>
+          <Reveal>
+            <SectionHeading eyebrow="What’s on" title="Good reasons to come back in the week" description="Regular offers that run every week, plus the nights that fill up first." />
+          </Reveal>
+          <ul className="mt-10 divide-y divide-cream/10">
+            {weekly.map((offer, index) => (
+              <Reveal as="li" key={offer.id} delay={index * 80}>
+                <Link href={offer.cta.href as Route} className="group grid grid-cols-[5.5rem_1fr_auto] items-center gap-4 py-6 sm:grid-cols-[8rem_1fr_auto] sm:gap-6">
+                  <span className="font-display text-3xl leading-none text-gold sm:text-[2.75rem]">{offer.stat?.value}</span>
+                  <span>
+                    <span className="block font-display text-2xl leading-tight text-cream transition-colors group-hover:text-gold">{offer.headline}</span>
+                    <span className="mt-1.5 block text-sm text-sand">{offer.when}</span>
+                  </span>
+                  <ArrowRight className="size-5 text-cream/30 transition-[transform,color] group-hover:translate-x-1 group-hover:text-gold" aria-hidden />
+                </Link>
+              </Reveal>
+            ))}
+          </ul>
+          <Reveal delay={260} className="mt-8">
+            <Button href="/whats-on" variant="secondary">
+              Everything on this week
+            </Button>
+          </Reveal>
         </div>
       </div>
     </Section>
   );
 }
 
+/* ------------------------------------------------------------------ */
+/* Press                                                                */
+/* ------------------------------------------------------------------ */
+
 function PressQuote() {
   return (
     <section className="relative isolate overflow-hidden bg-ink py-24 text-cream sm:py-32">
-      <Image
-        src="/images/feast-table.jpg"
-        alt=""
-        fill
-        sizes="100vw"
-        quality={60}
-        className="-z-20 object-cover opacity-30"
-      />
-      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-ink via-ink/70 to-ink" />
+      <Image src="/images/sharing-table.jpg" alt="" fill sizes="100vw" quality={60} className="-z-20 object-cover opacity-25" />
+      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-ink via-ink/75 to-ink" />
       <div className="container-content">
         <Reveal as="figure" className="mx-auto max-w-4xl text-center">
-          <blockquote>
+          <p className="text-gold" aria-label="Five stars">
+            {"★★★★★"}
+          </p>
+          <blockquote className="mt-6">
             <p className="font-display text-display-md italic leading-snug text-cream sm:text-display-lg">“{site.press.quote}”</p>
           </blockquote>
           <figcaption className="mt-8 flex flex-col items-center gap-3">
@@ -324,6 +424,10 @@ function PressQuote() {
   );
 }
 
+/* ------------------------------------------------------------------ */
+/* Catering & private hire                                              */
+/* ------------------------------------------------------------------ */
+
 function EventsPanels() {
   const panels = [
     {
@@ -332,6 +436,7 @@ function EventsPanels() {
       text: `Mezze, charcoal grills and saj bread cooked from scratch and brought to you across ${site.cateringAreas.slice(0, 3).join(", ")} and the surrounding area. Tell us the date and numbers and you’ll get a menu and a per-head price back.`,
       href: "/catering",
       cta: "Get a catering quote",
+      stat: { value: `${site.cateringAreas.length}+`, label: "towns covered" },
       image: "/images/sharing-table.jpg",
       alt: "A generous sharing table of Lebanese dishes prepared by Zufa",
     },
@@ -341,6 +446,7 @@ function EventsPanels() {
       text: `Up to ${site.capacity.seated} seated or ${site.capacity.standing} standing, a licensed bar, the patio and a belly dancer if you want one. Birthdays, engagements, baby showers, hen and stag nights and company parties in Hatch End.`,
       href: "/private-hire",
       cta: "Check a date",
+      stat: { value: String(site.capacity.standing), label: "guests standing" },
       image: "/images/restaurant-interior.jpg",
       alt: "The dining room at Zufa Hatch End with its glass-leaf chandelier and patio doors",
     },
@@ -350,7 +456,7 @@ function EventsPanels() {
     <Section tone="charcoal" padded={false}>
       <div className="grid lg:grid-cols-2">
         {panels.map((panel, index) => (
-          <Reveal key={panel.href} delay={index * 120} className="group relative isolate flex min-h-[32rem] flex-col justify-end overflow-hidden p-8 sm:p-12 lg:min-h-[40rem]">
+          <Reveal key={panel.href} delay={index * 120} className="group relative isolate flex min-h-[34rem] flex-col justify-end overflow-hidden p-8 sm:p-12 lg:min-h-[42rem]">
             <Image
               src={panel.image}
               alt={panel.alt}
@@ -359,6 +465,10 @@ function EventsPanels() {
               className="-z-20 object-cover transition-transform duration-1000 ease-(--ease-out-expo) group-hover:scale-105"
             />
             <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-ink from-25% via-ink/80 via-60% to-ink/30" />
+            <div className="absolute right-8 top-8 rounded-2xl border border-cream/15 bg-ink/60 px-4 py-3 text-right backdrop-blur-md sm:right-12 sm:top-12">
+              <p className="font-display text-3xl leading-none text-gold">{panel.stat.value}</p>
+              <p className="mt-1 text-[0.625rem] uppercase tracking-[0.16em] text-sand">{panel.stat.label}</p>
+            </div>
             <p className="eyebrow">{panel.eyebrow}</p>
             <h3 className="mt-4 max-w-md text-display-md">{panel.title}</h3>
             <p className="mt-4 max-w-md text-base leading-relaxed text-sand">{panel.text}</p>
@@ -372,6 +482,10 @@ function EventsPanels() {
   );
 }
 
+/* ------------------------------------------------------------------ */
+/* Takeaway                                                             */
+/* ------------------------------------------------------------------ */
+
 function Takeaway() {
   return (
     <Section tone="cream">
@@ -382,7 +496,7 @@ function Takeaway() {
             align="center"
             eyebrow="Takeaway & delivery"
             title="Zufa at home"
-            description="Order for collection or have it delivered across Hatch End, Pinner and Harrow. Enjoy 20% off your first online order."
+            description="Order for collection or have it delivered across Hatch End, Pinner and Harrow. 20% off your first online order."
           />
         </Reveal>
         <Reveal delay={100} className="flex flex-wrap items-center justify-center gap-4">
@@ -410,12 +524,16 @@ function Takeaway() {
   );
 }
 
+/* ------------------------------------------------------------------ */
+/* FAQs                                                                 */
+/* ------------------------------------------------------------------ */
+
 function Faqs() {
   return (
     <Section tone="parchment">
       <div className="container-content grid gap-12 lg:grid-cols-[1fr_1.6fr]">
         <Reveal>
-          <SectionHeading light eyebrow="Good to know" title="Questions, answered" description="Everything first-time guests tend to ask before they visit." />
+          <SectionHeading light eyebrow="Good to know" title="Questions, answered" description="What first-time guests tend to ask before they visit." />
           <div className="mt-8 flex flex-col gap-3 text-sm text-ink/70">
             <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-gold-dark">
               <Instagram className="size-4" aria-hidden /> Follow {site.social.instagramHandle}

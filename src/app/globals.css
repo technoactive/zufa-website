@@ -48,7 +48,10 @@
   --animate-fade-in: fade-in 0.6s ease-out both;
   --animate-consent-in: fade-up 0.6s var(--ease-out-expo) 1.2s both;
   --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-slow: marquee 90s linear infinite;
   --animate-slide-in-right: slide-in-right 0.6s var(--ease-out-expo) both;
+  --animate-ken-burns: ken-burns 14s var(--ease-out-expo) both;
+  --animate-float: float 7s ease-in-out infinite;
 
   /* Layout */
   --container-content: 72rem;
@@ -92,6 +95,23 @@
     }
     to {
       transform: translateX(-50%);
+    }
+  }
+  @keyframes ken-burns {
+    from {
+      transform: scale(1.12) translateY(1.5%);
+    }
+    to {
+      transform: scale(1) translateY(0);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
     }
   }
 }
@@ -225,6 +245,24 @@
   .reveal {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Marquee tracks pause on hover/focus so links inside stay reachable. */
+@utility marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  &:hover,
+  &:focus-within {
+    animation-play-state: paused;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+    width: auto;
+    flex-wrap: wrap;
   }
 }
 
