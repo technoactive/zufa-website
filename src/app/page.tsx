@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import type { Route } from "next";
+import type { ReactNode } from "react";
 import { ArrowRight, ArrowUpRight, MapPin, Phone } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { InstagramIcon as Instagram } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
@@ -429,56 +431,132 @@ function PressQuote() {
 /* ------------------------------------------------------------------ */
 
 function EventsPanels() {
-  const panels = [
+  const panels: readonly [EventPanelData, EventPanelData] = [
     {
       eyebrow: "Lebanese catering",
-      title: "Our kitchen, at your wedding, party or office",
-      text: `Mezze, charcoal grills and saj bread cooked from scratch and brought to you across ${site.cateringAreas.slice(0, 3).join(", ")} and the surrounding area. Tell us the date and numbers and you’ll get a menu and a per-head price back.`,
+      title: (
+        <>
+          Bring Zufa <em className="italic text-gold-dark">to you</em>
+        </>
+      ),
+      text: "Weddings, birthdays, office lunches and family gatherings. The same kitchen, cooked from scratch on the day and brought to your door.",
+      points: [
+        "Mezze, charcoal grills and saj bread, made fresh that morning",
+        `${site.cateringAreas.slice(0, 4).join(", ")} and the roads between`,
+        "A menu and a per-head price before you commit to anything",
+      ],
       href: "/catering",
       cta: "Get a catering quote",
-      stat: { value: `${site.cateringAreas.length}+`, label: "towns covered" },
+      stat: { value: `${site.cateringAreas.length}+`, label: "towns we cook for" },
       image: "/images/sharing-table.jpg",
       alt: "A generous sharing table of Lebanese dishes prepared by Zufa",
     },
     {
       eyebrow: "Private hire",
-      title: "Take over the whole restaurant",
-      text: `Up to ${site.capacity.seated} seated or ${site.capacity.standing} standing, a licensed bar, the patio and a belly dancer if you want one. Birthdays, engagements, baby showers, hen and stag nights and company parties in Hatch End.`,
+      title: (
+        <>
+          Bring everyone <em className="italic text-gold-dark">to Zufa</em>
+        </>
+      ),
+      text: "Close the doors, dim the lights and have the whole restaurant to yourselves for the evening. We look after the food, the bar and the music.",
+      points: [
+        `Up to ${site.capacity.seated} seated or ${site.capacity.standing} standing`,
+        "Licensed bar, patio and a belly dancer if you want one",
+        "Engagements, birthdays, baby showers and work parties",
+      ],
       href: "/private-hire",
       cta: "Check a date",
-      stat: { value: String(site.capacity.standing), label: "guests standing" },
+      stat: { value: String(site.capacity.standing), label: "guests, doors closed" },
       image: "/images/restaurant-interior.jpg",
       alt: "The dining room at Zufa Hatch End with its glass-leaf chandelier and patio doors",
     },
-  ] as const;
+  ];
 
   return (
-    <Section tone="charcoal" padded={false}>
-      <div className="grid lg:grid-cols-2">
-        {panels.map((panel, index) => (
-          <Reveal key={panel.href} delay={index * 120} className="group relative isolate flex min-h-[34rem] flex-col justify-end overflow-hidden p-8 sm:p-12 lg:min-h-[42rem]">
-            <Image
-              src={panel.image}
-              alt={panel.alt}
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="-z-20 object-cover transition-transform duration-1000 ease-(--ease-out-expo) group-hover:scale-105"
-            />
-            <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-ink from-25% via-ink/80 via-60% to-ink/30" />
-            <div className="absolute right-8 top-8 rounded-2xl border border-cream/15 bg-ink/60 px-4 py-3 text-right backdrop-blur-md sm:right-12 sm:top-12">
-              <p className="font-display text-3xl leading-none text-gold">{panel.stat.value}</p>
-              <p className="mt-1 text-[0.625rem] uppercase tracking-[0.16em] text-sand">{panel.stat.label}</p>
-            </div>
-            <p className="eyebrow">{panel.eyebrow}</p>
-            <h3 className="mt-4 max-w-md text-display-md">{panel.title}</h3>
-            <p className="mt-4 max-w-md text-base leading-relaxed text-sand">{panel.text}</p>
-            <div className="mt-8">
-              <Button href={panel.href}>{panel.cta}</Button>
-            </div>
-          </Reveal>
-        ))}
+    <Section tone="cream" pattern className="overflow-hidden">
+      <div className="container-content">
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <SectionHeading
+            light
+            align="center"
+            eyebrow="Parties & events"
+            title="Your party, two ways"
+            description="Bring our kitchen to you, or take over the restaurant for the night. Either way it is the same food and the same family looking after you."
+          />
+        </Reveal>
+
+        <div className="relative mt-16 grid gap-16 lg:grid-cols-[1fr_auto_1fr] lg:gap-12 xl:gap-16">
+          <EventPanel panel={panels[0]} />
+          <div className="relative flex items-center justify-center lg:flex-col" aria-hidden>
+            <span className="h-px flex-1 bg-ink/15 lg:h-auto lg:w-px lg:flex-1" />
+            <span className="mx-4 flex size-14 items-center justify-center rounded-full border border-gold/50 bg-cream font-display text-2xl italic text-gold-dark shadow-card lg:my-4 lg:mx-0">
+              or
+            </span>
+            <span className="h-px flex-1 bg-ink/15 lg:h-auto lg:w-px lg:flex-1" />
+          </div>
+          <EventPanel panel={panels[1]} offset delay={120} />
+        </div>
       </div>
     </Section>
+  );
+}
+
+interface EventPanelData {
+  eyebrow: string;
+  title: ReactNode;
+  text: string;
+  points: readonly string[];
+  href: Route;
+  cta: string;
+  stat: { value: string; label: string };
+  image: string;
+  alt: string;
+}
+
+function EventPanel({ panel, offset = false, delay = 0 }: { panel: EventPanelData; offset?: boolean; delay?: number }) {
+  return (
+    <Reveal delay={delay} className={cn("group flex flex-col", offset && "lg:mt-20")}>
+      <Link href={panel.href} className="relative block" aria-label={panel.cta}>
+        <span
+          aria-hidden
+          className="absolute -inset-3 -z-10 rounded-[2.25rem] border border-gold/40 transition-transform duration-700 ease-(--ease-out-expo) group-hover:translate-x-2 group-hover:translate-y-2 sm:-inset-4 sm:rounded-[2.5rem]"
+        />
+        <span className="relative block aspect-[4/3] overflow-hidden rounded-[1.75rem] bg-ink shadow-card sm:rounded-[2rem]">
+          <Image
+            src={panel.image}
+            alt={panel.alt}
+            fill
+            sizes="(min-width: 1024px) 45vw, 100vw"
+            className="object-cover transition-transform duration-1000 ease-(--ease-out-expo) group-hover:scale-[1.04]"
+          />
+          <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
+          <span className="absolute bottom-5 left-5 flex items-baseline gap-2 rounded-full border border-cream/20 bg-ink/70 px-4 py-2 text-cream backdrop-blur-md">
+            <span className="font-display text-2xl leading-none text-gold">{panel.stat.value}</span>
+            <span className="text-[0.6875rem] uppercase tracking-[0.16em] text-sand">{panel.stat.label}</span>
+          </span>
+        </span>
+      </Link>
+
+      <div className="mt-10">
+        <p className="eyebrow text-gold-dark">{panel.eyebrow}</p>
+        <h3 className="mt-3 font-display text-display-md text-ink">{panel.title}</h3>
+        <p className="mt-4 max-w-lg text-base leading-relaxed text-ink/70">{panel.text}</p>
+        <ul className="mt-6 flex flex-col gap-3">
+          {panel.points.map((point) => (
+            <li key={point} className="flex items-start gap-3 text-[0.9375rem] leading-snug text-ink/80">
+              <span aria-hidden className="mt-2 size-1.5 shrink-0 rotate-45 bg-gold-dark" />
+              {point}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <Button href={panel.href}>{panel.cta}</Button>
+          <a href={`tel:${site.phone.e164}`} className="inline-flex items-center gap-2 text-sm font-semibold text-ink/70 transition-colors hover:text-gold-dark">
+            <Phone className="size-3.5 text-gold-dark" aria-hidden /> or call {site.phone.display}
+          </a>
+        </div>
+      </div>
+    </Reveal>
   );
 }
 
@@ -488,11 +566,10 @@ function EventsPanels() {
 
 function Takeaway() {
   return (
-    <Section tone="cream">
+    <Section tone="charcoal">
       <div className="container-content flex flex-col items-center gap-10 text-center">
         <Reveal>
           <SectionHeading
-            light
             align="center"
             eyebrow="Takeaway & delivery"
             title="Zufa at home"
@@ -507,7 +584,7 @@ function Takeaway() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Order Zufa on ${partner.name} (opens in a new tab)`}
-              className="inline-flex h-16 items-center gap-3 rounded-2xl border border-ink/10 bg-white pr-6 pl-3 text-ink transition-[border-color,transform] hover:-translate-y-0.5 hover:border-ink/30"
+              className="inline-flex h-16 items-center gap-3 rounded-2xl border border-cream/10 bg-white pr-6 pl-3 text-ink transition-[border-color,transform] hover:-translate-y-0.5 hover:border-gold"
             >
               <Image src={partner.logo} alt="" width={96} height={128} className="h-11 w-auto object-contain" />
               <span className="text-sm font-semibold">{partner.name}</span>
@@ -515,7 +592,7 @@ function Takeaway() {
           ))}
         </Reveal>
         <Reveal delay={200}>
-          <Button href="/takeaway" variant="light">
+          <Button href="/takeaway" variant="secondary">
             Takeaway options
           </Button>
         </Reveal>
