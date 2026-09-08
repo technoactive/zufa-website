@@ -1,6 +1,8 @@
 import type {
   BreadcrumbList,
+  EventVenue,
   FAQPage,
+  FoodService,
   ItemList,
   Menu as SchemaMenu,
   MenuItem as SchemaMenuItem,
@@ -18,9 +20,12 @@ import { absoluteUrl, openingHours, site, SITE_URL, type DayOfWeek } from "@/con
 import { menus, type Menu, type MenuItem } from "@/content/menus";
 import type { Faq } from "@/content/faqs";
 import type { Offer as SiteOffer } from "@/content/offers";
+import { catering, privateHire } from "@/content/services";
 
 export const RESTAURANT_ID = `${SITE_URL}/#restaurant`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
+export const CATERING_ID = `${absoluteUrl(catering.path)}#service`;
+export const PRIVATE_HIRE_ID = `${absoluteUrl(privateHire.path)}#venue`;
 
 const dayUrl = (day: DayOfWeek) => `https://schema.org/${day}` as const;
 
@@ -69,6 +74,12 @@ export function restaurantSchema(): WithContext<Restaurant> {
     hasMap: site.maps.google,
     openingHoursSpecification: openingHoursSpecification(),
     sameAs: [site.social.instagram],
+    areaServed: [site.address.locality, ...site.cateringAreas].map((name) => ({ "@type": "City" as const, name })),
+    knowsAbout: ["Lebanese cuisine", "Mezze", "Charcoal grill", "Saj bread", "Lebanese wine", "Event catering", "Private dining"],
+    makesOffer: [
+      { "@type": "Offer", name: catering.name, itemOffered: { "@id": CATERING_ID }, url: absoluteUrl(catering.path) },
+      { "@type": "Offer", name: privateHire.name, itemOffered: { "@id": PRIVATE_HIRE_ID }, url: absoluteUrl(privateHire.path) },
+    ],
     amenityFeature: [
       { "@type": "LocationFeatureSpecification", name: "Outdoor seating", value: true },
       { "@type": "LocationFeatureSpecification", name: "Free Wi-Fi", value: true },
@@ -171,6 +182,79 @@ export function offersSchema(items: readonly SiteOffer[], path = "/whats-on"): W
         ...(offer.image ? { image: absoluteUrl(offer.image.src) } : {}),
       },
     })),
+  };
+}
+
+/** Catering as a schema.org FoodService: who provides it, where, for what, and what's on the menu. */
+export function cateringSchema(): WithContext<FoodService> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FoodService",
+    "@id": CATERING_ID,
+    name: catering.name,
+    serviceType: catering.serviceType,
+    description: catering.summary,
+    url: absoluteUrl(catering.path),
+    image: absoluteUrl("/images/sharing-table.jpg"),
+    provider: { "@id": RESTAURANT_ID },
+    brand: { "@id": RESTAURANT_ID },
+    areaServed: catering.areas.map((name) => ({ "@type": "City", name })),
+    audience: { "@type": "Audience", audienceType: catering.occasions.map((occasion) => occasion.title).join(", ") },
+    availableChannel: {
+      "@type": "ServiceChannel",
+      serviceUrl: absoluteUrl(`${catering.path}#enquire`),
+      servicePhone: { "@type": "ContactPoint", telephone: site.phone.e164, contactType: "reservations", availableLanguage: "English" },
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Catering menu styles",
+      itemListElement: catering.menuHighlights.map((group) => ({
+        "@type": "Offer",
+        name: group.title,
+        description: group.dishes.join(", "),
+        priceCurrency: site.currency,
+        priceSpecification: { "@type": "UnitPriceSpecification", priceCurrency: site.currency, unitText: "per person" },
+      })),
+    },
+  };
+}
+
+/** Private hire as a schema.org EventVenue nested inside the restaurant. */
+export function privateHireSchema(): WithContext<EventVenue> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "EventVenue",
+    "@id": PRIVATE_HIRE_ID,
+    name: privateHire.name,
+    description: privateHire.summary,
+    url: absoluteUrl(privateHire.path),
+    image: privateHire.gallery.map((photo) => absoluteUrl(photo.src)),
+    telephone: site.phone.e164,
+    maximumAttendeeCapacity: site.capacity.standing,
+    containedInPlace: { "@id": RESTAURANT_ID },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      addressLocality: site.address.locality,
+      addressRegion: site.address.region,
+      postalCode: site.address.postalCode,
+      addressCountry: site.address.country,
+    },
+    geo: { "@type": "GeoCoordinates", latitude: site.geo.latitude, longitude: site.geo.longitude },
+    hasMap: site.maps.google,
+    openingHoursSpecification: openingHoursSpecification(),
+    publicAccess: false,
+    isAccessibleForFree: false,
+    amenityFeature: [
+      { "@type": "LocationFeatureSpecification", name: "Seated capacity", value: site.capacity.seated },
+      { "@type": "LocationFeatureSpecification", name: "Standing capacity", value: site.capacity.standing },
+      { "@type": "LocationFeatureSpecification", name: "Fully licensed bar", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Outdoor patio", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Live entertainment (belly dancing)", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Free Wi-Fi", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Children's menu", value: true },
+    ],
+    keywords: privateHire.occasions.map((occasion) => occasion.title).join(", "),
   };
 }
 

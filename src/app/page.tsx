@@ -327,20 +327,20 @@ function PressQuote() {
 function EventsPanels() {
   const panels = [
     {
-      eyebrow: "Catering",
-      title: "We bring Zufa to the heart of your party",
-      text: `Weddings, birthdays, board lunches and family gatherings across ${site.cateringAreas.slice(0, 3).join(", ")} and beyond. Our team brings the expertise and the equipment.`,
+      eyebrow: "Lebanese catering",
+      title: "Our kitchen, at your wedding, party or office",
+      text: `Mezze, charcoal grills and saj bread cooked from scratch and brought to you across ${site.cateringAreas.slice(0, 3).join(", ")} and the surrounding area. Tell us the date and numbers and you’ll get a menu and a per-head price back.`,
       href: "/catering",
-      cta: "Catering enquiries",
+      cta: "Get a catering quote",
       image: "/images/sharing-table.jpg",
       alt: "A generous sharing table of Lebanese dishes prepared by Zufa",
     },
     {
       eyebrow: "Private hire",
-      title: "Looking for a place to celebrate?",
-      text: `Book the whole restaurant for up to ${site.capacity.seated} seated or ${site.capacity.standing} standing guests — engagements, baby showers, hen and stag nights and company get-togethers.`,
+      title: "Take over the whole restaurant",
+      text: `Up to ${site.capacity.seated} seated or ${site.capacity.standing} standing, a licensed bar, the patio and a belly dancer if you want one. Birthdays, engagements, baby showers, hen and stag nights and company parties in Hatch End.`,
       href: "/private-hire",
-      cta: "Plan your event",
+      cta: "Check a date",
       image: "/images/restaurant-interior.jpg",
       alt: "The dining room at Zufa Hatch End with its glass-leaf chandelier and patio doors",
     },

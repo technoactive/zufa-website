@@ -9,6 +9,10 @@ interface EnquiryFormProps {
   topic: EnquiryTopic;
   /** Show event-specific fields (date, guests). */
   event?: boolean;
+  /** Placeholder for the message field; defaults depend on `event`. */
+  placeholder?: string;
+  /** Submit button label. */
+  submitLabel?: string;
   className?: string;
 }
 
@@ -48,7 +52,7 @@ function Field({
   );
 }
 
-export function EnquiryForm({ topic, event = true, className }: EnquiryFormProps) {
+export function EnquiryForm({ topic, event = true, placeholder, submitLabel = "Send enquiry", className }: EnquiryFormProps) {
   const [state, action, pending] = useActionState(submitEnquiry, initialState);
   const formRef = useRef<HTMLFormElement>(null);
   const statusRef = useRef<HTMLDivElement>(null);
@@ -132,7 +136,7 @@ export function EnquiryForm({ topic, event = true, className }: EnquiryFormProps
             required
             aria-invalid={invalid}
             aria-describedby={describedBy}
-            placeholder={event ? "Occasion, preferred menu style, dietary requirements, budget…" : "How can we help?"}
+            placeholder={placeholder ?? (event ? "Occasion, preferred menu style, dietary requirements, budget…" : "How can we help?")}
             className={cn(inputClass, "resize-y")}
           />
         )}
@@ -176,7 +180,7 @@ export function EnquiryForm({ topic, event = true, className }: EnquiryFormProps
         className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink px-8 text-[0.8125rem] font-semibold uppercase tracking-[0.16em] text-cream transition-colors hover:bg-stone disabled:opacity-60"
       >
         {pending ? <Loader2 className="size-4 animate-spin" aria-hidden /> : null}
-        {pending ? "Sending…" : "Send enquiry"}
+        {pending ? "Sending…" : submitLabel}
       </button>
     </form>
   );

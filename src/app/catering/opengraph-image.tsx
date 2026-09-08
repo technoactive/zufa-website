@@ -8,7 +8,8 @@ export default function Image() {
   return renderOgImage({
     title: "Lebanese",
     accent: "Catering",
-    subtitle: "Weddings, birthdays and corporate events across Northwood, Pinner, Ruislip, Harrow, Stanmore and Watford.",
+    subtitle: "Mezze, charcoal grills and saj bread brought to weddings, birthdays and office lunches across Harrow, Pinner, Northwood, Ruislip, Stanmore and Watford.",
+    eyebrow: "Lebanese catering · North West London",
     image: "/images/sharing-table.jpg",
   });
 }

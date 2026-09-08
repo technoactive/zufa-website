@@ -89,7 +89,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang={site.language} className={`${cormorant.variable} ${montserrat.variable} no-js`} suppressHydrationWarning>
+    <html lang={site.language} className={`${cormorant.variable} ${montserrat.variable} no-js`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         {/* Remove the no-js class as early as possible so reveal animations work. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.remove('no-js')" }} />

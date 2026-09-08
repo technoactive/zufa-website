@@ -4,6 +4,8 @@ import { menus } from "./menus";
 export interface PageEntry {
   path: string;
   title: string;
+  /** Use the title verbatim instead of appending the site-wide "| Zufa …" template (keeps long SEO titles under ~60 chars). */
+  absoluteTitle?: boolean;
   description: string;
   changeFrequency: NonNullable<MetadataRoute.Sitemap[number]["changeFrequency"]>;
   priority: number;
@@ -14,6 +16,7 @@ export interface PageEntry {
 }
 
 const CONTENT_UPDATED = "2026-09-07";
+const SERVICES_UPDATED = "2026-09-08";
 
 export const pages: readonly PageEntry[] = [
   {
@@ -83,23 +86,25 @@ export const pages: readonly PageEntry[] = [
   },
   {
     path: "/catering",
-    title: "Lebanese Catering",
+    title: "Lebanese Catering in Harrow, Pinner & NW London | Zufa",
+    absoluteTitle: true,
     description:
-      "Zufa brings authentic Lebanese catering to weddings, birthdays, family gatherings and corporate events across Northwood, Pinner, Ruislip, Harrow, Stanmore and Watford.",
+      "Lebanese catering for weddings, birthdays, family gatherings and office lunches across Harrow, Pinner, Northwood, Ruislip, Stanmore and Watford. Mezze, charcoal grills and desserts made from scratch. Get a per-head quote.",
     changeFrequency: "monthly",
-    priority: 0.7,
-    lastModified: CONTENT_UPDATED,
+    priority: 0.9,
+    lastModified: SERVICES_UPDATED,
     image: "/images/sharing-table.jpg",
     section: "Events & Services",
   },
   {
     path: "/private-hire",
-    title: "Private Hire",
+    title: "Private Hire & Party Venue in Hatch End | Zufa",
+    absoluteTitle: true,
     description:
-      "Hire Zufa for birthdays, engagements, baby showers and company events — up to 60 seated or 80 standing in the heart of Hatch End.",
+      "Hire Zufa for birthdays, engagements, baby showers, hen nights and company parties. Up to 60 seated or 80 standing, licensed bar, patio and belly dancing, minutes from Pinner and Harrow.",
     changeFrequency: "monthly",
-    priority: 0.7,
-    lastModified: CONTENT_UPDATED,
+    priority: 0.9,
+    lastModified: SERVICES_UPDATED,
     image: "/images/restaurant-interior.jpg",
     section: "Events & Services",
   },

@@ -8,7 +8,8 @@ export default function Image() {
   return renderOgImage({
     title: "Private",
     accent: "Hire",
-    subtitle: "Celebrate with up to 60 seated or 80 standing guests in the heart of Hatch End.",
+    subtitle: "The whole restaurant for your party: up to 60 seated or 80 standing, licensed bar, patio and belly dancing. Hatch End, minutes from Pinner and Harrow.",
+    eyebrow: "Private hire · Party venue · Hatch End",
     image: "/images/restaurant-interior.jpg",
   });
 }

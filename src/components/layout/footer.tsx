@@ -232,11 +232,6 @@ export function Footer() {
               </li>
             ))}
             <li>
-              <a href="/llms.txt" className="transition-colors hover:text-cream">
-                llms.txt
-              </a>
-            </li>
-            <li>
               <a
                 href="#top"
                 aria-label="Back to top"

@@ -25,7 +25,7 @@ export function pageMetadata(path: string, overrides: Overrides = {}): Metadata 
   const url = absoluteUrl(path);
 
   return {
-    title: path === "/" ? { absolute: title } : title,
+    title: path === "/" || page.absoluteTitle ? { absolute: title } : title,
     description,
     alternates: { canonical: url },
     openGraph: {

@@ -73,23 +73,66 @@ export const privateHireFaqs: readonly Faq[] = [
   {
     question: "Can you arrange entertainment for my party?",
     answer:
-      "Yes — belly dancing shows are a Zufa favourite and can be arranged for private events. Let us know what you have in mind when you enquire.",
+      "Yes. Belly dancing shows are a Zufa favourite and can be arranged for private events. Tell us what you have in mind when you enquire and we’ll sort the timing around the food.",
+  },
+  {
+    question: "How does private hire pricing work?",
+    answer:
+      "It depends on the day of the week, your numbers and how you want to eat. Most parties go for one of our set menus (the Group Menu is £36.75 a head, the Tasting Menu £46.75) and pay for drinks as they go. Tell us what you have in mind and we’ll give you a clear quote rather than a formula.",
+  },
+  {
+    question: "Can we bring a cake or decorate the room?",
+    answer:
+      "Bring the cake and we’ll serve it with the coffee. If you’d like to decorate, say so when you book and we’ll make sure there’s time before your guests arrive.",
+  },
+  {
+    question: "Is Zufa suitable for children and guests with dietary requirements?",
+    answer:
+      "Yes. We have a kids menu, every cold mezze is vegetarian and most are vegan, and allergens are listed for every dish. Let us know about allergies in advance and the kitchen will plan around them.",
+  },
+  {
+    question: "How do guests get to Zufa and where can they park?",
+    answer: `We’re at ${site.address.street}, ${site.address.locality}, a short walk from Hatch End Overground station with buses stopping nearby. There is plenty of parking on the surrounding streets.`,
+  },
+  {
+    question: "Can you cater at our own venue instead?",
+    answer:
+      "Yes. If your party is at home, in a hall or at the office, our catering team brings the same menu to you across North West London and Hertfordshire. See our catering page for details.",
   },
 ];
 
 export const cateringFaqs: readonly Faq[] = [
   {
     question: "Which areas does Zufa cater?",
-    answer: `We cater across ${site.cateringAreas.slice(0, -1).join(", ")} and ${site.cateringAreas.at(-1)}, as well as the surrounding areas of North West London and Hertfordshire.`,
+    answer: `We cater across ${site.cateringAreas.slice(0, -1).join(", ")} and ${site.cateringAreas.at(-1)}, as well as the surrounding areas of North West London and Hertfordshire. If you’re further out, ask; it’s usually possible.`,
   },
   {
     question: "What events can Zufa cater for?",
     answer:
-      "Weddings, birthdays, family gatherings, board lunches, working meetings and corporate events. We bring our expertise and equipment to the heart of the party.",
+      "Weddings and engagements, birthdays, christenings, Eid and Christmas gatherings, board lunches, working meetings, product launches and office parties. We bring the food and the equipment and set it out where you are.",
   },
   {
     question: "Can the catering menu be tailored?",
     answer:
-      "Absolutely. Tell us your guest numbers, dietary requirements and budget and we will put together a mezze and grill selection to suit.",
+      "Yes, and it usually is. Tell us your guest numbers, dietary requirements and budget and we’ll put together a mezze and grill selection to suit, then change it with you until it’s right.",
+  },
+  {
+    question: "Do you cater for vegetarian, vegan and allergy requirements?",
+    answer:
+      "Every day. All of our cold mezze are vegetarian and most are vegan (hommos, moutabbal, tabbouleh, fattoush, warak enab, muhammara), as are falafel and spinach fatayer. We list the allergens for every dish and can build a menu around nut, gluten, dairy or sesame allergies.",
+  },
+  {
+    question: "How is catering priced?",
+    answer:
+      "Per head. The figure depends on your numbers, the dishes you choose and where we’re bringing it. As a guide, our in-restaurant Group Menu is £36.75 per person and the Tasting Menu £46.75. Send us the basics and you’ll get a proper quote back, not a range.",
+  },
+  {
+    question: "How much notice do you need?",
+    answer:
+      "As much as you can give us, particularly for weekends, wedding season and December. Smaller working lunches can often be arranged with a few days’ notice. Call us and we’ll tell you straight away whether the date works.",
+  },
+  {
+    question: "Could we hold the event at the restaurant instead?",
+    answer: `Yes. Zufa can be hired privately for up to ${site.capacity.seated} guests seated or ${site.capacity.standing} standing, with a licensed bar, patio and belly dancing on request. See our private hire page.`,
   },
 ];
