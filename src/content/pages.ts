@@ -67,7 +67,7 @@ export const pages: readonly PageEntry[] = [
     path: "/takeaway",
     title: "Takeaway & Delivery",
     description:
-      "Order Zufa Lebanese food for collection or delivery in Hatch End, Pinner and Harrow via Deliveroo, Uber Eats and Just Eat. 20% off your first online order.",
+      "Order Zufa direct for collection or delivery in Hatch End, Pinner and Harrow — or use Deliveroo, Uber Eats and Just Eat. 20% off your first online order.",
     changeFrequency: "monthly",
     priority: 0.8,
     lastModified: CONTENT_UPDATED,

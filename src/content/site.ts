@@ -87,6 +87,15 @@ export const site = {
     eventPartySize: 12,
   },
 
+  /** Direct online ordering (collection and delivery), embedded on /takeaway. Carried over from the previous site. */
+  ordering: {
+    provider: "Flipdish",
+    /** Flipdish white-label restaurant identifier. */
+    restaurantId: "fd20235",
+    pluginVersion: "1.5.2",
+    script: "https://web-order.flipdish.co/client/productionwlbuild/latest/static/js/main.js",
+  },
+
   delivery: [
     {
       name: "Deliveroo",

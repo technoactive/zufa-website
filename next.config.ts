@@ -6,8 +6,9 @@ import type { NextConfig } from "next";
  * The site is fully prerendered (static shell served from the CDN), so a nonce-based
  * policy is not possible without forcing every route dynamic. We therefore allow
  * inline scripts (required by React hydration payloads) but lock down every other
- * source to the explicit third parties we use: Google Analytics (consent-gated) and
- * the SevenRooms reservation widget.
+ * source to the explicit third parties we use: Google Analytics (consent-gated), the
+ * SevenRooms reservation widget and the Flipdish ordering widget (which in turn loads
+ * Stripe for payment, Google Maps for delivery addresses and Split for feature flags).
  */
 const isDev = process.env.NODE_ENV === "development";
 
@@ -16,15 +17,15 @@ const contentSecurityPolicy = [
   "base-uri 'self'",
   "object-src 'none'",
   "frame-ancestors 'none'",
-  "form-action 'self'",
+  "form-action 'self' https://*.flipdish.co https://*.flipdish.com https://*.stripe.com",
   "upgrade-insecure-requests",
   // React dev tooling (Fast Refresh, source-mapped stacks) needs eval; production never does.
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://*.sevenrooms.com`,
-  "style-src 'self' 'unsafe-inline' https://*.sevenrooms.com",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://*.sevenrooms.com https://*.flipdish.co https://*.flipdish.com https://js.stripe.com https://maps.googleapis.com https://sdk.split.io`,
+  "style-src 'self' 'unsafe-inline' https://*.sevenrooms.com https://*.flipdish.co https://*.flipdish.com https://fonts.googleapis.com",
   "img-src 'self' data: blob: https:",
-  "font-src 'self' data: https://*.sevenrooms.com",
-  "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.sevenrooms.com",
-  "frame-src https://*.sevenrooms.com https://www.google.com",
+  "font-src 'self' data: https://*.sevenrooms.com https://*.flipdish.co https://*.flipdish.com https://fonts.gstatic.com",
+  "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.sevenrooms.com https://*.flipdish.co https://*.flipdish.com https://api.stripe.com https://maps.googleapis.com https://*.split.io https://ipinfo.io https://flipdish-cookie-consent.s3-eu-west-1.amazonaws.com https://*.cloudfront.net",
+  "frame-src https://*.sevenrooms.com https://www.google.com https://*.flipdish.co https://*.flipdish.com https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com",
   "manifest-src 'self'",
   "worker-src 'self' blob:",
 ].join("; ");
@@ -38,7 +39,7 @@ const securityHeaders = [
   { key: "X-DNS-Prefetch-Control", value: "on" },
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=(), browsing-topics=(), interest-cohort=()",
+    value: "camera=(), microphone=(), geolocation=(self), browsing-topics=(), interest-cohort=()",
   },
 ];
 

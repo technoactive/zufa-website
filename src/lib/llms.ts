@@ -153,6 +153,7 @@ export function buildLlmsFullTxt(): string {
     `## Takeaway & delivery (${absoluteUrl("/takeaway")})`,
     "",
     p("/takeaway").description,
+    `- Direct online ordering (Flipdish, collection and delivery) on ${absoluteUrl("/takeaway")}#order-online.`,
     ...site.delivery.map((d) => `- ${d.name}: ${d.url}`),
     `- Collection: call ${site.phone.display} with your order.`,
     "",
