@@ -22,15 +22,17 @@ interface NavItemProps {
   active: boolean;
 }
 
-/** Serif nav link: cream, gold on hover; the current page is set in gold italic. */
+/** Serif nav link: cream, gold on hover; the current page glows gold like candlelight. */
 function NavItem({ item, active }: NavItemProps) {
   return (
     <Link
       href={item.href}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "inline-flex h-10 items-center px-3.5 font-display text-[1.125rem] font-medium leading-none tracking-[0.02em] whitespace-nowrap transition-colors duration-300",
-        active ? "italic text-gold" : "text-cream hover:text-gold",
+        "inline-flex h-10 items-center px-3.5 font-display text-[1.125rem] font-medium leading-none tracking-[0.02em] whitespace-nowrap transition-[color,text-shadow] duration-300",
+        active
+          ? "text-gold [text-shadow:0_0_14px_rgb(255_205_117/0.65),0_0_32px_rgb(255_205_117/0.3)]"
+          : "text-cream hover:text-gold",
       )}
     >
       {item.label}
