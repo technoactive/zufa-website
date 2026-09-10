@@ -291,7 +291,7 @@ function Signatures() {
             <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
             <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4">
               <p className="max-w-xs text-sm leading-relaxed text-cream/90">Mezze first, then the grill. Lebanese meals are built to be shared, so bring people.</p>
-              <Button href="/menu/set-menus" size="sm" variant="secondary" className="shrink-0 border-cream/40 text-cream hover:border-gold hover:bg-gold hover:text-ink">
+              <Button href="/menu/set-menus" size="sm" variant="secondary" className="shrink-0 border-cream/40 text-cream hover:border-gold-deep hover:bg-gold-deep hover:text-ink">
                 Set menus
               </Button>
             </div>

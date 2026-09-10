@@ -106,7 +106,7 @@ export function OrderingWidget({ className }: { className?: string }) {
               <div className="mt-6 flex flex-col items-center gap-4">
                 <a
                   href={`tel:${site.phone.e164}`}
-                  className="inline-flex h-12 items-center gap-2 rounded-full bg-gold px-7 text-[0.8125rem] font-semibold uppercase tracking-[0.16em] text-ink transition-colors hover:bg-ink hover:text-cream"
+                  className="inline-flex h-12 items-center gap-2 rounded-full bg-gold-deep px-7 text-[0.8125rem] font-bold uppercase tracking-[0.1em] text-ink transition-colors hover:bg-ink hover:text-cream"
                 >
                   <Phone className="size-4" aria-hidden /> Call {site.phone.display}
                 </a>

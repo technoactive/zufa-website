@@ -125,7 +125,7 @@ export function CookieConsent() {
           <button
             type="button"
             onClick={() => decide("granted")}
-            className="h-11 rounded-full bg-gold px-5 text-xs font-semibold uppercase tracking-[0.16em] text-ink transition-colors hover:bg-cream"
+            className="h-11 rounded-full bg-gold-deep px-5 text-xs font-bold uppercase tracking-[0.1em] text-ink transition-colors hover:bg-cream"
           >
             Accept analytics
           </button>

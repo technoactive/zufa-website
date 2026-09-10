@@ -58,7 +58,7 @@
   --container-prose: 44rem;
 
   /* Shadows */
-  --shadow-glow: 0 0 0 1px rgb(255 205 117 / 0.18), 0 24px 60px -24px rgb(255 205 117 / 0.25);
+  --shadow-glow: 0 0 0 1px rgb(201 162 79 / 0.28), 0 24px 60px -24px rgb(201 162 79 / 0.35);
   --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 20px 40px -20px rgb(0 0 0 / 0.6);
 
   @keyframes fade-up {
@@ -407,13 +407,24 @@
 
 #flipdish-menu .MuiButton-contained,
 #flipdish-menu .MuiButton-containedPrimary {
-  background-color: var(--color-gold) !important;
+  background-color: var(--color-gold-deep) !important;
   color: var(--color-ink) !important;
   border-radius: 999px !important;
   box-shadow: none !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.12em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
   text-transform: uppercase !important;
+}
+
+/* Inner labels inherit Flipdish cream; force ink on gold fills. */
+#flipdish-menu .MuiButton-contained,
+#flipdish-menu .MuiButton-contained *,
+#flipdish-menu .MuiButton-containedPrimary,
+#flipdish-menu .MuiButton-containedPrimary *,
+#flipdish-menu .MuiButton-contained .MuiTypography-root,
+#flipdish-menu .MuiButton-containedPrimary .MuiTypography-root,
+#flipdish-menu .MuiButton-contained .fd-text {
+  color: var(--color-ink) !important;
 }
 
 #flipdish-menu .MuiButton-contained:hover,
@@ -461,9 +472,18 @@
 
 .MuiDrawer-paper .MuiButton-containedPrimary,
 .MuiDialog-paper .MuiButton-containedPrimary {
-  background-color: var(--color-gold) !important;
+  background-color: var(--color-gold-deep) !important;
   color: var(--color-ink) !important;
   border-radius: 999px !important;
+}
+
+.MuiDrawer-paper .MuiButton-containedPrimary,
+.MuiDrawer-paper .MuiButton-containedPrimary *,
+.MuiDrawer-paper .MuiButton-containedPrimary .MuiTypography-root,
+.MuiDialog-paper .MuiButton-containedPrimary,
+.MuiDialog-paper .MuiButton-containedPrimary *,
+.MuiDialog-paper .MuiButton-containedPrimary .MuiTypography-root {
+  color: var(--color-ink) !important;
 }
 
 @media print {

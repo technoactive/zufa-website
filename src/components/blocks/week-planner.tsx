@@ -81,7 +81,7 @@ export function WeekPlanner({ days, className }: { days: readonly PlannerDay[]; 
                   <li key={item.id}>
                     <Link
                       href={item.href as Route}
-                      className="group/chip block rounded-xl border border-gold/20 bg-gold/[0.06] px-3 py-2.5 text-left transition-colors duration-300 hover:border-gold hover:bg-gold"
+                      className="group/chip block rounded-xl border border-gold/20 bg-gold/[0.06] px-3 py-2.5 text-left transition-colors duration-300 hover:border-gold-deep hover:bg-gold-deep"
                     >
                       <span className="block text-xs font-semibold leading-snug text-cream group-hover/chip:text-ink">{item.label}</span>
                       {item.hours ? <span className="mt-1 block text-[0.6875rem] leading-none text-sand group-hover/chip:text-ink/70">{item.hours}</span> : null}
