@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
-import { ArrowUpRight, Phone, Percent, ShoppingBag } from "lucide-react";
+import { ArrowUpRight, Download, Phone, Percent, ShoppingBag } from "lucide-react";
 import { PageHero } from "@/components/blocks/page-hero";
 import { CtaBand } from "@/components/blocks/cta-band";
 import { OrderingWidget } from "@/components/blocks/ordering-widget";
@@ -38,6 +38,13 @@ export default function TakeawayPage() {
         <Button href={`tel:${site.phone.e164}`} variant="secondary" size="lg">
           <Phone className="size-4" aria-hidden /> Call to collect
         </Button>
+        <a
+          href="/menus/zufa-takeaway-menu.pdf"
+          download
+          className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-gold/60 px-9 text-sm font-semibold uppercase tracking-[0.16em] text-gold transition-[background-color,color,border-color] hover:border-gold hover:bg-gold hover:text-ink"
+        >
+          <Download className="size-4" aria-hidden /> Takeaway menu PDF
+        </a>
       </PageHero>
 
       <Section tone="ink" pattern id="order-online" className="scroll-mt-20 overflow-hidden">
@@ -103,9 +110,13 @@ export default function TakeawayPage() {
                   <a href={`tel:${site.phone.e164}`} className="text-gold underline underline-offset-4">
                     {site.phone.display}
                   </a>{" "}
-                  with your order and we’ll have it ready when you arrive. Browse the full{" "}
+                  with your order and we’ll have it ready when you arrive. Browse the{" "}
+                  <Link href="/menu/takeaway-menu" className="text-gold underline underline-offset-4">
+                    takeaway wraps
+                  </Link>{" "}
+                  or the full{" "}
                   <Link href="/menu/a-la-carte" className="text-gold underline underline-offset-4">
-                    à la carte menu
+                    à la carte
                   </Link>{" "}
                   to choose your mezze and grills.
                 </>

@@ -14,7 +14,7 @@ export const generalFaqs: readonly Faq[] = [
   {
     question: "What are Zufa’s opening hours?",
     answer:
-      "We are open Sunday to Thursday from 11am to 11pm, and Friday and Saturday from 11am to midnight. Our weekday lunch menu is served Monday to Friday, 12pm to 4pm.",
+      "We are open Sunday to Thursday from 11am to 11pm, and Friday and Saturday from 11am to midnight. Our weekday lunch menu is served Monday to Friday, 12pm to 5pm.",
   },
   {
     question: "Do I need to book a table at Zufa?",
@@ -23,7 +23,7 @@ export const generalFaqs: readonly Faq[] = [
   {
     question: "Does Zufa offer vegetarian and vegan food?",
     answer:
-      "Yes. Lebanese cuisine is naturally plant-forward: all of our cold mezze are vegetarian and most are vegan, including hommos, moutabbal, tabbouleh, fattoush, falafel and warak enab. We also serve a vegetarian mixed grill, musakaat rice and bamieh rice.",
+      "Yes. Lebanese cuisine is naturally plant-forward: all of our cold mezze are vegetarian and most are vegan, including hommos, moutabbal, tabbouleh, fattoush, falafel, rahib and muhammara. We also serve a vegetarian mixed grill, musakaat rice, bamieh rice and fattet batinjen.",
   },
   {
     question: "Is Zufa halal?",
@@ -119,7 +119,7 @@ export const cateringFaqs: readonly Faq[] = [
   {
     question: "Do you cater for vegetarian, vegan and allergy requirements?",
     answer:
-      "Every day. All of our cold mezze are vegetarian and most are vegan (hommos, moutabbal, tabbouleh, fattoush, warak enab, muhammara), as are falafel and spinach fatayer. We list the allergens for every dish and can build a menu around nut, gluten, dairy or sesame allergies.",
+      "Every day. All of our cold mezze are vegetarian and most are vegan (hommos, moutabbal, tabbouleh, fattoush, rahib, muhammara), as are falafel and spinach fatayer. We list the allergens for every dish and can build a menu around nut, gluten, dairy or sesame allergies.",
   },
   {
     question: "How is catering priced?",

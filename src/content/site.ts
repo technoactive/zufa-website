@@ -171,8 +171,8 @@ export const openingHours: readonly OpeningPeriod[] = [
 export const lunchService = {
   days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] satisfies DayOfWeek[],
   opens: "12:00",
-  closes: "16:00",
-  label: "Monday – Friday, 12pm – 4pm",
+  closes: "17:00",
+  label: "Monday – Friday, 12pm – 5pm",
 } as const;
 
 export const navigation = {

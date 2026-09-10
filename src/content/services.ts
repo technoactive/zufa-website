@@ -83,7 +83,7 @@ export const catering = {
   menuHighlights: [
     {
       title: "Cold mezze",
-      dishes: ["Hommos", "Moutabbal", "Tabbouleh", "Fattoush", "Warak enab", "Muhammara", "Mixed olives and pickles"],
+      dishes: ["Hommos", "Moutabbal", "Tabbouleh", "Fattoush", "Rahib", "Muhammara", "Mixed olives and pickles"],
       note: "Every cold mezze on our menu is vegetarian and most are vegan.",
     },
     {
@@ -101,7 +101,7 @@ export const catering = {
     },
     {
       title: "Desserts and coffee",
-      dishes: ["Baklawa", "Knefeh", "Osmaliyeh", "Atayef", "Gluten-free honey cake", "Lebanese coffee with cardamom"],
+      dishes: ["Baklawa", "Pistachio baklawa", "Knefeh", "Osmaliyeh", "Mouhallabieh", "Gluten-free honey cake", "Lebanese coffee"],
     },
   ] satisfies readonly MenuHighlight[] as readonly MenuHighlight[],
   pricing:
@@ -168,7 +168,7 @@ export const privateHire = {
     },
     {
       title: "Choose how the table eats",
-      text: "For most parties one of our set menus is the easiest: the Group Menu (£36.75 a head) brings hommos, moutabbal, tabbouleh, rikakat, jawaneh and samke harra, then shish taouk, kafta and mixed shawarma. The Tasting Menu (£46.75) adds warak enab, sojok, kebbeh and falafel and lets each guest choose their main. Smaller parties can order à la carte.",
+      text: "For most parties one of our set menus is the easiest: the Group Menu (£36.75 a head) brings hommos, moutabbal, tabbouleh, rikakat, jawaneh and samke harra, then shish taouk, kafta and mixed shawarma. The Tasting Menu (£46.75) adds sojok, kebbeh and falafel and lets each guest choose their main. Smaller parties can order à la carte.",
     },
     {
       title: "Sort the drinks and the extras",
