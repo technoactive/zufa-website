@@ -58,7 +58,7 @@
   --container-prose: 44rem;
 
   /* Shadows */
-  --shadow-glow: 0 0 0 1px rgb(201 162 79 / 0.28), 0 24px 60px -24px rgb(201 162 79 / 0.35);
+  --shadow-glow: 0 0 0 1px rgb(201 162 79 / 0.35), 0 24px 60px -24px rgb(0 0 0 / 0.45);
   --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 20px 40px -20px rgb(0 0 0 / 0.6);
 
   @keyframes fade-up {
@@ -407,16 +407,16 @@
 
 #flipdish-menu .MuiButton-contained,
 #flipdish-menu .MuiButton-containedPrimary {
-  background-color: var(--color-gold-deep) !important;
+  background-color: var(--color-cream) !important;
   color: var(--color-ink) !important;
   border-radius: 999px !important;
   box-shadow: none !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.1em !important;
-  text-transform: uppercase !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
 }
 
-/* Inner labels inherit Flipdish cream; force ink on gold fills. */
+/* Inner labels inherit Flipdish cream; force ink on cream fills. */
 #flipdish-menu .MuiButton-contained,
 #flipdish-menu .MuiButton-contained *,
 #flipdish-menu .MuiButton-containedPrimary,
@@ -429,7 +429,7 @@
 
 #flipdish-menu .MuiButton-contained:hover,
 #flipdish-menu .MuiButton-containedPrimary:hover {
-  background-color: var(--color-cream) !important;
+  background-color: var(--color-cream-deep) !important;
 }
 
 #flipdish-menu .MuiButton-outlined,
@@ -472,7 +472,7 @@
 
 .MuiDrawer-paper .MuiButton-containedPrimary,
 .MuiDialog-paper .MuiButton-containedPrimary {
-  background-color: var(--color-gold-deep) !important;
+  background-color: var(--color-cream) !important;
   color: var(--color-ink) !important;
   border-radius: 999px !important;
 }
