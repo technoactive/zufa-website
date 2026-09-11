@@ -166,6 +166,15 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  /*
+    Root is `color-scheme: dark`, so after first paint Safari/Chrome can force
+    CanvasText (near-white) onto links. Lock CTA labels in :visited too.
+  */
+  a.group\/btn:visited {
+    color: inherit;
+    -webkit-text-fill-color: currentColor;
+  }
+
   img,
   video {
     @apply block max-w-full;
@@ -407,8 +416,9 @@
 
 #flipdish-menu .MuiButton-contained,
 #flipdish-menu .MuiButton-containedPrimary {
-  background-color: var(--color-cream) !important;
-  color: var(--color-ink) !important;
+  background-color: var(--color-ink) !important;
+  color: var(--color-cream) !important;
+  border: 1px solid var(--color-gold) !important;
   border-radius: 999px !important;
   box-shadow: none !important;
   font-weight: 600 !important;
@@ -416,7 +426,6 @@
   text-transform: none !important;
 }
 
-/* Inner labels inherit Flipdish cream; force ink on cream fills. */
 #flipdish-menu .MuiButton-contained,
 #flipdish-menu .MuiButton-contained *,
 #flipdish-menu .MuiButton-containedPrimary,
@@ -424,12 +433,12 @@
 #flipdish-menu .MuiButton-contained .MuiTypography-root,
 #flipdish-menu .MuiButton-containedPrimary .MuiTypography-root,
 #flipdish-menu .MuiButton-contained .fd-text {
-  color: var(--color-ink) !important;
+  color: var(--color-cream) !important;
 }
 
 #flipdish-menu .MuiButton-contained:hover,
 #flipdish-menu .MuiButton-containedPrimary:hover {
-  background-color: var(--color-cream-deep) !important;
+  background-color: var(--color-stone) !important;
 }
 
 #flipdish-menu .MuiButton-outlined,
@@ -472,8 +481,9 @@
 
 .MuiDrawer-paper .MuiButton-containedPrimary,
 .MuiDialog-paper .MuiButton-containedPrimary {
-  background-color: var(--color-cream) !important;
-  color: var(--color-ink) !important;
+  background-color: var(--color-ink) !important;
+  color: var(--color-cream) !important;
+  border: 1px solid var(--color-gold) !important;
   border-radius: 999px !important;
 }
 
@@ -483,7 +493,7 @@
 .MuiDialog-paper .MuiButton-containedPrimary,
 .MuiDialog-paper .MuiButton-containedPrimary *,
 .MuiDialog-paper .MuiButton-containedPrimary .MuiTypography-root {
-  color: var(--color-ink) !important;
+  color: var(--color-cream) !important;
 }
 
 @media print {

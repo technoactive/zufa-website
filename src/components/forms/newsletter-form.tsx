@@ -51,7 +51,7 @@ export function NewsletterForm({ className }: { className?: string }) {
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex h-10 shrink-0 items-center gap-2 rounded-full border border-gold-deep/50 bg-cream px-5 text-sm font-semibold text-ink transition-colors duration-300 hover:bg-cream-deep disabled:opacity-60"
+          className="inline-flex h-10 shrink-0 items-center gap-2 rounded-full border border-gold bg-ink px-5 text-sm font-semibold text-cream transition-colors duration-300 hover:bg-stone disabled:opacity-60"
         >
           {pending ? "Joining…" : "Join"}
           <ArrowRight className="size-3.5" aria-hidden />

@@ -108,7 +108,7 @@ export function TonightCard({ offers, className }: TonightCardProps) {
 
       <Link
         href="/bookings"
-        className="mt-5 inline-flex h-11 w-full items-center justify-center rounded-full border border-gold-deep/50 bg-cream text-[0.8125rem] font-semibold text-ink transition-colors hover:bg-cream-deep"
+        className="mt-5 inline-flex h-11 w-full items-center justify-center rounded-full border border-gold bg-ink text-[0.8125rem] font-semibold text-cream transition-colors hover:bg-stone"
       >
         Book a table
       </Link>

@@ -41,7 +41,7 @@ export default function TakeawayPage() {
         <a
           href="/menus/zufa-takeaway-menu.pdf"
           download
-          className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-gold/70 px-9 text-base font-semibold text-gold transition-[background-color,color,border-color] hover:border-cream hover:bg-cream hover:text-ink"
+          className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-gold/70 px-9 text-base font-semibold text-gold transition-[background-color,border-color] hover:border-cream hover:text-cream"
         >
           <Download className="size-4" aria-hidden /> Takeaway menu PDF
         </a>
