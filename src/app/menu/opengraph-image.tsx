@@ -8,7 +8,7 @@ export default function Image() {
   return renderOgImage({
     title: "Our",
     accent: "Menus",
-    subtitle: "À la carte, set menus, lunch, kids, desserts and drinks — every dish with prices and allergens.",
+    subtitle: "À la carte, sharing platters, lunch, kids, desserts and drinks — every dish with prices and allergens.",
     image: "/images/feast-table.jpg",
   });
 }

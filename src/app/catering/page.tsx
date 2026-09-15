@@ -117,7 +117,7 @@ export default function CateringPage() {
               />
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button href="/menu/set-menus" variant="light" size="sm">
-                  Set menus &amp; platters
+                  Sharing platters
                 </Button>
                 <Button href="/menu/a-la-carte" variant="light" size="sm">
                   À la carte

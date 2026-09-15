@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Route } from "next";
 import type { ReactNode } from "react";
-import { ArrowRight, Clock, Martini, PartyPopper, Phone, ShoppingBag, Sparkles, UtensilsCrossed, Wine } from "lucide-react";
+import { ArrowRight, Clock, Coffee, Martini, PartyPopper, Phone, ShoppingBag, Sparkles, UtensilsCrossed, Wine } from "lucide-react";
 import { PageHero } from "@/components/blocks/page-hero";
 import { CtaBand } from "@/components/blocks/cta-band";
 import { WeekPlanner, type PlannerDay } from "@/components/blocks/week-planner";
@@ -23,6 +23,7 @@ export const metadata: Metadata = pageMetadata("/whats-on");
 const page = getPage("/whats-on")!;
 
 const icons: Record<string, ReactNode> = {
+  breakfast: <Coffee className="size-5" aria-hidden />,
   "byo-monday": <Wine className="size-5" aria-hidden />,
   "cocktails-241": <Martini className="size-5" aria-hidden />,
   lunch: <UtensilsCrossed className="size-5" aria-hidden />,
@@ -41,7 +42,12 @@ const plannerDays: PlannerDay[] = dayOrder.map((day) => {
     lateNight: period.closes === "00:00",
     items: regularOffers
       .filter((offer) => offer.days?.includes(day))
-      .map((offer) => ({ id: offer.id, label: offer.short ?? offer.title, hours: offer.hours, href: `#${offer.id}` })),
+      .map((offer) => ({
+        id: offer.id,
+        label: offer.short ?? offer.title,
+        hours: offer.hoursByDay?.[day] ?? offer.hours,
+        href: `#${offer.id}`,
+      })),
   };
 });
 
@@ -57,7 +63,7 @@ export default function WhatsOnPage() {
             Offers, nights out and <em className="italic text-gold">celebrations</em>
           </>
         }
-        description="Corkage-free Mondays, two-for-one cocktails, weekday lunch deals and private parties — there is always a reason to visit Zufa."
+        description="Corkage-free Mondays, two-for-one house cocktails, weekend breakfast, weekday lunch deals and private parties — there is always a reason to visit Zufa."
         image={{ src: "/images/feast-table.jpg", alt: "A table of Lebanese dishes at Zufa Hatch End" }}
         crumbs={[{ name: "What’s On", path: "/whats-on" }]}
       >
@@ -92,10 +98,10 @@ function WeekAtZufa() {
           <SectionHeading
             eyebrow="Plan your week"
             title="Seven days, something on every one of them"
-            description="Weekday lunch and cocktail hours, corkage-free Mondays and late nights on Fridays and Saturdays. Today is highlighted — tap an offer to jump to the details."
+            description="Breakfast from 8am at the weekend, weekday lunch and cocktail hours, corkage-free Mondays and late nights on Fridays and Saturdays. Today is highlighted — tap an offer to jump to the details."
           />
           <p className="inline-flex shrink-0 items-center gap-2 text-sm text-sand">
-            <Clock className="size-4 text-gold" aria-hidden /> Kitchen open from 11am daily
+            <Clock className="size-4 text-gold" aria-hidden /> Breakfast from 8am Friday to Sunday
           </p>
         </Reveal>
         <Reveal delay={120} className="mt-12">

@@ -12,6 +12,7 @@ export interface TonightOffer {
   id: string;
   label: string;
   hours?: string;
+  hoursByDay?: Partial<Record<DayOfWeek, string>>;
   href: string;
   days: readonly DayOfWeek[];
 }
@@ -89,7 +90,9 @@ export function TonightCard({ offers, className }: TonightCardProps) {
                 >
                   <span>
                     <span className="block font-semibold text-cream">{offer.label}</span>
-                    {offer.hours ? <span className="mt-0.5 block text-xs text-sand">{offer.hours}</span> : null}
+                    {offer.hoursByDay?.[now.day] ?? offer.hours ? (
+                      <span className="mt-0.5 block text-xs text-sand">{offer.hoursByDay?.[now.day] ?? offer.hours}</span>
+                    ) : null}
                   </span>
                   <ArrowUpRight className="size-4 shrink-0 text-gold transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
                 </Link>

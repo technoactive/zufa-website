@@ -130,7 +130,7 @@ export default function PrivateHirePage() {
                 <p>
                   Prices below are our current{" "}
                   <Link href="/menu/set-menus" className="text-gold-dark underline underline-offset-4 hover:text-ink">
-                    set menus
+                    sharing platters
                   </Link>
                   ; the{" "}
                   <Link href="/menu/drinks" className="text-gold-dark underline underline-offset-4 hover:text-ink">
@@ -148,7 +148,7 @@ export default function PrivateHirePage() {
           <StepList steps={privateHire.steps} light className="mt-14" />
           <Reveal delay={120} className="mt-12 flex flex-wrap gap-3">
             <Button href="/menu/set-menus" variant="light" size="sm">
-              Set menus
+              Sharing platters
             </Button>
             <Button href="/menu/drinks" variant="light" size="sm">
               Drinks
@@ -194,7 +194,7 @@ export default function PrivateHirePage() {
             <p className="mt-3 text-base leading-relaxed text-ink/70">Dates, numbers, the occasion. We’ll do the rest.</p>
             <EnquiryForm
               topic="private-hire"
-              placeholder="Occasion, whether you’d like a set menu or à la carte, a cake, dietary requirements…"
+              placeholder="Occasion, whether you’d like a sharing platter or à la carte, a cake, dietary requirements…"
               submitLabel="Check availability"
               className="mt-8"
             />

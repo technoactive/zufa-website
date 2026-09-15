@@ -298,9 +298,9 @@ export const aLaCarte: Menu = {
 export const setMenus: Menu = {
   slug: "set-menus",
   title: "Set Menus & Sharing Platters",
-  shortTitle: "Set Menus",
+  shortTitle: "Sharing Platters",
   summary:
-    "Vegetarian, Levantine and Lebanese grill sharing feasts for two or four, plus group and tasting set menus — the easiest way to eat the Lebanese way.",
+    "Vegetarian, Levantine and Lebanese grill sharing feasts for two or four — the easiest way to eat the Lebanese way.",
   intro:
     "Lebanese food is made for sharing. Our feasts bring the whole table a generous spread of mezze and charcoal grills. Ideal for groups, celebrations and first-time visitors.",
   image: "/images/sharing-table.jpg",
@@ -335,27 +335,6 @@ export const setMenus: Menu = {
             { label: "For two", price: 69.75 },
             { label: "For four", price: 133.75 },
           ],
-        },
-      ],
-    },
-    {
-      id: "set-menus",
-      title: "Set Menus",
-      description: "Minimum two people. Priced per person. Ask when you book if you would like one of these for a larger group.",
-      items: [
-        {
-          name: "Group Menu",
-          description:
-            "Starters: hommos, moutabbal, tabbouleh, cheese rikakat, jawaneh, samke harra. Main course: shish taouk, kafta meshwi, mixed shawarma, chips and salad.",
-          price: 36.75,
-          priceNote: "per person",
-        },
-        {
-          name: "Tasting Menu",
-          description:
-            "Starters: hommos, moutabbal, tabbouleh, sojok, cheese rikakat, kebbeh, falafel. Then a main course of your choice plus any side (add £4 for a seafood main).",
-          price: 46.75,
-          priceNote: "per person",
         },
       ],
     },
@@ -507,8 +486,8 @@ export const dessertMenu: Menu = {
     "Traditional Lebanese sweets — baklawa, pistachio baklawa, knefeh, osmaliyeh and mouhallabieh — alongside puddings, gluten-free honey cake, ice cream, Lebanese coffee and floral teas.",
   intro:
     "Lebanese desserts are traditionally flavoured with rose water, orange blossom and sugar syrup. Finish your meal the Lebanese way with a plate of sweets and a strong Lebanese coffee.",
-  image: "/images/warak-enab.jpg",
-  imageAlt: "A plated dish finished with pomegranate seeds and edible flowers at Zufa",
+  image: "/images/baklawa.jpg",
+  imageAlt: "A plate of baklawa and Lebanese sweets at Zufa",
   pdf: "/menus/zufa-a-la-carte-menu.pdf",
   sections: [
     {
@@ -637,7 +616,8 @@ export const drinksMenu: Menu = {
     {
       id: "signature-cocktails",
       title: "Zufa Signature Cocktails",
-      description: "All signature cocktails £11.95. Two-for-one on cocktails Monday to Friday, 12pm – 7pm.",
+      description:
+        "All signature cocktails £11.95. Two-for-one on house cocktails Monday to Thursday, 12pm – 7pm, and Friday to Saturday, 12pm – 6pm.",
       items: [
         { name: "Zaatarita", description: "Patrón Silver, zaatar-infused syrup, lime, grapefruit juice", price: 11.95 },
         { name: "Mangorita", description: "Patrón Silver, Cointreau, lime, mango purée, mango juice", price: 11.95 },

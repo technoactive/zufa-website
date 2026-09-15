@@ -90,7 +90,7 @@ export default function BookingsPage() {
               </Link>{" "}
               or, for groups, the{" "}
               <Link href="/menu/set-menus" className="text-gold-dark underline underline-offset-4">
-                set menus
+                sharing platters
               </Link>
               . Mondays are{" "}
               <Link href="/whats-on#byo-monday" className="text-gold-dark underline underline-offset-4">

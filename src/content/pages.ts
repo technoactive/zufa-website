@@ -15,7 +15,7 @@ export interface PageEntry {
   section: "Core" | "Menus" | "Events & Services" | "Company";
 }
 
-const CONTENT_UPDATED = "2026-09-10";
+const CONTENT_UPDATED = "2026-09-15";
 const SERVICES_UPDATED = "2026-09-08";
 
 export const pages: readonly PageEntry[] = [
@@ -34,7 +34,7 @@ export const pages: readonly PageEntry[] = [
     path: "/menu",
     title: "Menus",
     description:
-      "Explore every Zufa menu: à la carte, set menus and sharing platters, weekday lunch, kids, desserts and drinks — all with prices and allergen information.",
+      "Explore every Zufa menu: à la carte, sharing platters, weekday lunch, kids, desserts and drinks — all with prices and allergen information.",
     changeFrequency: "monthly",
     priority: 0.9,
     lastModified: CONTENT_UPDATED,
@@ -78,7 +78,7 @@ export const pages: readonly PageEntry[] = [
     path: "/whats-on",
     title: "What’s On",
     description:
-      "Offers and events at Zufa: corkage-free Mondays, 2-for-1 cocktails Monday to Friday, weekday lunch deals and private parties.",
+      "Offers and events at Zufa: corkage-free Mondays, 2-for-1 house cocktails, weekend breakfast, weekday lunch deals and private parties.",
     changeFrequency: "weekly",
     priority: 0.8,
     lastModified: CONTENT_UPDATED,

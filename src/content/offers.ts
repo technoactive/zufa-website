@@ -1,4 +1,4 @@
-import type { DayOfWeek } from "./site";
+import { breakfastService, type DayOfWeek } from "./site";
 
 export type OfferKind = "offer" | "experience";
 
@@ -16,6 +16,8 @@ export interface Offer {
   days?: readonly DayOfWeek[];
   /** Short time window shown in the week planner, e.g. “12pm – 7pm”. */
   hours?: string;
+  /** Per-day override of `hours` when the window changes through the week. */
+  hoursByDay?: Partial<Record<DayOfWeek, string>>;
   /** Headline figure for the offer card, e.g. { value: "2 for 1", label: "on every cocktail" }. */
   stat?: { value: string; label: string };
   image?: { src: string; alt: string };
@@ -26,8 +28,23 @@ export interface Offer {
 }
 
 const weekdays: readonly DayOfWeek[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+const cocktailDays: readonly DayOfWeek[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 export const offers: readonly Offer[] = [
+  {
+    id: "breakfast",
+    kind: "offer",
+    title: "Weekend Breakfast",
+    short: "Breakfast",
+    headline: "Breakfast from 8am, Friday to Sunday",
+    description:
+      "We open at 8am on Fridays, Saturdays and Sundays. Breakfast is served until midday — then the rest of the kitchen takes over.",
+    when: breakfastService.label,
+    days: breakfastService.days,
+    hours: "8am – midday",
+    stat: { value: "8am", label: "Friday to Sunday" },
+    cta: { label: "Book a table", href: "/bookings" },
+  },
   {
     id: "byo-monday",
     kind: "offer",
@@ -48,16 +65,20 @@ export const offers: readonly Offer[] = [
     id: "cocktails-241",
     kind: "offer",
     title: "2-for-1 Cocktails",
-    short: "2-for-1 cocktails",
-    headline: "Two-for-one on all cocktails",
+    short: "2-for-1 house cocktails",
+    headline: "Two-for-one on house cocktails",
     description:
-      "Zaatarita, PoMojito, Espresso Martini and the rest of the list — two for the price of one, Monday to Friday afternoons and early evenings.",
-    when: "Monday – Friday, 12pm – 7pm",
-    days: weekdays,
+      "Zaatarita, PoMojito and the rest of the house list — two for the price of one, Monday to Thursday 12pm – 7pm and Friday to Saturday 12pm – 6pm.",
+    when: "Monday – Thursday 12pm – 7pm · Friday – Saturday 12pm – 6pm",
+    days: cocktailDays,
     hours: "12pm – 7pm",
-    stat: { value: "2 for 1", label: "on every cocktail" },
+    hoursByDay: {
+      Friday: "12pm – 6pm",
+      Saturday: "12pm – 6pm",
+    },
+    stat: { value: "2 for 1", label: "on house cocktails" },
     cta: { label: "See the cocktail list", href: "/menu/drinks" },
-    details: "Applies to signature and classic cocktails ordered together, dine-in only.",
+    details: "Applies to house cocktails ordered together, dine-in only.",
   },
   {
     id: "lunch",

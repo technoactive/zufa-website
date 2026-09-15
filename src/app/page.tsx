@@ -34,7 +34,14 @@ const page = getPage("/")!;
 
 const tonightOffers: TonightOffer[] = regularOffers
   .filter((offer) => offer.days?.length)
-  .map((offer) => ({ id: offer.id, label: offer.short ?? offer.title, hours: offer.hours, href: offer.cta.href, days: offer.days! }));
+  .map((offer) => ({
+    id: offer.id,
+    label: offer.short ?? offer.title,
+    hours: offer.hours,
+    hoursByDay: offer.hoursByDay,
+    href: offer.cta.href,
+    days: offer.days!,
+  }));
 
 const tickerItems: TickerItem[] = [
   ...regularOffers.filter((offer) => offer.days?.length).map((offer) => ({ label: `${offer.short ?? offer.title} · ${offer.when}`, href: "/whats-on" })),
@@ -292,7 +299,7 @@ function Signatures() {
             <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4">
               <p className="max-w-xs text-sm leading-relaxed text-cream/90">Mezze first, then the grill. Lebanese meals are built to be shared, so bring people.</p>
               <Button href="/menu/set-menus" size="sm" variant="secondary" className="shrink-0 border-cream/40 text-cream hover:border-cream hover:text-cream">
-                Set menus
+                Sharing platters
               </Button>
             </div>
           </div>

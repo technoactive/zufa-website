@@ -6,7 +6,7 @@
  * Everything is derived from the same content modules that render the HTML pages,
  * so the two can never drift apart.
  */
-import { absoluteUrl, lunchService, openingHours, site } from "@/content/site";
+import { absoluteUrl, breakfastService, lunchService, openingHours, site } from "@/content/site";
 import { pages, type PageEntry } from "@/content/pages";
 import { formatPrice, menus, allergenLabels, dietLabels, type Menu, type MenuItem } from "@/content/menus";
 import { offers } from "@/content/offers";
@@ -25,7 +25,7 @@ function keyFacts(): string {
     `- **Address:** ${site.address.full}, ${site.address.countryName}.`,
     `- **Coordinates:** ${site.geo.latitude}, ${site.geo.longitude}.`,
     `- **Phone:** ${site.phone.display} (${site.phone.e164}). **WhatsApp:** ${site.whatsapp.display}. **Email:** ${site.email}.`,
-    `- **Opening hours:** ${openingHours.map((p) => p.label).join("; ")}. Lunch menu ${lunchService.label}.`,
+    `- **Opening hours:** ${openingHours.map((p) => p.label).join("; ")}. Breakfast ${breakfastService.label}. Lunch menu ${lunchService.label}.`,
     `- **Reservations:** online via SevenRooms (${site.reservations.url}) for up to ${site.reservations.maxOnlinePartySize} guests; phone for larger groups; events of more than ${site.reservations.eventPartySize} via private hire.`,
     `- **Takeaway & delivery:** order on ${absoluteUrl("/takeaway")}#order-online (20% off first order on that form only). Also ${site.delivery.map((d) => `${d.name} (${d.url})`).join(", ")}.`,
     `- **Private hire capacity:** ${site.capacity.seated} seated / ${site.capacity.standing} standing.`,
@@ -127,6 +127,7 @@ export function buildLlmsFullTxt(): string {
     "## Opening hours",
     "",
     ...openingHours.map((period) => `- ${period.days.join(", ")}: ${period.opens} – ${period.closes === "00:00" ? "00:00 (midnight)" : period.closes}`),
+    `- Breakfast: ${breakfastService.days.join(", ")}, ${breakfastService.opens} – ${breakfastService.closes}`,
     `- Lunch menu: ${lunchService.days.join(", ")}, ${lunchService.opens} – ${lunchService.closes}`,
     "",
     `## Our story (${absoluteUrl("/our-story")})`,

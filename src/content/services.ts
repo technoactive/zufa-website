@@ -105,7 +105,7 @@ export const catering = {
     },
   ] satisfies readonly MenuHighlight[] as readonly MenuHighlight[],
   pricing:
-    "Catering is quoted per head. As a guide, in the restaurant our Group Menu is £36.75 per person and the Tasting Menu £46.75; a catering price depends on your numbers, the dishes you pick and how far we’re travelling, so ask and we’ll come back with a figure rather than a range.",
+    "Catering is quoted per head. The figure depends on your numbers, the dishes you pick and how far we’re travelling, so ask and we’ll come back with a figure rather than a range.",
   areas: site.cateringAreas,
   areaNote: "plus the surrounding parts of North West London and Hertfordshire. Further afield? Ask. We’ve driven further for less.",
 } as const;
@@ -129,7 +129,7 @@ export const privateHire = {
   features: [
     "Fully licensed bar: Lebanese wines, arak, Almaza and house cocktails",
     "Al fresco patio for summer parties and a breath of air between courses",
-    "Set menus from £36.75 per person, or à la carte for smaller parties",
+    "Sharing platters from £55.75 for two, or à la carte for smaller parties",
     "Vegetarian, vegan and allergen information on every dish",
     "Kids menu for family celebrations",
     "Free Wi-Fi and space for a speech, a cake and a playlist",
@@ -154,7 +154,7 @@ export const privateHire = {
     },
     {
       title: "Company get-togethers",
-      text: "Team dinners, client evenings and the Christmas party for offices around Harrow, Pinner and Watford. Set menus keep the bill predictable; the room keeps everyone talking.",
+      text: "Team dinners, client evenings and the Christmas party for offices around Harrow, Pinner and Watford. Sharing platters keep the bill predictable; the room keeps everyone talking.",
     },
     {
       title: "Eid, Christmas and family feasts",
@@ -168,7 +168,7 @@ export const privateHire = {
     },
     {
       title: "Choose how the table eats",
-      text: "For most parties one of our set menus is the easiest: the Group Menu (£36.75 a head) brings hommos, moutabbal, tabbouleh, rikakat, jawaneh and samke harra, then shish taouk, kafta and mixed shawarma. The Tasting Menu (£46.75) adds sojok, kebbeh and falafel and lets each guest choose their main. Smaller parties can order à la carte.",
+      text: "For most parties a sharing platter is the easiest: Vegetarian, Levantine or Lebanese Feast Grill, for two or four. Mix platters for a bigger table, or order à la carte.",
     },
     {
       title: "Sort the drinks and the extras",

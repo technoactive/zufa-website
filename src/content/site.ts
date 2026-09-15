@@ -155,18 +155,31 @@ export interface OpeningPeriod {
 
 export const openingHours: readonly OpeningPeriod[] = [
   {
-    days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday"],
     opens: "11:00",
     closes: "23:00",
-    label: "Sunday – Thursday: 11am – 11pm",
+    label: "Monday – Thursday: 11am – 11pm",
   },
   {
     days: ["Friday", "Saturday"],
-    opens: "11:00",
+    opens: "08:00",
     closes: "00:00",
-    label: "Friday – Saturday: 11am – Midnight",
+    label: "Friday – Saturday: 8am – Midnight",
+  },
+  {
+    days: ["Sunday"],
+    opens: "08:00",
+    closes: "23:00",
+    label: "Sunday: 8am – 11pm",
   },
 ] as const;
+
+export const breakfastService = {
+  days: ["Friday", "Saturday", "Sunday"] satisfies DayOfWeek[],
+  opens: "08:00",
+  closes: "12:00",
+  label: "Friday – Sunday, 8am – midday",
+} as const;
 
 export const lunchService = {
   days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] satisfies DayOfWeek[],

@@ -13,7 +13,7 @@ import { pageMetadata } from "@/lib/metadata";
 import { webPageSchema } from "@/lib/schema";
 import { getPage } from "@/content/pages";
 import { generalFaqs } from "@/content/faqs";
-import { lunchService, openingHours, site } from "@/content/site";
+import { breakfastService, lunchService, openingHours, site } from "@/content/site";
 
 export const metadata: Metadata = pageMetadata("/contact");
 const page = getPage("/contact")!;
@@ -91,6 +91,10 @@ export default function ContactPage() {
                 </li>
               ))}
               <li className="flex gap-3 border-t border-ink/10 pt-3 text-sm text-ink/65">
+                <span className="w-5 shrink-0" aria-hidden />
+                <span>Breakfast: {breakfastService.label}</span>
+              </li>
+              <li className="flex gap-3 text-sm text-ink/65">
                 <span className="w-5 shrink-0" aria-hidden />
                 <span>Lunch menu: {lunchService.label}</span>
               </li>

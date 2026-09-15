@@ -4,7 +4,7 @@ import { MapPin, Phone, Mail, MessageCircle, ArrowUpRight, ArrowUp } from "lucid
 import { InstagramIcon } from "@/components/ui/icons";
 import { NewsletterForm } from "@/components/forms/newsletter-form";
 import { menus } from "@/content/menus";
-import { lunchService, navigation, openingHours, site } from "@/content/site";
+import { breakfastService, lunchService, navigation, openingHours, site } from "@/content/site";
 import { Logo } from "./logo";
 import { OpenStatus } from "./open-status";
 
@@ -45,7 +45,7 @@ export function Footer() {
               So is good news.
             </h2>
             <p className="mt-6 max-w-lg text-[0.9375rem] leading-relaxed text-sand">
-              Seasonal set menus, corkage-free Mondays and the occasional recipe from Tannourine — once or twice a
+              Seasonal sharing platters, corkage-free Mondays and the occasional recipe from Tannourine — once or twice a
               month, never more.
             </p>
           </div>
@@ -167,6 +167,10 @@ export function Footer() {
                     </div>
                   );
                 })}
+                <div>
+                  <dt className="text-cream">Breakfast</dt>
+                  <dd className="mt-1 text-sand">{breakfastService.label}</dd>
+                </div>
                 <div>
                   <dt className="text-cream">Lunch menu</dt>
                   <dd className="mt-1 text-sand">{lunchService.label}</dd>

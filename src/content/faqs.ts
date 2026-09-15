@@ -14,7 +14,7 @@ export const generalFaqs: readonly Faq[] = [
   {
     question: "What are Zufa’s opening hours?",
     answer:
-      "We are open Sunday to Thursday from 11am to 11pm, and Friday and Saturday from 11am to midnight. Our weekday lunch menu is served Monday to Friday, 12pm to 5pm.",
+      "We are open Monday to Thursday from 11am to 11pm, Friday and Saturday from 8am to midnight, and Sunday from 8am to 11pm. Breakfast is served Friday to Sunday, 8am to midday. Our weekday lunch menu is served Monday to Friday, 12pm to 5pm.",
   },
   {
     question: "Do I need to book a table at Zufa?",
@@ -78,7 +78,7 @@ export const privateHireFaqs: readonly Faq[] = [
   {
     question: "How does private hire pricing work?",
     answer:
-      "It depends on the day of the week, your numbers and how you want to eat. Most parties go for one of our set menus (the Group Menu is £36.75 a head, the Tasting Menu £46.75) and pay for drinks as they go. Tell us what you have in mind and we’ll give you a clear quote rather than a formula.",
+      "It depends on the day of the week, your numbers and how you want to eat. Most parties go for a sharing platter — Vegetarian, Levantine or Lebanese Feast Grill — and pay for drinks as they go. Tell us what you have in mind and we’ll give you a clear quote rather than a formula.",
   },
   {
     question: "Can we bring a cake or decorate the room?",
@@ -124,7 +124,7 @@ export const cateringFaqs: readonly Faq[] = [
   {
     question: "How is catering priced?",
     answer:
-      "Per head. The figure depends on your numbers, the dishes you choose and where we’re bringing it. As a guide, our in-restaurant Group Menu is £36.75 per person and the Tasting Menu £46.75. Send us the basics and you’ll get a proper quote back, not a range.",
+      "Per head. The figure depends on your numbers, the dishes you choose and where we’re bringing it. Send us the basics and you’ll get a proper quote back, not a range.",
   },
   {
     question: "How much notice do you need?",
