@@ -31,7 +31,7 @@ src/app/            Routes (one folder per page) + metadata routes
   robots.ts, sitemap.ts, manifest.ts, opengraph-image.tsx, icon.tsx, apple-icon.tsx
   llms.txt/         /llms.txt   (concise, spec-compliant index for AI agents)
   llms-full.txt/    /llms-full.txt (complete site content as Markdown)
-  actions/          Server actions (enquiry form: Zod validation, honeypot, time-trap, Resend)
+  actions/          Server actions (enquiry and newsletter: Zod, honeypot, Resend staff + confirmation emails)
 src/lib/            schema.ts (JSON-LD builders), llms.ts, metadata.ts, og.tsx, hours.ts
 src/components/     layout/ (header, footer), blocks/ (hero, FAQ, menu renderer…), ui/, forms/, consent/
 public/             images/, brand/, menus/ (PDF downloads), press/

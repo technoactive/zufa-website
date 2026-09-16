@@ -9,7 +9,7 @@ import { absoluteUrl, SITE_URL } from "@/content/site";
  *   and reservations) and pointed at llms.txt via the sitemap + <link rel="alternate">.
  * - Only Next.js internals and server-action endpoints are excluded.
  */
-const disallow = ["/api/", "/_next/", "/actions/"];
+const disallow = ["/api/", "/_next/", "/actions/", "/thank-you"];
 
 const aiCrawlers = [
   "GPTBot",

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useActionState, useId } from "react";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { subscribeNewsletter, type NewsletterState } from "@/app/actions/newsletter";
 import { cn } from "@/lib/utils";
 
@@ -11,17 +11,6 @@ const initial: NewsletterState = { status: "idle" };
 export function NewsletterForm({ className }: { className?: string }) {
   const [state, action, pending] = useActionState(subscribeNewsletter, initial);
   const id = useId();
-
-  if (state.status === "success") {
-    return (
-      <div className={cn("flex items-start gap-3 rounded-2xl border border-gold/30 bg-gold/[0.08] p-5", className)} role="status">
-        <span className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-gold-deep text-ink">
-          <Check className="size-3.5" aria-hidden />
-        </span>
-        <p className="text-sm leading-relaxed text-cream">{state.message}</p>
-      </div>
-    );
-  }
 
   return (
     <form action={action} className={className} noValidate>
@@ -46,7 +35,6 @@ export function NewsletterForm({ className }: { className?: string }) {
           aria-describedby={`${id}-help`}
           className="min-w-0 flex-1 bg-transparent text-sm text-cream placeholder:text-smoke focus:outline-none"
         />
-        {/* Honeypot */}
         <input type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
         <button
           type="submit"

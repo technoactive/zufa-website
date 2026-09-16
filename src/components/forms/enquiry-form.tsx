@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useId, useRef, type ReactNode } from "react";
-import { CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { AlertCircle, Loader2 } from "lucide-react";
 import { submitEnquiry, type EnquiryState, type EnquiryTopic } from "@/app/actions/enquiry";
 import { cn } from "@/lib/utils";
 
@@ -55,35 +55,12 @@ function Field({
 export function EnquiryForm({ topic, event = true, placeholder, submitLabel = "Send enquiry", className }: EnquiryFormProps) {
   const [state, action, pending] = useActionState(submitEnquiry, initialState);
   const formRef = useRef<HTMLFormElement>(null);
-  const statusRef = useRef<HTMLDivElement>(null);
   const startedAtRef = useRef<HTMLInputElement>(null);
 
   // Time-trap for bots: stamp when the form was actually rendered on the client.
   useEffect(() => {
     if (startedAtRef.current) startedAtRef.current.value = String(Date.now());
   }, []);
-
-  useEffect(() => {
-    if (state.status === "success") {
-      formRef.current?.reset();
-      statusRef.current?.focus();
-    }
-  }, [state.status]);
-
-  if (state.status === "success") {
-    return (
-      <div
-        ref={statusRef}
-        tabIndex={-1}
-        role="status"
-        className={cn("rounded-2xl border border-success/30 bg-success/10 p-8 text-ink", className)}
-      >
-        <CheckCircle2 className="size-8 text-success" aria-hidden />
-        <h3 className="mt-4 font-display text-2xl">Message received</h3>
-        <p className="mt-2 leading-relaxed text-ink/75">{state.message}</p>
-      </div>
-    );
-  }
 
   return (
     <form ref={formRef} action={action} noValidate className={cn("space-y-6", className)}>

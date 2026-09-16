@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 const page = getPage("/privacy-policy")!;
 
-const LAST_UPDATED = "7 September 2026";
+const LAST_UPDATED = "16 September 2026";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -38,7 +38,10 @@ export default function PrivacyPolicyPage() {
               <h2>Information we collect</h2>
               <ul>
                 <li>
-                  <strong>Enquiry forms.</strong> When you use our catering, private hire or contact forms we collect your name, email address, phone number (optional), event details and your message so that we can respond.
+                  <strong>Enquiry forms.</strong> When you use our catering, private hire or contact forms we collect your name, email address, phone number (optional), event details and your message so that we can respond. We send a confirmation email to the address you give us, and we email the enquiry to our inbox so the team can reply.
+                </li>
+                <li>
+                  <strong>Newsletter.</strong> If you join our list we collect your email address, send a welcome email, and then send occasional news from the restaurant. You can unsubscribe from any email in one click.
                 </li>
                 <li>
                   <strong>Table bookings.</strong> Reservations are handled by SevenRooms, our booking provider. When you book, SevenRooms collects the details needed to hold your table (name, contact details, party size, date and any notes) and shares them with us. SevenRooms’ own{" "}
@@ -59,7 +62,8 @@ export default function PrivacyPolicyPage() {
             <section className="space-y-4">
               <h2>How we use your information and our lawful bases</h2>
               <ul>
-                <li>To answer your enquiry and arrange catering, events or bookings — <em>performance of a contract / steps prior to a contract</em>.</li>
+                <li>To answer your enquiry and arrange catering, events or bookings, including a confirmation email — <em>performance of a contract / steps prior to a contract</em>.</li>
+                <li>To send the restaurant newsletter if you have joined the list — <em>consent</em>, which you can withdraw at any time.</li>
                 <li>To keep the Site secure and reliable — <em>legitimate interests</em>.</li>
                 <li>To measure and improve the Site with analytics — <em>consent</em>, which you can withdraw at any time.</li>
                 <li>To meet legal and accounting obligations — <em>legal obligation</em>.</li>
@@ -69,7 +73,7 @@ export default function PrivacyPolicyPage() {
 
             <section className="space-y-4">
               <h2>Who we share data with</h2>
-              <p>We use a small number of trusted processors who act on our instructions: our website hosting provider, our transactional email provider (to deliver enquiry forms to our inbox), SevenRooms (reservations) and, if you consent, Google (analytics). Takeaway orders placed through Deliveroo, Uber Eats or Just Eat are governed by those companies’ privacy policies.</p>
+              <p>We use a small number of trusted processors who act on our instructions: our website hosting provider, Resend (to deliver enquiry alerts, confirmation emails and newsletter messages), SevenRooms (reservations) and, if you consent, Google (analytics). Takeaway orders placed through Deliveroo, Uber Eats, Just Eat or our Flipdish ordering form are governed by those companies’ privacy policies.</p>
               <p>Some providers may process data outside the United Kingdom. Where they do, transfers are protected by UK-approved safeguards such as the International Data Transfer Agreement or adequacy regulations.</p>
             </section>
 
