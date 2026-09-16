@@ -20,7 +20,9 @@ const contentSecurityPolicy = [
   "form-action 'self' https://*.flipdish.co https://*.flipdish.com https://*.stripe.com",
   "upgrade-insecure-requests",
   // React dev tooling (Fast Refresh, source-mapped stacks) needs eval; production never does.
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://*.sevenrooms.com https://*.flipdish.co https://*.flipdish.com https://js.stripe.com https://maps.googleapis.com https://sdk.split.io`,
+  // Vercel Analytics / Speed Insights load a debug script from va.vercel-scripts.com in dev only;
+  // in production they are served same-origin under /_vercel/.
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval' https://va.vercel-scripts.com" : ""} https://www.googletagmanager.com https://*.sevenrooms.com https://*.flipdish.co https://*.flipdish.com https://js.stripe.com https://maps.googleapis.com https://sdk.split.io`,
   "style-src 'self' 'unsafe-inline' https://*.sevenrooms.com https://*.flipdish.co https://*.flipdish.com https://fonts.googleapis.com",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data: https://*.sevenrooms.com https://*.flipdish.co https://*.flipdish.com https://fonts.gstatic.com",

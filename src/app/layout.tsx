@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { CookieConsent } from "@/components/consent/cookie-consent";
@@ -113,6 +115,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
         <CookieConsent />
         <JsonLd data={[restaurantSchema(), websiteSchema()]} />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
