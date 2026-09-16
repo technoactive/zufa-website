@@ -197,18 +197,13 @@ function Story() {
               className="object-cover"
             />
           </div>
-          <div className="absolute -bottom-8 -right-4 w-[46%] animate-float motion-reduce:animate-none sm:-right-8">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] border-[6px] border-ink shadow-card">
-              <Image src="/images/warak-enab.jpg" alt="Warak enab, stuffed vine leaves, plated with pomegranate and yoghurt" fill sizes="(min-width: 1024px) 20vw, 45vw" className="object-cover" />
-            </div>
-          </div>
           <div className="absolute -left-3 top-8 rounded-full border border-gold/40 bg-ink/85 px-5 py-3 backdrop-blur-md sm:-left-8">
             <p className="font-display text-3xl leading-none text-gold">{site.foundingYear}</p>
             <p className="mt-1 text-[0.625rem] uppercase tracking-[0.18em] text-sand">Tannourine, Lebanon</p>
           </div>
         </Reveal>
 
-        <Reveal delay={120} className="pt-8 lg:pt-0">
+        <Reveal delay={120}>
           <SectionHeading
             eyebrow="Our story"
             title={
