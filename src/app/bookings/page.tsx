@@ -20,7 +20,7 @@ export default function BookingsPage() {
     <>
       <PageHero
         compact
-        className="max-sm:pb-6 [&_[aria-label='Breadcrumb']]:max-sm:hidden"
+        className="max-sm:pb-5 [&_[aria-label='Breadcrumb']]:max-sm:hidden [&_.eyebrow]:max-sm:hidden"
         eyebrow="Reservations"
         title={
           <>
@@ -47,7 +47,7 @@ export default function BookingsPage() {
         </Button>
       </PageHero>
 
-      <Section tone="cream" className="pt-0 pb-16 sm:pt-10 sm:pb-24 lg:pt-16 lg:pb-32">
+      <Section tone="cream" className="pt-8 pb-16 sm:pt-10 sm:pb-24 lg:pt-16 lg:pb-32">
         <div className="container-content grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
           <Reveal className="order-2 space-y-8 lg:order-1">
             <SectionHeading light eyebrow="Zufa Hatch End" title="Good to know before you book" />
@@ -110,7 +110,7 @@ export default function BookingsPage() {
             </p>
           </Reveal>
 
-          <div className="relative z-10 order-1 -mt-8 sm:-mt-4 lg:order-2 lg:mt-0">
+          <div className="order-1 lg:order-2">
             <ReservationWidget eager />
           </div>
         </div>
