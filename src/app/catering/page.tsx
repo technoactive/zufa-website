@@ -34,23 +34,71 @@ export default function CateringPage() {
   return (
     <>
       <PageHero
+        compact
+        className="max-sm:pb-8 [&_[aria-label='Breadcrumb']]:max-sm:hidden [&_.eyebrow]:max-sm:hidden"
         eyebrow="Lebanese catering · North West London"
         title={
           <>
-            Lebanese catering for weddings, parties and the office across <em className="italic text-gold">North West London</em>
+            <span className="lg:hidden">
+              Catering for your <em className="italic text-gold">event</em>
+            </span>
+            <span className="hidden lg:inline">
+              Lebanese catering for weddings, parties and the office across <em className="italic text-gold">North West London</em>
+            </span>
           </>
         }
-        description={catering.intro}
+        description={
+          <>
+            <span className="lg:hidden">The same Hatch End kitchen, brought to your wedding, party or office lunch.</span>
+            <span className="hidden lg:inline">{catering.intro}</span>
+          </>
+        }
         image={{ src: "/images/sharing-table.jpg", alt: "A round table filled with Lebanese sharing dishes prepared by Zufa for a private party" }}
         crumbs={[{ name: "Catering", path: "/catering" }]}
+        aside={
+          <div id="enquire" className="scroll-mt-24 rounded-3xl border border-ink/10 bg-parchment p-6 text-ink shadow-card sm:p-8">
+            <h2 className="font-display text-2xl text-ink sm:text-3xl">Catering enquiry</h2>
+            <p className="mt-2 text-sm leading-relaxed text-ink/70 sm:text-base">Two minutes to fill in. We come back to every enquiry personally.</p>
+            <EnquiryForm
+              topic="catering"
+              placeholder="Occasion, venue postcode, how you’d like to eat (mezze table, grill, boxed lunches), dietary requirements, budget per head…"
+              submitLabel="Request a quote"
+              className="mt-6"
+            />
+          </div>
+        }
       >
-        <Button href="#enquire" size="lg">
-          Get a quote
-        </Button>
         <Button href={`tel:${site.phone.e164}`} variant="secondary" size="lg">
           Call {site.phone.display}
         </Button>
       </PageHero>
+
+      {/* ---- What to include ---- */}
+      <Section tone="cream" pattern className="overflow-hidden">
+        <div className="container-content grid gap-10 lg:grid-cols-2 lg:gap-16">
+          <Reveal>
+            <SectionHeading
+              light
+              eyebrow="Get a quote"
+              title="Tell us about the day"
+              description="Send the basics and one of us will call or write back with a menu and a per-head price. No obligation, and no chasing."
+            />
+            <h3 className="eyebrow mt-10 text-gold-dark">Useful to include</h3>
+            <ul className="mt-5 space-y-3 text-sm text-ink/80">
+              {whatToTellUs.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <Check className="mt-0.5 size-4 shrink-0 text-gold-dark" aria-hidden /> {item}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal delay={80}>
+            <ContactRail>
+              Weekdays it’s usually quickest to call between lunch and dinner service. WhatsApp works any time; we reply when the kitchen lets us.
+            </ContactRail>
+          </Reveal>
+        </div>
+      </Section>
 
       <FactsStrip facts={catering.facts} />
 
@@ -190,48 +238,6 @@ export default function CateringPage() {
                 Plus the rest of North West London and the Herts border
               </li>
             </ul>
-          </Reveal>
-        </div>
-      </Section>
-
-      {/* ---- Enquiry ---- */}
-      <Section tone="cream" pattern id="enquire" className="scroll-mt-24 overflow-hidden">
-        <div className="container-content grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
-          <div className="space-y-8">
-            <Reveal>
-              <SectionHeading
-                light
-                eyebrow="Get a quote"
-                title="Tell us about the day"
-                description="Send the basics and one of us will call or write back with a menu and a per-head price. No obligation, and no chasing."
-              />
-            </Reveal>
-            <Reveal delay={60}>
-              <h3 className="eyebrow text-gold-dark">Useful to include</h3>
-              <ul className="mt-5 space-y-3 text-sm text-ink/80">
-                {whatToTellUs.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <Check className="mt-0.5 size-4 shrink-0 text-gold-dark" aria-hidden /> {item}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-            <Reveal delay={100}>
-              <ContactRail>
-                Weekdays it’s usually quickest to call between lunch and dinner service. WhatsApp works any time; we reply when the kitchen lets us.
-              </ContactRail>
-            </Reveal>
-          </div>
-
-          <Reveal delay={80} className="rounded-3xl border border-ink/10 bg-parchment p-8 shadow-card sm:p-10">
-            <h2 className="font-display text-3xl text-ink sm:text-4xl">Catering enquiry</h2>
-            <p className="mt-3 text-base leading-relaxed text-ink/70">Two minutes to fill in. We come back to every enquiry personally.</p>
-            <EnquiryForm
-              topic="catering"
-              placeholder="Occasion, venue postcode, how you’d like to eat (mezze table, grill, boxed lunches), dietary requirements, budget per head…"
-              submitLabel="Request a quote"
-              className="mt-8"
-            />
           </Reveal>
         </div>
       </Section>

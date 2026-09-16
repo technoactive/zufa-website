@@ -36,23 +36,66 @@ export default function PrivateHirePage() {
   return (
     <>
       <PageHero
+        compact
+        className="max-sm:pb-8 [&_[aria-label='Breadcrumb']]:max-sm:hidden [&_.eyebrow]:max-sm:hidden"
         eyebrow={`Private hire · ${site.address.locality}`}
         title={
           <>
             Hire the whole restaurant for your <em className="italic text-gold">celebration</em>
           </>
         }
-        description={privateHire.intro}
+        description={
+          <>
+            <span className="lg:hidden">Up to {site.capacity.seated} seated or {site.capacity.standing} standing — tell us the date below.</span>
+            <span className="hidden lg:inline">{privateHire.intro}</span>
+          </>
+        }
         image={{ src: "/images/restaurant-interior.jpg", alt: "The dining room at Zufa Hatch End, set for a private party" }}
         crumbs={[{ name: "Private Hire", path: "/private-hire" }]}
+        aside={
+          <div id="enquire" className="scroll-mt-24 rounded-3xl border border-ink/10 bg-parchment p-6 text-ink shadow-card sm:p-8">
+            <h2 className="font-display text-2xl text-ink sm:text-3xl">Private hire enquiry</h2>
+            <p className="mt-2 text-sm leading-relaxed text-ink/70 sm:text-base">Dates, numbers, the occasion. We’ll do the rest.</p>
+            <EnquiryForm
+              topic="private-hire"
+              placeholder="Occasion, whether you’d like a sharing platter or à la carte, a cake, dietary requirements…"
+              submitLabel="Check availability"
+              className="mt-6"
+            />
+          </div>
+        }
       >
-        <Button href="#enquire" size="lg">
-          Check a date
-        </Button>
         <Button href={`tel:${site.phone.e164}`} variant="secondary" size="lg">
           Call {site.phone.display}
         </Button>
       </PageHero>
+
+      {/* ---- What to include ---- */}
+      <Section tone="cream" pattern className="overflow-hidden">
+        <div className="container-content grid gap-10 lg:grid-cols-2 lg:gap-16">
+          <Reveal>
+            <SectionHeading
+              light
+              eyebrow="Check a date"
+              title="Tell us about the party"
+              description="Send the basics and one of us will come back to you personally to talk through the date, the numbers and the menu."
+            />
+            <h3 className="eyebrow mt-10 text-gold-dark">Useful to include</h3>
+            <ul className="mt-5 space-y-3 text-sm text-ink/80">
+              {whatToTellUs.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <Check className="mt-0.5 size-4 shrink-0 text-gold-dark" aria-hidden /> {item}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal delay={80}>
+            <ContactRail heading="Quicker on the phone">
+              For parties of more than {site.reservations.eventPartySize}, calling is the fastest way to check a date. Between lunch and dinner service is best.
+            </ContactRail>
+          </Reveal>
+        </div>
+      </Section>
 
       <FactsStrip facts={privateHire.facts} />
 
@@ -156,48 +199,6 @@ export default function PrivateHirePage() {
             <Button href="/whats-on" variant="light" size="sm">
               What’s on this week
             </Button>
-          </Reveal>
-        </div>
-      </Section>
-
-      {/* ---- Enquiry ---- */}
-      <Section tone="cream" pattern id="enquire" className="scroll-mt-24 overflow-hidden">
-        <div className="container-content grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
-          <div className="space-y-8">
-            <Reveal>
-              <SectionHeading
-                light
-                eyebrow="Check a date"
-                title="Tell us about the party"
-                description="Send the basics and one of us will come back to you personally to talk through the date, the numbers and the menu."
-              />
-            </Reveal>
-            <Reveal delay={60}>
-              <h3 className="eyebrow text-gold-dark">Useful to include</h3>
-              <ul className="mt-5 space-y-3 text-sm text-ink/80">
-                {whatToTellUs.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <Check className="mt-0.5 size-4 shrink-0 text-gold-dark" aria-hidden /> {item}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-            <Reveal delay={100}>
-              <ContactRail heading="Quicker on the phone">
-                For parties of more than {site.reservations.eventPartySize}, calling is the fastest way to check a date. Between lunch and dinner service is best.
-              </ContactRail>
-            </Reveal>
-          </div>
-
-          <Reveal delay={80} className="rounded-3xl border border-ink/10 bg-parchment p-8 shadow-card sm:p-10">
-            <h2 className="font-display text-3xl text-ink sm:text-4xl">Private hire enquiry</h2>
-            <p className="mt-3 text-base leading-relaxed text-ink/70">Dates, numbers, the occasion. We’ll do the rest.</p>
-            <EnquiryForm
-              topic="private-hire"
-              placeholder="Occasion, whether you’d like a sharing platter or à la carte, a cake, dietary requirements…"
-              submitLabel="Check availability"
-              className="mt-8"
-            />
           </Reveal>
         </div>
       </Section>
