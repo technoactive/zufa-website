@@ -43,7 +43,7 @@ export const generalFaqs: readonly Faq[] = [
   {
     question: "Is Zufa licensed? Can I bring my own wine?",
     answer:
-      "Zufa is fully licensed, with a list of Lebanese wines, arak, Almaza beer and cocktails. On Mondays we are corkage-free, so you are welcome to bring your own wine.",
+      "Zufa is fully licensed, with a list of Lebanese wines, arak, Lebanese beer and cocktails. On Mondays we are corkage-free, so you are welcome to bring your own wine.",
   },
   {
     question: "Does Zufa have outdoor seating?",

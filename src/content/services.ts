@@ -127,7 +127,7 @@ export const privateHire = {
     { value: String(site.foundingYear), label: "The year our parents opened in Tannourine" },
   ] as const satisfies readonly ServiceFact[],
   features: [
-    "Fully licensed bar: Lebanese wines, arak, Almaza and house cocktails",
+    "Fully licensed bar: Lebanese wines, arak, Lebanese beer and house cocktails",
     "Al fresco patio for summer parties and a breath of air between courses",
     "Sharing platters from £55.75 for two, or à la carte for smaller parties",
     "Vegetarian, vegan and allergen information on every dish",

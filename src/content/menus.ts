@@ -672,7 +672,7 @@ export const drinksMenu: Menu = {
       items: [
         { name: "Prosecco DOC Millesimato Brut, Zonin", description: "Italy. Wisteria flowers, crisp apple and fine citrus fruits with an almond finish. Fresh, fruity and well balanced.", price: 32.0, priceNote: "bottle" },
         { name: "Prosecco DOC Millesimato Rosé Brut, Zonin", description: "Italy. Luminous pale pink, pleasantly fruity, with notes of orchard apple and red fruits.", price: [{ label: "125ml", price: 9.75 }, { label: "Bottle", price: 34.0 }] },
-        { name: "Single-serve mini bottle", description: "Prefer a single serve? A perfectly chilled 20cl mini bottle.", price: 10.5 },
+        { name: "Prosecco 20cl Mini Bottle", description: "Prefer a single serve? A perfectly chilled 20cl mini bottle of Prosecco.", price: 10.5 },
         { name: "Carte Blanche Brut, Champagne Charles Ellner", description: "France. An elegant and subtle Champagne, fresh and fruity with floral hints.", price: 52.0, priceNote: "bottle" },
         { name: "Rosé Brut, Champagne Charles Ellner", description: "France. Intense aromas with hints of strawberry, developing into intensely fruity notes.", price: 62.0, priceNote: "bottle" },
         { name: "Laurent-Perrier La Cuvée", description: "France. Crisp lemony freshness with more than a hint of green apples on the palate. Vegan.", price: 75.0, priceNote: "bottle" },
