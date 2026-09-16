@@ -1,8 +1,10 @@
 "use client";
 
 import { useActionState, useEffect, useId, useRef, type ReactNode } from "react";
-import { AlertCircle, Loader2 } from "lucide-react";
+import { AlertCircle, Check, Loader2 } from "lucide-react";
 import { submitEnquiry, type EnquiryState, type EnquiryTopic } from "@/app/actions/enquiry";
+import { DatePicker } from "@/components/forms/date-picker";
+import { GuestStepper } from "@/components/forms/guest-stepper";
 import { cn } from "@/lib/utils";
 
 interface EnquiryFormProps {
@@ -63,7 +65,7 @@ export function EnquiryForm({ topic, event = true, placeholder, submitLabel = "S
   }, []);
 
   return (
-    <form ref={formRef} action={action} noValidate className={cn("space-y-6", className)}>
+    <form ref={formRef} action={action} noValidate className={cn("space-y-6 [color-scheme:light]", className)}>
       <input type="hidden" name="topic" value={topic} />
       <input ref={startedAtRef} type="hidden" name="startedAt" defaultValue="" />
       {/* Honeypot — hidden from humans and assistive tech. */}
@@ -92,12 +94,12 @@ export function EnquiryForm({ topic, event = true, placeholder, submitLabel = "S
           <>
             <Field label="Event date" name="eventDate" error={state.errors?.eventDate} optional>
               {({ id, describedBy, invalid }) => (
-                <input id={id} name="eventDate" type="date" aria-invalid={invalid} aria-describedby={describedBy} className={inputClass} />
+                <DatePicker id={id} name="eventDate" describedBy={describedBy} invalid={invalid} />
               )}
             </Field>
             <Field label="Number of guests" name="guests" error={state.errors?.guests} optional>
               {({ id, describedBy, invalid }) => (
-                <input id={id} name="guests" type="number" min={1} max={500} inputMode="numeric" aria-invalid={invalid} aria-describedby={describedBy} className={inputClass} />
+                <GuestStepper id={id} name="guests" describedBy={describedBy} invalid={invalid} />
               )}
             </Field>
           </>
@@ -126,8 +128,14 @@ export function EnquiryForm({ topic, event = true, placeholder, submitLabel = "S
             name="consent"
             required
             aria-invalid={Boolean(state.errors?.consent)}
-            className="mt-0.5 size-4 shrink-0 accent-gold-dark"
+            className="peer sr-only"
           />
+          <span
+            aria-hidden
+            className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-md border border-ink/20 bg-white/70 text-cream transition-colors peer-checked:border-ink peer-checked:bg-ink peer-focus-visible:ring-4 peer-focus-visible:ring-gold/25 peer-checked:[&_svg]:opacity-100"
+          >
+            <Check className="size-3 opacity-0" strokeWidth={3} />
+          </span>
           <span>
             I’m happy for Zufa to contact me about this enquiry. We only use your details to reply — see our{" "}
             <a href="/privacy-policy" className="text-gold-dark underline underline-offset-4">
