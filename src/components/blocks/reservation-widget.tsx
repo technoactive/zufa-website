@@ -10,12 +10,12 @@ import { cn } from "@/lib/utils";
  * fallback link so guests can always reach the booking page even if the
  * third-party script is blocked.
  */
-export function ReservationWidget({ className }: { className?: string }) {
+export function ReservationWidget({ className, eager = false }: { className?: string; eager?: boolean }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className={cn("overflow-hidden rounded-3xl border border-ink/10 bg-parchment shadow-card", className)}>
-      <div className="relative min-h-[720px]">
+    <div id="reserve" className={cn("overflow-hidden rounded-3xl border border-ink/10 bg-parchment shadow-card", className)}>
+      <div className="relative min-h-[640px] sm:min-h-[720px]">
         {!loaded ? (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-ink/60" aria-hidden>
             <Loader2 className="size-6 animate-spin" />
@@ -25,9 +25,9 @@ export function ReservationWidget({ className }: { className?: string }) {
         <iframe
           src={site.reservations.embedUrl}
           title="Book a table at Zufa Hatch End — reservation widget by SevenRooms"
-          loading="lazy"
+          loading={eager ? "eager" : "lazy"}
           onLoad={() => setLoaded(true)}
-          className={cn("h-[760px] w-full border-0 transition-opacity duration-500", loaded ? "opacity-100" : "opacity-0")}
+          className={cn("h-[640px] w-full border-0 transition-opacity duration-500 sm:h-[760px]", loaded ? "opacity-100" : "opacity-0")}
           allow="payment"
           referrerPolicy="strict-origin-when-cross-origin"
         />

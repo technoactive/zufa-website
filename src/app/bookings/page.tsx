@@ -19,27 +19,37 @@ export default function BookingsPage() {
   return (
     <>
       <PageHero
+        compact
+        className="max-sm:pb-6 [&_[aria-label='Breadcrumb']]:max-sm:hidden"
         eyebrow="Reservations"
         title={
           <>
             Book your <em className="italic text-gold">table</em>
           </>
         }
-        description={`Reserve online in seconds for up to ${site.reservations.maxOnlinePartySize} guests. For larger tables, celebrations or events of more than ${site.reservations.eventPartySize}, call us and we’ll take care of everything.`}
+        description={
+          <>
+            <span className="sm:hidden">Pick a date below — up to {site.reservations.maxOnlinePartySize} guests online.</span>
+            <span className="hidden sm:inline">
+              Reserve online in seconds for up to {site.reservations.maxOnlinePartySize} guests. For larger tables, celebrations or
+              events of more than {site.reservations.eventPartySize}, call us and we’ll take care of everything.
+            </span>
+          </>
+        }
         image={{ src: "/images/restaurant-interior.jpg", alt: "The dining room at Zufa Hatch End" }}
         crumbs={[{ name: "Bookings", path: "/bookings" }]}
       >
         <Button href={`tel:${site.phone.e164}`} variant="secondary" size="lg">
           <Phone className="size-4" aria-hidden /> {site.phone.display}
         </Button>
-        <Button href={site.whatsapp.url} variant="ghost" size="lg">
+        <Button href={site.whatsapp.url} variant="ghost" size="lg" className="max-sm:hidden">
           <MessageCircle className="size-4" aria-hidden /> WhatsApp us
         </Button>
       </PageHero>
 
-      <Section tone="cream" className="pt-12 sm:pt-16">
-        <div className="container-content grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-16">
-          <Reveal className="space-y-8">
+      <Section tone="cream" className="pt-0 pb-16 sm:pt-10 sm:pb-24 lg:pt-16 lg:pb-32">
+        <div className="container-content grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
+          <Reveal className="order-2 space-y-8 lg:order-1">
             <SectionHeading light eyebrow="Zufa Hatch End" title="Good to know before you book" />
             <ul className="space-y-6 text-sm text-ink/75">
               <li className="flex gap-4">
@@ -100,9 +110,9 @@ export default function BookingsPage() {
             </p>
           </Reveal>
 
-          <Reveal delay={120}>
-            <ReservationWidget />
-          </Reveal>
+          <div className="relative z-10 order-1 -mt-8 sm:-mt-4 lg:order-2 lg:mt-0">
+            <ReservationWidget eager />
+          </div>
         </div>
       </Section>
 
