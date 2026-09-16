@@ -172,7 +172,7 @@ export const privateHire = {
     },
     {
       title: "Sort the drinks and the extras",
-      text: "Wines from Château Ksara, Musar and Belle-Vue, arak, Almaza, our own cocktails and mocktails for anyone driving. Bring a playlist, or a cake we can plate with the coffee.",
+      text: "Wines from Château Barka, Ksara and Belle-Vue, arak, Lebanese beer, our own cocktails and mocktails for anyone driving. Bring a playlist, or a cake we can plate with the coffee.",
     },
   ] as const satisfies readonly ServiceStep[],
   gallery: [
