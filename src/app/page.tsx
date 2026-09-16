@@ -56,7 +56,6 @@ const marqueePhotos: MarqueePhoto[] = [
   { src: "/images/feast-table.jpg", alt: "A table of Lebanese dishes seen from above: lamb, salads, fatayer and a cocktail" },
   { src: "/images/sharing-table.jpg", alt: "A round table laden with sharing dishes and cocktails at Zufa", portrait: true },
   { src: "/images/restaurant-interior.jpg", alt: "The dining room at Zufa with its glass-leaf chandelier" },
-  { src: "/images/warak-enab.jpg", alt: "Warak enab plated with pomegranate and yoghurt", portrait: true },
   { src: "/images/dinner-for-two.jpg", alt: "Grilled lamb and salmon with wine at Zufa" },
   { src: "/images/mezze-spread.jpg", alt: "A spread of Lebanese mezze dishes at Zufa", portrait: true },
 ];
