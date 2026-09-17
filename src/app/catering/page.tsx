@@ -6,7 +6,7 @@ import { PageHero } from "@/components/blocks/page-hero";
 import { FaqList } from "@/components/blocks/faq-list";
 import { CtaBand } from "@/components/blocks/cta-band";
 import { ContactRail, FactsStrip, OccasionGrid, StepList } from "@/components/blocks/service-blocks";
-import { EnquiryForm } from "@/components/forms/enquiry-form";
+import { CateringEnquiryForm } from "@/components/forms/catering-enquiry-form";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
@@ -56,15 +56,12 @@ export default function CateringPage() {
         image={{ src: "/images/sharing-table.jpg", alt: "A round table filled with Lebanese sharing dishes prepared by Zufa for a private party" }}
         crumbs={[{ name: "Catering", path: "/catering" }]}
         aside={
-          <div id="enquire" className="scroll-mt-24 rounded-3xl border border-ink/10 bg-parchment p-6 text-ink shadow-card sm:p-8">
-            <h2 className="font-display text-2xl text-ink sm:text-3xl">Catering enquiry</h2>
-            <p className="mt-2 text-sm leading-relaxed text-ink/70 sm:text-base">Two minutes to fill in. We come back to every enquiry personally.</p>
-            <EnquiryForm
-              topic="catering"
-              placeholder="Occasion, venue postcode, how you’d like to eat (mezze table, grill, boxed lunches), dietary requirements, budget per head…"
-              submitLabel="Request a quote"
-              className="mt-6"
-            />
+          <div id="enquire" data-form-card className="scroll-mt-24 rounded-3xl border border-ink/10 bg-parchment p-6 text-ink shadow-card sm:p-8">
+            <h2 className="font-display text-2xl text-ink sm:text-3xl">Get a catering quote</h2>
+            <p className="mt-2 text-sm leading-relaxed text-ink/70 sm:text-base">
+              Three short steps. We reply personally, usually within one working day, with a menu and a per-head price.
+            </p>
+            <CateringEnquiryForm className="mt-6" />
           </div>
         }
       >

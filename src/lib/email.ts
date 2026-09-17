@@ -15,9 +15,20 @@ export interface EnquiryPayload {
   name: string;
   email: string;
   phone?: string;
-  eventDate?: string;
-  guests?: string;
+  /** Topic-specific detail rows (label, value), already human-readable. */
+  details?: ReadonlyArray<readonly [string, string]>;
   message: string;
+  /** Short line appended to the staff subject, e.g. "60 guests · 14 Nov 2026 · HA5". */
+  summary?: string;
+}
+
+function contactRows(data: EnquiryPayload): Array<[string, string | undefined]> {
+  return [
+    ["Name", data.name],
+    ["Email", data.email],
+    ["Phone", data.phone],
+    ...(data.details ?? []).map(([label, value]) => [label, value] as [string, string]),
+  ];
 }
 
 const GOLD = "#c9a24f";
@@ -185,13 +196,7 @@ function guestEnquiryHtml(data: EnquiryPayload): string {
     heading: copy.heading,
     bodyHtml: `
       <p style="margin:0 0 16px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7;color:${INK}">${escapeHtml(copy.intro)}</p>
-      ${detailsTable([
-        ["Name", data.name],
-        ["Email", data.email],
-        ["Phone", data.phone],
-        ["Event date", data.eventDate],
-        ["Guests", data.guests],
-      ])}
+      ${detailsTable(contactRows(data))}
       ${messageHtml}
       ${ctaButton(copy.ctaLabel, copy.ctaHref)}
       <p style="margin:24px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.7;color:#5c564c">
@@ -208,16 +213,15 @@ function staffEnquiryHtml(data: EnquiryPayload): string {
     heading: topicLabels[data.topic],
     bodyHtml: `
       <p style="margin:0 0 8px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#5c564c">Received ${escapeHtml(londonNow())} from zufa.co.uk</p>
-      ${detailsTable([
-        ["Name", data.name],
-        ["Email", data.email],
-        ["Phone", data.phone],
-        ["Event date", data.eventDate],
-        ["Guests", data.guests],
-      ])}
-      <p style="margin:8px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#8a6a26">Message</p>
-      <p style="margin:0;font-family:Georgia,serif;font-size:16px;line-height:1.6;color:${INK};white-space:pre-wrap">${escapeHtml(data.message)}</p>
-      ${ctaButton("Reply to guest", `mailto:${data.email}`)}`,
+      ${detailsTable(contactRows(data))}
+      ${
+        data.message
+          ? `<p style="margin:8px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#8a6a26">Message</p>
+      <p style="margin:0;font-family:Georgia,serif;font-size:16px;line-height:1.6;color:${INK};white-space:pre-wrap">${escapeHtml(data.message)}</p>`
+          : ""
+      }
+      ${ctaButton("Reply to guest", `mailto:${data.email}`)}
+      ${data.phone ? ctaButton(`Call ${data.phone}`, `tel:${data.phone.replace(/[^\d+]/g, "")}`) : ""}`,
   });
 }
 
@@ -292,17 +296,11 @@ async function deliver(input: {
 export async function sendEnquiryEmails(data: EnquiryPayload): Promise<void> {
   const label = topicLabels[data.topic];
   const copy = guestCopy(data.topic, data.name);
-  const rows: Array<[string, string | undefined]> = [
-    ["Name", data.name],
-    ["Email", data.email],
-    ["Phone", data.phone],
-    ["Event date", data.eventDate],
-    ["Guests", data.guests],
-  ];
+  const rows = contactRows(data);
 
   await deliver({
     to: staffInbox(),
-    subject: `${label} from ${data.name}`,
+    subject: `${label} from ${data.name}${data.summary ? ` — ${data.summary}` : ""}`,
     html: staffEnquiryHtml(data),
     text: toText(label, rows, data.message),
     replyTo: data.email,

@@ -1,10 +1,10 @@
 "use client";
 
-import { useActionState, useEffect, useId, useRef, type ReactNode } from "react";
-import { AlertCircle, Check, Loader2 } from "lucide-react";
+import { useActionState } from "react";
 import { submitEnquiry, type EnquiryState, type EnquiryTopic } from "@/app/actions/enquiry";
 import { DatePicker } from "@/components/forms/date-picker";
 import { GuestStepper } from "@/components/forms/guest-stepper";
+import { ConsentCheckbox, Field, FormErrorBanner, SpamTraps, SubmitButton, inputClass } from "@/components/forms/primitives";
 import { cn } from "@/lib/utils";
 
 interface EnquiryFormProps {
@@ -20,59 +20,12 @@ interface EnquiryFormProps {
 
 const initialState: EnquiryState = { status: "idle" };
 
-const inputClass =
-  "w-full rounded-xl border border-ink/15 bg-white/70 px-4 py-3 text-base text-ink placeholder:text-ink/40 transition-[border-color,box-shadow] focus:border-gold-deep focus:outline-none focus:ring-4 focus:ring-gold/25 aria-[invalid=true]:border-danger";
-
-function Field({
-  label,
-  error,
-  children,
-  optional = false,
-}: {
-  label: string;
-  name: string;
-  error?: string;
-  children: (props: { id: string; describedBy?: string; invalid: boolean }) => ReactNode;
-  optional?: boolean;
-}) {
-  const id = useId();
-  const errorId = `${id}-error`;
-  return (
-    <div className="space-y-2">
-      <label htmlFor={id} className="flex items-baseline justify-between text-sm font-medium text-ink">
-        <span>{label}</span>
-        {optional ? <span className="text-xs font-normal text-ink/50">Optional</span> : null}
-      </label>
-      {children({ id, describedBy: error ? errorId : undefined, invalid: Boolean(error) })}
-      {error ? (
-        <p id={errorId} className="flex items-center gap-1.5 text-sm text-danger" role="alert">
-          <AlertCircle className="size-4" aria-hidden />
-          {error}
-        </p>
-      ) : null}
-    </div>
-  );
-}
-
 export function EnquiryForm({ topic, event = true, placeholder, submitLabel = "Send enquiry", className }: EnquiryFormProps) {
   const [state, action, pending] = useActionState(submitEnquiry, initialState);
-  const formRef = useRef<HTMLFormElement>(null);
-  const startedAtRef = useRef<HTMLInputElement>(null);
-
-  // Time-trap for bots: stamp when the form was actually rendered on the client.
-  useEffect(() => {
-    if (startedAtRef.current) startedAtRef.current.value = String(Date.now());
-  }, []);
 
   return (
-    <form ref={formRef} action={action} noValidate className={cn("space-y-6 [color-scheme:light]", className)}>
-      <input type="hidden" name="topic" value={topic} />
-      <input ref={startedAtRef} type="hidden" name="startedAt" defaultValue="" />
-      {/* Honeypot — hidden from humans and assistive tech. */}
-      <div className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden" aria-hidden>
-        <label htmlFor="website">Website</label>
-        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
-      </div>
+    <form action={action} noValidate className={cn("space-y-6 [color-scheme:light]", className)}>
+      <SpamTraps topic={topic} />
 
       <div className="grid gap-6 sm:grid-cols-2">
         <Field label="Your name" name="name" error={state.errors?.name}>
@@ -93,14 +46,10 @@ export function EnquiryForm({ topic, event = true, placeholder, submitLabel = "S
         {event ? (
           <>
             <Field label="Event date" name="eventDate" error={state.errors?.eventDate} optional>
-              {({ id, describedBy, invalid }) => (
-                <DatePicker id={id} name="eventDate" describedBy={describedBy} invalid={invalid} />
-              )}
+              {({ id, describedBy, invalid }) => <DatePicker id={id} name="eventDate" describedBy={describedBy} invalid={invalid} />}
             </Field>
             <Field label="Number of guests" name="guests" error={state.errors?.guests} optional>
-              {({ id, describedBy, invalid }) => (
-                <GuestStepper id={id} name="guests" describedBy={describedBy} invalid={invalid} />
-              )}
+              {({ id, describedBy, invalid }) => <GuestStepper id={id} name="guests" describedBy={describedBy} invalid={invalid} />}
             </Field>
           </>
         ) : null}
@@ -121,52 +70,11 @@ export function EnquiryForm({ topic, event = true, placeholder, submitLabel = "S
         )}
       </Field>
 
-      <div className="space-y-2">
-        <label className="flex items-start gap-3 text-sm text-ink/80">
-          <input
-            type="checkbox"
-            name="consent"
-            required
-            aria-invalid={Boolean(state.errors?.consent)}
-            className="peer sr-only"
-          />
-          <span
-            aria-hidden
-            className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-md border border-ink/20 bg-white/70 text-cream transition-colors peer-checked:border-ink peer-checked:bg-ink peer-focus-visible:ring-4 peer-focus-visible:ring-gold/25 peer-checked:[&_svg]:opacity-100"
-          >
-            <Check className="size-3 opacity-0" strokeWidth={3} />
-          </span>
-          <span>
-            I’m happy for Zufa to contact me about this enquiry. We only use your details to reply — see our{" "}
-            <a href="/privacy-policy" className="text-gold-dark underline underline-offset-4">
-              privacy policy
-            </a>
-            .
-          </span>
-        </label>
-        {state.errors?.consent ? (
-          <p className="flex items-center gap-1.5 text-sm text-danger" role="alert">
-            <AlertCircle className="size-4" aria-hidden />
-            {state.errors.consent}
-          </p>
-        ) : null}
-      </div>
+      <ConsentCheckbox error={state.errors?.consent} />
 
-      {state.status === "error" && state.message ? (
-        <p className="flex items-center gap-2 rounded-xl border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-ink" role="alert">
-          <AlertCircle className="size-4 text-danger" aria-hidden />
-          {state.message}
-        </p>
-      ) : null}
+      {state.status === "error" && state.message ? <FormErrorBanner>{state.message}</FormErrorBanner> : null}
 
-      <button
-        type="submit"
-        disabled={pending}
-        className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink px-8 text-[0.8125rem] font-semibold uppercase tracking-[0.16em] text-cream transition-colors hover:bg-stone disabled:opacity-60"
-      >
-        {pending ? <Loader2 className="size-4 animate-spin" aria-hidden /> : null}
-        {pending ? "Sending…" : submitLabel}
-      </button>
+      <SubmitButton pending={pending}>{submitLabel}</SubmitButton>
     </form>
   );
 }
