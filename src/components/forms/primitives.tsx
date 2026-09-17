@@ -7,11 +7,6 @@ import { cn } from "@/lib/utils";
 export const inputClass =
   "w-full rounded-xl border border-ink/15 bg-white/70 px-4 py-3 text-base text-ink placeholder:text-ink/40 transition-[border-color,box-shadow] focus:border-gold-deep focus:outline-none focus:ring-4 focus:ring-gold/25 aria-[invalid=true]:border-danger";
 
-export const selectClass = cn(
-  inputClass,
-  "appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%2216%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%230c0b09%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22m6 9 6 6 6-6%22/></svg>')] bg-[length:1rem] bg-[right_1rem_center] bg-no-repeat pr-11",
-);
-
 export function FieldError({ id, children }: { id?: string; children: ReactNode }) {
   return (
     <p id={id} className="flex items-center gap-1.5 text-sm text-danger" role="alert">

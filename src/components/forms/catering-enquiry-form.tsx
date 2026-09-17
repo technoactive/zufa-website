@@ -5,18 +5,8 @@ import { ArrowLeft, ArrowRight, Check, Pencil } from "lucide-react";
 import { submitEnquiry, type EnquiryFieldName, type EnquiryState } from "@/app/actions/enquiry";
 import { DatePicker } from "@/components/forms/date-picker";
 import { GuestStepper } from "@/components/forms/guest-stepper";
-import {
-  ChoiceCard,
-  ChoiceChip,
-  ConsentCheckbox,
-  Field,
-  Fieldset,
-  FormErrorBanner,
-  SpamTraps,
-  SubmitButton,
-  inputClass,
-  selectClass,
-} from "@/components/forms/primitives";
+import { SelectField } from "@/components/forms/select-field";
+import { ChoiceCard, ChoiceChip, ConsentCheckbox, Field, Fieldset, FormErrorBanner, SpamTraps, SubmitButton, inputClass } from "@/components/forms/primitives";
 import {
   budgetOptions,
   dietaryOptions,
@@ -171,7 +161,8 @@ export function CateringEnquiryForm({ className }: { className?: string }) {
     if (Object.keys(found).length) {
       setClientErrors(found);
       const firstName = Object.keys(found)[0];
-      const el = form.querySelector<HTMLElement>(`[name="${firstName}"]`);
+      // Custom controls carry their name on a hidden input; focus their visible trigger instead.
+      const el = form.querySelector<HTMLElement>(`[data-name="${firstName}"], [name="${firstName}"]:not([type="hidden"])`);
       el?.focus();
       return;
     }
@@ -251,23 +242,16 @@ export function CateringEnquiryForm({ className }: { className?: string }) {
       <div hidden={step !== 0} className="mt-6 space-y-6">
         <Field label="What’s the occasion?" name="occasion" error={errors.occasion}>
           {({ id, describedBy, invalid }) => (
-            <select
+            <SelectField
               id={id}
               name="occasion"
+              options={occasionOptions}
               required
-              aria-invalid={invalid}
-              aria-describedby={describedBy}
-              className={selectClass}
               value={occasion}
-              onChange={(e) => setOccasion(e.target.value)}
-            >
-              <option value="">Choose…</option>
-              {occasionOptions.map((o) => (
-                <option key={o.value} value={o.value}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
+              onChange={setOccasion}
+              describedBy={describedBy}
+              invalid={invalid}
+            />
           )}
         </Field>
         {occasion === "other" ? (
@@ -300,16 +284,7 @@ export function CateringEnquiryForm({ className }: { className?: string }) {
         </div>
 
         <Field label="Time of day" name="eventTime" error={errors.eventTime} optional>
-          {({ id, describedBy, invalid }) => (
-            <select id={id} name="eventTime" aria-invalid={invalid} aria-describedby={describedBy} className={selectClass} defaultValue="">
-              <option value="">Choose…</option>
-              {eventTimeOptions.map((o) => (
-                <option key={o.value} value={o.value}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
-          )}
+          {({ id, describedBy, invalid }) => <SelectField id={id} name="eventTime" options={eventTimeOptions} describedBy={describedBy} invalid={invalid} />}
         </Field>
 
         <div className="grid gap-6 sm:grid-cols-[1fr_1.4fr]">
@@ -331,16 +306,7 @@ export function CateringEnquiryForm({ className }: { className?: string }) {
             )}
           </Field>
           <Field label="Type of venue" name="venueType" error={errors.venueType} optional>
-            {({ id, describedBy, invalid }) => (
-              <select id={id} name="venueType" aria-invalid={invalid} aria-describedby={describedBy} className={selectClass} defaultValue="">
-                <option value="">Choose…</option>
-                {venueTypeOptions.map((o) => (
-                  <option key={o.value} value={o.value}>
-                    {o.label}
-                  </option>
-                ))}
-              </select>
-            )}
+            {({ id, describedBy, invalid }) => <SelectField id={id} name="venueType" options={venueTypeOptions} describedBy={describedBy} invalid={invalid} />}
           </Field>
         </div>
       </div>
@@ -356,16 +322,7 @@ export function CateringEnquiryForm({ className }: { className?: string }) {
         </Fieldset>
 
         <Field label="Menu style" name="menuStyle" error={errors.menuStyle} optional hint="Our sharing platters are a good starting point; every menu can be changed.">
-          {({ id, describedBy, invalid }) => (
-            <select id={id} name="menuStyle" aria-invalid={invalid} aria-describedby={describedBy} className={selectClass} defaultValue="">
-              <option value="">Choose…</option>
-              {menuStyleOptions.map((o) => (
-                <option key={o.value} value={o.value}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
-          )}
+          {({ id, describedBy, invalid }) => <SelectField id={id} name="menuStyle" options={menuStyleOptions} describedBy={describedBy} invalid={invalid} />}
         </Field>
 
         <Fieldset legend="Dietary requirements" hint="Tick anything that applies. All cold mezze are vegetarian and most are vegan." error={errors.dietary} optional>
@@ -392,16 +349,7 @@ export function CateringEnquiryForm({ className }: { className?: string }) {
 
         <div className="grid gap-6 sm:grid-cols-2">
           <Field label="Budget per head" name="budget" error={errors.budget} optional>
-            {({ id, describedBy, invalid }) => (
-              <select id={id} name="budget" aria-invalid={invalid} aria-describedby={describedBy} className={selectClass} defaultValue="">
-                <option value="">Choose…</option>
-                {budgetOptions.map((o) => (
-                  <option key={o.value} value={o.value}>
-                    {o.label}
-                  </option>
-                ))}
-              </select>
-            )}
+            {({ id, describedBy, invalid }) => <SelectField id={id} name="budget" options={budgetOptions} describedBy={describedBy} invalid={invalid} />}
           </Field>
           <Fieldset legend="Would you like us to bring…" error={errors.extras} optional>
             <div className="flex flex-wrap gap-2">
@@ -456,16 +404,7 @@ export function CateringEnquiryForm({ className }: { className?: string }) {
         </Field>
 
         <Field label="How did you hear about us?" name="source" error={errors.source} optional>
-          {({ id, describedBy, invalid }) => (
-            <select id={id} name="source" aria-invalid={invalid} aria-describedby={describedBy} className={selectClass} defaultValue="">
-              <option value="">Choose…</option>
-              {sourceOptions.map((o) => (
-                <option key={o.value} value={o.value}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
-          )}
+          {({ id, describedBy, invalid }) => <SelectField id={id} name="source" options={sourceOptions} describedBy={describedBy} invalid={invalid} />}
         </Field>
 
         <ConsentCheckbox error={errors.consent} />
