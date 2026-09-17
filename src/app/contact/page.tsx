@@ -23,20 +23,44 @@ export default function ContactPage() {
   return (
     <>
       <PageHero
+        compact
+        className="max-sm:pb-8 [&_[aria-label='Breadcrumb']]:max-sm:hidden [&_.eyebrow]:max-sm:hidden"
         eyebrow="Contact"
         title={
           <>
             Find us in <em className="italic text-gold">Hatch End</em>
           </>
         }
-        description="We’re on the Uxbridge Road, a short walk from Hatch End station. Call, WhatsApp or email — or simply come and say hello."
+        description={
+          <>
+            <span className="lg:hidden">Call, WhatsApp, or send us a message below.</span>
+            <span className="hidden lg:inline">
+              We’re on the Uxbridge Road, a short walk from Hatch End station. Call, WhatsApp or email — or simply come and say hello. For table
+              bookings, our online booking page is fastest.
+            </span>
+          </>
+        }
+        image={{ src: "/images/restaurant-interior.jpg", alt: "The dining room at Zufa Hatch End" }}
         crumbs={[{ name: "Contact", path: "/contact" }]}
+        aside={
+          <div id="enquire" className="scroll-mt-24 rounded-3xl border border-ink/10 bg-parchment p-6 text-ink shadow-card sm:p-8">
+            <h2 className="font-display text-2xl text-ink sm:text-3xl">Send us a message</h2>
+            <p className="mt-2 text-sm leading-relaxed text-ink/70 sm:text-base">
+              Questions, feedback or something special? For table bookings, please{" "}
+              <Link href="/bookings" className="text-gold-dark underline underline-offset-4">
+                book online
+              </Link>{" "}
+              or call — it’s faster.
+            </p>
+            <EnquiryForm topic="general" event={false} className="mt-6" />
+          </div>
+        }
       >
         <Button href="/bookings" size="lg">
           Book a table
         </Button>
-        <Button href={site.maps.directions} variant="secondary" size="lg">
-          Get directions
+        <Button href={`tel:${site.phone.e164}`} variant="secondary" size="lg">
+          <Phone className="size-4" aria-hidden /> {site.phone.display}
         </Button>
       </PageHero>
 
@@ -211,22 +235,6 @@ export default function ContactPage() {
               </p>
             </Reveal>
           </div>
-        </div>
-      </Section>
-
-      <Section tone="parchment">
-        <div className="container-content grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
-          <Reveal>
-            <SectionHeading
-              light
-              eyebrow="Send a message"
-              title="Questions, feedback or something special?"
-              description="For table bookings please use our online booking page or call — it’s faster. For anything else, the form is the best way to reach us."
-            />
-          </Reveal>
-          <Reveal delay={100} className="rounded-3xl border border-ink/10 bg-cream p-8 shadow-card sm:p-10">
-            <EnquiryForm topic="general" event={false} />
-          </Reveal>
         </div>
       </Section>
 
