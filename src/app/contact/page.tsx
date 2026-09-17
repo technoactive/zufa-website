@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { MapPin, Phone, Mail, MessageCircle, Clock, Train, Car } from "lucide-react";
+import { MapPin, Phone, Mail, MessageCircle, Clock, Train, Car, CalendarCheck, UtensilsCrossed, Leaf, Building2 } from "lucide-react";
+import Link from "next/link";
 import { InstagramIcon as Instagram } from "@/components/ui/icons";
 import { PageHero } from "@/components/blocks/page-hero";
 import { FaqList } from "@/components/blocks/faq-list";
@@ -145,6 +146,71 @@ export default function ContactPage() {
               </div>
             </a>
           </Reveal>
+        </div>
+
+        <div className="container-content mt-16">
+          <Reveal>
+            <SectionHeading light eyebrow="Who to ask" title="The quickest way to reach the right person" />
+          </Reveal>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <Reveal className="rounded-3xl border border-ink/10 bg-parchment p-7 shadow-card">
+              <CalendarCheck className="size-6 text-gold-dark" aria-hidden />
+              <h3 className="mt-4 font-display text-2xl text-ink">Table bookings</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink/70">
+                Up to {site.reservations.maxOnlinePartySize} guests:{" "}
+                <Link href="/bookings" className="text-gold-dark underline underline-offset-4">
+                  book online
+                </Link>
+                . {site.reservations.maxOnlinePartySize + 1} – {site.reservations.eventPartySize} guests: call{" "}
+                <a href={`tel:${site.phone.e164}`} className="text-gold-dark underline underline-offset-4">
+                  {site.phone.display}
+                </a>{" "}
+                or WhatsApp. More than {site.reservations.eventPartySize} is an event — see private hire.
+              </p>
+            </Reveal>
+            <Reveal delay={60} className="rounded-3xl border border-ink/10 bg-parchment p-7 shadow-card">
+              <Building2 className="size-6 text-gold-dark" aria-hidden />
+              <h3 className="mt-4 font-display text-2xl text-ink">Private hire &amp; catering</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink/70">
+                The restaurant seats {site.capacity.seated} or hosts {site.capacity.standing} standing; we also cater across North West London. Use the{" "}
+                <Link href="/private-hire#enquire" className="text-gold-dark underline underline-offset-4">
+                  private hire
+                </Link>{" "}
+                or{" "}
+                <Link href="/catering#enquire" className="text-gold-dark underline underline-offset-4">
+                  catering
+                </Link>{" "}
+                enquiry forms and we’ll come back with a quote — usually the same day, or first thing after service.
+              </p>
+            </Reveal>
+            <Reveal delay={120} className="rounded-3xl border border-ink/10 bg-parchment p-7 shadow-card">
+              <Leaf className="size-6 text-gold-dark" aria-hidden />
+              <h3 className="mt-4 font-display text-2xl text-ink">Allergies &amp; dietary needs</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink/70">
+                Every dish on our{" "}
+                <Link href="/menu" className="text-gold-dark underline underline-offset-4">
+                  online menus
+                </Link>{" "}
+                lists its allergens and whether it’s vegetarian or plant-based. For anything serious, call ahead and tell your server when you
+                arrive — the kitchen handles all fourteen major allergens.
+              </p>
+            </Reveal>
+            <Reveal delay={180} className="rounded-3xl border border-ink/10 bg-parchment p-7 shadow-card">
+              <UtensilsCrossed className="size-6 text-gold-dark" aria-hidden />
+              <h3 className="mt-4 font-display text-2xl text-ink">Takeaway &amp; everything else</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink/70">
+                Order collection or delivery on our{" "}
+                <Link href="/takeaway" className="text-gold-dark underline underline-offset-4">
+                  takeaway page
+                </Link>{" "}
+                or call to collect. For feedback, press or lost property, email{" "}
+                <a href={`mailto:${site.email}`} className="text-gold-dark underline underline-offset-4">
+                  {site.email}
+                </a>{" "}
+                and we’ll reply within a day.
+              </p>
+            </Reveal>
+          </div>
         </div>
       </Section>
 

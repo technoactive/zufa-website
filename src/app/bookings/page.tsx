@@ -152,18 +152,12 @@ export default function BookingsPage() {
       <Section tone="parchment" className="py-16 sm:py-24">
         <div className="container-content grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
           <Reveal>
-            <SectionHeading light eyebrow="Booking questions" title="Before you arrive" />
-            <p className="mt-6 text-base leading-relaxed text-ink/70">
-              Anything else, call{" "}
-              <a href={`tel:${site.phone.e164}`} className="text-gold-dark underline underline-offset-4">
-                {site.phone.display}
-              </a>{" "}
-              or WhatsApp{" "}
-              <a href={site.whatsapp.url} className="text-gold-dark underline underline-offset-4">
-                {site.whatsapp.display}
-              </a>
-              .
-            </p>
+            <SectionHeading
+              light
+              eyebrow="Booking questions"
+              title="Before you arrive"
+              description="The things guests most often ask before a first visit. Anything else, the team is a call or a WhatsApp away."
+            />
           </Reveal>
           <Reveal>
             <FaqList faqs={bookingFaqs} light />
