@@ -73,7 +73,7 @@ export function restaurantSchema(): WithContext<Restaurant> {
     },
     hasMap: site.maps.google,
     openingHoursSpecification: openingHoursSpecification(),
-    sameAs: [site.social.instagram],
+    sameAs: [site.social.instagram, site.reservations.url, ...site.delivery.map((d) => d.url)],
     areaServed: [site.address.locality, ...site.cateringAreas].map((name) => ({ "@type": "City" as const, name })),
     knowsAbout: ["Lebanese cuisine", "Mezze", "Charcoal grill", "Saj bread", "Lebanese wine", "Event catering", "Private dining"],
     makesOffer: [

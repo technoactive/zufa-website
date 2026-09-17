@@ -18,7 +18,7 @@ export const generalFaqs: readonly Faq[] = [
   },
   {
     question: "Do I need to book a table at Zufa?",
-    answer: `Booking is recommended, especially for Friday and Saturday evenings. You can book online in seconds for parties of up to ${site.reservations.maxOnlinePartySize}. For larger groups, please call us on ${site.phone.display}.`,
+    answer: `Booking is recommended, especially for Friday and Saturday evenings. You can book online in seconds for parties of up to ${site.reservations.maxOnlinePartySize}. For ${site.reservations.maxOnlinePartySize + 1} to ${site.reservations.eventPartySize} guests please call us on ${site.phone.display}; for more than ${site.reservations.eventPartySize}, see private hire.`,
   },
   {
     question: "Does Zufa offer vegetarian and vegan food?",
@@ -53,6 +53,45 @@ export const generalFaqs: readonly Faq[] = [
     question: "Is there parking near Zufa?",
     answer:
       "There is plenty of local parking on and around the Uxbridge Road, and we are easily reached by bus and by the London Overground to Hatch End.",
+  },
+];
+
+/** Booking FAQs — shown on /bookings and emitted as FAQPage JSON-LD. */
+export const bookingFaqs: readonly Faq[] = [
+  {
+    question: "How many people can I book for online?",
+    answer: `Online reservations are for parties of up to ${site.reservations.maxOnlinePartySize}. For ${site.reservations.maxOnlinePartySize + 1} to ${site.reservations.eventPartySize} guests, call us on ${site.phone.display} or WhatsApp ${site.whatsapp.display} and we’ll seat you together. For more than ${site.reservations.eventPartySize}, we treat it as an event — see our private hire page or send an enquiry.`,
+  },
+  {
+    question: "How do I change or cancel my booking?",
+    answer: `Use the link in your confirmation email from SevenRooms to amend or cancel, or call us on ${site.phone.display}. Please give us as much notice as you can, especially for Friday and Saturday evenings, so we can offer the table to someone else.`,
+  },
+  {
+    question: "What if I’m running late?",
+    answer: `Call or WhatsApp us on ${site.whatsapp.display} and we’ll do our best to hold your table. On busy evenings we may need to release a table if we haven’t heard from you, so a quick message really helps.`,
+  },
+  {
+    question: "Is there a time limit on tables?",
+    answer:
+      "On Friday and Saturday evenings tables may be booked for a 90-minute sitting so that everyone gets a seat. The rest of the week, take your time.",
+  },
+  {
+    question: "Can I book the patio or a particular table?",
+    answer:
+      "Add a note when you book and we’ll do our best. The al fresco patio is open in warmer months and is seated on a first-come basis; we can’t guarantee a specific table but we will always try.",
+  },
+  {
+    question: "Are children welcome?",
+    answer: "Very much so. We have a kids menu, and every cold mezze is vegetarian — just let us know how many little ones are coming when you book.",
+  },
+  {
+    question: "Can I bring my own wine?",
+    answer: "On Mondays, yes: we are corkage-free, so bring a bottle. The rest of the week we serve Lebanese wines, arak, cocktails and mocktails from the bar.",
+  },
+  {
+    question: "Do I need to book for breakfast?",
+    answer:
+      "Breakfast is served Friday to Sunday from 8am to midday. You’re welcome to walk in; for a group, call us and we’ll keep a table.",
   },
 ];
 

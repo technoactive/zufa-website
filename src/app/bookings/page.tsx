@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Phone, Users, Clock, MapPin, MessageCircle } from "lucide-react";
+import { Phone, Users, Clock, MapPin, MessageCircle, CalendarClock } from "lucide-react";
 import { PageHero } from "@/components/blocks/page-hero";
 import { ReservationWidget } from "@/components/blocks/reservation-widget";
+import { FaqList } from "@/components/blocks/faq-list";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
@@ -10,7 +11,8 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { pageMetadata } from "@/lib/metadata";
 import { webPageSchema } from "@/lib/schema";
 import { getPage } from "@/content/pages";
-import { openingHours, site } from "@/content/site";
+import { bookingFaqs } from "@/content/faqs";
+import { breakfastService, openingHours, site } from "@/content/site";
 
 export const metadata: Metadata = pageMetadata("/bookings");
 const page = getPage("/bookings")!;
@@ -31,8 +33,9 @@ export default function BookingsPage() {
           <>
             <span className="sm:hidden">Pick a date below — up to {site.reservations.maxOnlinePartySize} guests online.</span>
             <span className="hidden sm:inline">
-              Reserve online in seconds for up to {site.reservations.maxOnlinePartySize} guests. For larger tables, celebrations or
-              events of more than {site.reservations.eventPartySize}, call us and we’ll take care of everything.
+              Reserve online in seconds for up to {site.reservations.maxOnlinePartySize} guests. For {site.reservations.maxOnlinePartySize + 1} to{" "}
+              {site.reservations.eventPartySize}, call us and we’ll seat you together. More than {site.reservations.eventPartySize} is an event — we’ll
+              take care of everything.
             </span>
           </>
         }
@@ -55,18 +58,37 @@ export default function BookingsPage() {
               <li className="flex gap-4">
                 <Users className="mt-0.5 size-5 shrink-0 text-gold-dark" aria-hidden />
                 <div>
-                  <p className="font-semibold text-ink">Groups</p>
-                  <p className="mt-1 leading-relaxed">
-                    Online bookings are for up to {site.reservations.maxOnlinePartySize} guests. For larger parties please call{" "}
-                    <a href={`tel:${site.phone.e164}`} className="text-gold-dark underline underline-offset-4">
-                      {site.phone.display}
-                    </a>
-                    . Events for more than {site.reservations.eventPartySize} can be arranged through{" "}
-                    <Link href="/private-hire" className="text-gold-dark underline underline-offset-4">
-                      private hire
-                    </Link>
-                    .
-                  </p>
+                  <p className="font-semibold text-ink">Party size</p>
+                  <ul className="mt-1 space-y-1 leading-relaxed">
+                    <li>
+                      <span className="font-semibold text-ink">1 – {site.reservations.maxOnlinePartySize} guests:</span> book online below.
+                    </li>
+                    <li>
+                      <span className="font-semibold text-ink">
+                        {site.reservations.maxOnlinePartySize + 1} – {site.reservations.eventPartySize} guests:
+                      </span>{" "}
+                      call{" "}
+                      <a href={`tel:${site.phone.e164}`} className="text-gold-dark underline underline-offset-4">
+                        {site.phone.display}
+                      </a>{" "}
+                      or{" "}
+                      <a href={site.whatsapp.url} className="text-gold-dark underline underline-offset-4">
+                        WhatsApp
+                      </a>{" "}
+                      and we’ll seat you together.
+                    </li>
+                    <li>
+                      <span className="font-semibold text-ink">{site.reservations.eventPartySize + 1}+ guests:</span> that’s an event —{" "}
+                      <Link href="/private-hire" className="text-gold-dark underline underline-offset-4">
+                        private hire
+                      </Link>{" "}
+                      or a{" "}
+                      <Link href="/menu/set-menus" className="text-gold-dark underline underline-offset-4">
+                        sharing platter
+                      </Link>{" "}
+                      booked by phone.
+                    </li>
+                  </ul>
                 </div>
               </li>
               <li className="flex gap-4">
@@ -78,6 +100,17 @@ export default function BookingsPage() {
                       <li key={p.label}>{p.label}</li>
                     ))}
                   </ul>
+                  <p className="mt-1 leading-relaxed">Breakfast {breakfastService.label} — walk in, or call for a group.</p>
+                </div>
+              </li>
+              <li className="flex gap-4">
+                <CalendarClock className="mt-0.5 size-5 shrink-0 text-gold-dark" aria-hidden />
+                <div>
+                  <p className="font-semibold text-ink">Changes, cancellations and late arrivals</p>
+                  <p className="mt-1 leading-relaxed">
+                    Amend or cancel through the link in your confirmation email, or call us. If you’re running late, a quick call or WhatsApp
+                    means we can hold your table. On Friday and Saturday evenings tables may be booked for a 90-minute sitting.
+                  </p>
                 </div>
               </li>
               <li className="flex gap-4">
@@ -113,6 +146,28 @@ export default function BookingsPage() {
           <div className="order-1 lg:order-2">
             <ReservationWidget eager />
           </div>
+        </div>
+      </Section>
+
+      <Section tone="parchment" className="py-16 sm:py-24">
+        <div className="container-content grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
+          <Reveal>
+            <SectionHeading light eyebrow="Booking questions" title="Before you arrive" />
+            <p className="mt-6 text-base leading-relaxed text-ink/70">
+              Anything else, call{" "}
+              <a href={`tel:${site.phone.e164}`} className="text-gold-dark underline underline-offset-4">
+                {site.phone.display}
+              </a>{" "}
+              or WhatsApp{" "}
+              <a href={site.whatsapp.url} className="text-gold-dark underline underline-offset-4">
+                {site.whatsapp.display}
+              </a>
+              .
+            </p>
+          </Reveal>
+          <Reveal>
+            <FaqList faqs={bookingFaqs} light />
+          </Reveal>
         </div>
       </Section>
 

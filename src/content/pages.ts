@@ -56,7 +56,7 @@ export const pages: readonly PageEntry[] = [
     path: "/bookings",
     title: "Book a Table",
     description:
-      "Reserve a table at Zufa Hatch End online in seconds, or call 0208 421 6821 for groups of more than eight.",
+      "Reserve a table at Zufa Hatch End online for up to 8 guests, call 0208 421 6821 for 9–12, or enquire about private hire for larger events. Opening hours, group and cancellation info.",
     changeFrequency: "monthly",
     priority: 0.9,
     lastModified: CONTENT_UPDATED,
