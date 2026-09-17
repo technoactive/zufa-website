@@ -68,7 +68,7 @@ export function buildLlmsTxt(): string {
     "## Optional",
     "",
     pageLink(pages.find((p) => p.path === "/privacy-policy")!),
-    `- [Menu PDFs](${absoluteUrl("/menu")}): printable PDF versions of the à la carte, set, lunch and kids menus are linked from each menu page.`,
+    `- [Menu PDFs](${absoluteUrl("/menu")}): printable PDF versions of the à la carte, takeaway, set, lunch, breakfast and kids menus are linked from each menu page.`,
     "",
   ]);
 }

@@ -34,7 +34,7 @@ export const pages: readonly PageEntry[] = [
     path: "/menu",
     title: "Menus",
     description:
-      "Explore every Zufa menu: à la carte, sharing platters, weekday lunch, kids, desserts and drinks — all with prices and allergen information.",
+      "Explore every Zufa menu: à la carte, sharing platters, weekday lunch, weekend breakfast, kids, desserts and drinks — all with prices and allergen information.",
     changeFrequency: "monthly",
     priority: 0.9,
     lastModified: CONTENT_UPDATED,

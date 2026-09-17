@@ -38,12 +38,12 @@ export const offers: readonly Offer[] = [
     short: "Breakfast",
     headline: "Breakfast from 8am, Friday to Sunday",
     description:
-      "We open at 8am on Fridays, Saturdays and Sundays. Breakfast is served until midday — then the rest of the kitchen takes over.",
+      "We open at 8am on Fridays, Saturdays and Sundays. Manakish from the oven, Lebanese eggs, foul, labneh and sharing platters — or eggs Benedict, pain perdu and pancakes. Breakfast is served until midday, then the rest of the kitchen takes over.",
     when: breakfastService.label,
     days: breakfastService.days,
     hours: "8am – midday",
     stat: { value: "8am", label: "Friday to Sunday" },
-    cta: { label: "Book a table", href: "/bookings" },
+    cta: { label: "View the breakfast menu", href: "/menu/breakfast" },
   },
   {
     id: "byo-monday",

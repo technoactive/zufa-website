@@ -445,6 +445,184 @@ export const lunchMenu: Menu = {
 };
 
 /* ------------------------------------------------------------------ */
+/* Breakfast                                                           */
+/* ------------------------------------------------------------------ */
+
+export const breakfastMenu: Menu = {
+  slug: "breakfast",
+  title: "Breakfast Menu",
+  shortTitle: "Breakfast",
+  summary:
+    "Weekend breakfast in Hatch End, Friday to Sunday from 8am: manakish from the saj, Lebanese eggs, foul, labneh and halloumi, breakfast platters from £12.95, eggs Benedict, pancakes, smoothies and Lebanese coffee.",
+  intro:
+    "Friday to Sunday we open at 8am for a proper Lebanese breakfast: manakish straight from the oven, eggs cooked the village way with sojok or awarma, foul and musabaha with warm bread, and platters made for sharing. If you’d rather go beyond the Levant, there are eggs Benedict on sourdough, brioche pain perdu and buttermilk pancakes, with fresh juices, smoothies and coffee to go with them.",
+  availability: "Friday – Sunday, 8am – midday",
+  image: "/images/dishes-detail.webp",
+  imageAlt: "Lebanese breakfast dishes at Zufa Hatch End",
+  pdf: "/menus/zufa-breakfast-menu.pdf",
+  sections: [
+    {
+      id: "manakish",
+      title: "Manakish",
+      description: "Lebanese flatbreads baked to order.",
+      items: [
+        { name: "Zaatar", description: "Soft baked flatbread spread with a blend of wild thyme, olive oil and sesame seeds", price: 5.5, allergens: ["gluten", "sesame"], diets: ["vegan"] },
+        { name: "Zaatar Extra", description: "Zaatar with tomatoes and fresh mint, served with olives", price: 6.5, allergens: ["gluten", "sesame"], diets: ["vegan"] },
+        { name: "Zaatar Labneh", description: "Creamy strained yoghurt spread with zaatar", price: 6.5, allergens: ["gluten", "sesame", "dairy"], diets: ["vegetarian"] },
+        { name: "Zaatar Jibneh", description: "Zaatar topped with mixed cheese", price: 7.0, allergens: ["gluten", "sesame", "dairy"], diets: ["vegetarian"] },
+        { name: "Jibneh", description: "Akkawi and mozzarella cheese blend", price: 6.75, allergens: ["gluten", "dairy"], diets: ["vegetarian"] },
+        { name: "Harra", description: "Cheese blended with aromatic spices", price: 7.0, allergens: ["gluten", "dairy"], diets: ["vegetarian", "spicy"] },
+        { name: "Safiha", description: "Seasoned minced lamb with tomatoes, onions, herbs and chilli", price: 9.25, allergens: ["gluten"], diets: ["spicy"] },
+      ],
+    },
+    {
+      id: "eggs",
+      title: "Eggs",
+      items: [
+        { name: "Shakshuka", description: "Spicy peppers, onions and tomato sauce with farm-fresh eggs", price: 12.95, allergens: ["eggs"], diets: ["vegetarian", "spicy"] },
+        { name: "Sojok & Bayd", description: "Spicy lamb sausages pan-fried with farm-fresh eggs", price: 11.95, allergens: ["eggs"], diets: ["spicy"] },
+        { name: "Bayd bi Awarma", description: "Farm-fresh eggs fried with diced lamb, onions and spices", price: 10.95, allergens: ["eggs"] },
+        { name: "Bayd & Batata", description: "Diced potatoes cooked with garlic and spices, scrambled with farm-fresh eggs", price: 9.95, allergens: ["eggs"], diets: ["vegetarian"] },
+        { name: "Ejjeh", description: "Traditional Lebanese omelette — farm-fresh eggs, herbs and spices, served with salad", price: 10.95, allergens: ["eggs"], diets: ["vegetarian"] },
+        { name: "Add-ons for Ejjeh", description: "Red onions, mushrooms, tomatoes, cheese, diced potatoes or spinach", price: 2.5, priceNote: "each" },
+      ],
+    },
+    {
+      id: "cold-dishes",
+      title: "Cold Dishes",
+      description: "Served with bread.",
+      items: [
+        { name: "Labneh", description: "Creamy strained yoghurt with olive oil", price: 7.25, allergens: ["gluten", "dairy"], diets: ["vegetarian"] },
+        { name: "Hommos", description: "Chickpea purée, tahini and olive oil", price: 7.75, allergens: ["gluten", "sesame"], diets: ["vegan"] },
+        { name: "Babaganough", description: "Smoked aubergine purée, tahini, garlic and olive oil", price: 8.25, allergens: ["gluten", "sesame"], diets: ["vegan"] },
+        { name: "Olives", description: "Kalamata and green Greek olives", price: 5.5, diets: ["vegan"] },
+      ],
+    },
+    {
+      id: "hot-dishes",
+      title: "Hot Dishes",
+      description: "Served with bread.",
+      items: [
+        { name: "Foul", description: "Fava beans mashed with garlic, lemon juice and olive oil", price: 11.75, allergens: ["gluten"], diets: ["vegan"] },
+        { name: "Halloumi", description: "Grilled halloumi with tomatoes and cucumber", price: 8.75, allergens: ["gluten", "dairy"], diets: ["vegetarian"] },
+        { name: "Musabaha", description: "Chickpeas blended with tahini, lemon, garlic and olive oil, served with whole chickpeas and cumin", price: 11.25, allergens: ["gluten", "sesame"], diets: ["vegan"] },
+        { name: "Batata Harra", description: "Crispy potatoes with peppers, onions, chilli and garlic", price: 8.75, allergens: ["gluten"], diets: ["vegan", "spicy"] },
+        { name: "Fatayer", description: "Baked pastry filled with spinach, onions, pine nuts and aromatic spices", price: 6.75, allergens: ["gluten", "nuts"], diets: ["vegan"] },
+        { name: "Fatayer Jibneh", description: "Baked pastry filled with seasoned creamy cheese and herbs", price: 7.75, allergens: ["gluten", "dairy"], diets: ["vegetarian"] },
+      ],
+    },
+    {
+      id: "breakfast-platters",
+      title: "Breakfast Platters",
+      description: "Authentic flavours, made for sharing. Served with bread.",
+      items: [
+        { name: "Breakfast for One", description: "Hommos, labneh, foul, halloumi, sojok, olives, eggs, vegetables and zaatar", price: 13.95, allergens: ["gluten", "sesame", "dairy", "eggs"] },
+        {
+          name: "Family Breakfast Platter",
+          description: "Hommos, labneh, foul, mixed manakish, sojok, eggs and vegetables",
+          note: "Serves 2 – 4, minimum 2 people. Vegetarian option available.",
+          price: 12.95,
+          priceNote: "per person",
+          allergens: ["gluten", "sesame", "dairy", "eggs"],
+        },
+      ],
+    },
+    {
+      id: "benedict",
+      title: "Beyond the Levant — Benedict",
+      description: "Served on sourdough bread. Eggs scrambled or poached.",
+      items: [
+        { name: "Spicy Avocado & Feta Eggs", description: "Farm-fresh eggs with creamy spicy avocado paste and feta", price: 11.75, allergens: ["gluten", "eggs", "dairy"], diets: ["vegetarian", "spicy"] },
+        { name: "Salmon Benedict", description: "Farm-fresh eggs and smoked salmon with hollandaise sauce", price: 12.75, allergens: ["gluten", "eggs", "dairy", "fish"] },
+        { name: "Spiced Spinach Royale", description: "Farm-fresh eggs, masala spinach and hollandaise sauce", price: 11.25, allergens: ["gluten", "eggs", "dairy"], diets: ["vegetarian"] },
+        { name: "The Duck Pond", description: "Farm-fresh eggs, confit duck and hollandaise sauce", price: 12.75, allergens: ["gluten", "eggs", "dairy"] },
+      ],
+    },
+    {
+      id: "pain-perdu",
+      title: "Pain Perdu",
+      items: [
+        { name: "Bonjour", description: "Soft brioche pancake with cinnamon-vanilla custard and a caramelised golden crust, blueberry compote, fresh berries, crème fraîche, berry sauce and chocolate crumb", price: 9.95, allergens: ["gluten", "dairy", "eggs"], diets: ["vegetarian"] },
+        { name: "Bon Appétit", description: "Soft brioche soaked in cinnamon-vanilla custard with caramelised apple, banana brûlée, crème fraîche and salted caramel", price: 9.95, allergens: ["gluten", "dairy", "eggs"], diets: ["vegetarian"] },
+      ],
+    },
+    {
+      id: "pancakes",
+      title: "Pancakes",
+      items: [
+        { name: "Morning Heaven", description: "Fluffy American-style buttermilk pancakes topped with seasonal fresh fruit, berry compote and maple syrup, finished with rainbow sprinkles", price: 10.75, allergens: ["gluten", "dairy", "eggs"], diets: ["vegetarian"] },
+        { name: "Honeymoon Mode", description: "Stacks of fluffy pancakes generously coated in Nutella, layered with fresh banana and strawberries, finished with toasted almonds", price: 11.25, allergens: ["gluten", "dairy", "eggs", "nuts"], diets: ["vegetarian"] },
+      ],
+    },
+    {
+      id: "add-ons",
+      title: "Add-ons",
+      items: [
+        { name: "Two Farm-Fresh Eggs", price: 3.75, allergens: ["eggs"], diets: ["vegetarian"] },
+        { name: "Fries", price: 4.0, diets: ["vegan"] },
+        { name: "Spicy Fries", price: 4.75, diets: ["vegan", "spicy"] },
+        { name: "Avocado", price: 2.75, diets: ["vegan"] },
+        { name: "Falafel", price: 1.75, allergens: ["sesame", "celery"], diets: ["vegan"] },
+        { name: "Sourdough Bread", price: 1.75, allergens: ["gluten"], diets: ["vegan"] },
+      ],
+    },
+    {
+      id: "jam",
+      title: "Jam",
+      description: "Served with bread and butter.",
+      items: [
+        { name: "Apricot", price: 3.5, allergens: ["gluten", "dairy"], diets: ["vegetarian"] },
+        { name: "Fig", price: 3.75, allergens: ["gluten", "dairy"], diets: ["vegetarian"] },
+        { name: "Strawberry", price: 3.5, allergens: ["gluten", "dairy"], diets: ["vegetarian"] },
+        { name: "Orange Marmalade", price: 3.75, allergens: ["gluten", "dairy"], diets: ["vegetarian"] },
+      ],
+    },
+    {
+      id: "smoothies-juices",
+      title: "Smoothies & Fresh Juices",
+      items: [
+        { name: "Verde", description: "Spinach, green apple and cucumber", price: 6.25, diets: ["vegan"] },
+        { name: "Tropical", description: "Coconut water, pineapple, mango and banana", price: 6.25, diets: ["vegan"] },
+        { name: "Berryholic", description: "Mixed berries, banana and almond milk", price: 6.25, allergens: ["nuts"], diets: ["vegan"] },
+        { name: "Fresh Juices", description: "Orange, apple, carrot, or lemon / lemon mint — ask for today’s options", price: [{ label: "Single", price: 5.5 }, { label: "Mix", price: 5.75 }], diets: ["vegan"] },
+      ],
+    },
+    {
+      id: "coffee-tea",
+      title: "Coffee & Tea",
+      description: "Plant-based milk available.",
+      items: [
+        {
+          name: "Coffee",
+          price: [
+            { label: "Espresso", price: 2.75 },
+            { label: "Macchiato", price: 3.0 },
+            { label: "Lebanese coffee", price: 3.5 },
+            { label: "Flat white", price: 4.25 },
+            { label: "Cappuccino", price: 4.5 },
+            { label: "Latte", price: 4.5 },
+            { label: "Mocha", price: 4.5 },
+            { label: "Hot chocolate", price: 4.5 },
+          ],
+        },
+        {
+          name: "Tea",
+          price: [
+            { label: "English breakfast", price: 3.75 },
+            { label: "Earl Grey", price: 3.75 },
+            { label: "Green", price: 3.75 },
+            { label: "Fresh mint", price: 3.75 },
+            { label: "Peppermint", price: 3.75 },
+            { label: "Lebanese tea", price: 3.75 },
+            { label: "Matcha", price: 5.5 },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+/* ------------------------------------------------------------------ */
 /* Kids                                                                */
 /* ------------------------------------------------------------------ */
 
@@ -790,7 +968,7 @@ export const drinksMenu: Menu = {
   ],
 };
 
-export const menus: readonly Menu[] = [aLaCarte, takeawayMenu, setMenus, lunchMenu, kidsMenu, dessertMenu, drinksMenu];
+export const menus: readonly Menu[] = [aLaCarte, takeawayMenu, setMenus, lunchMenu, breakfastMenu, kidsMenu, dessertMenu, drinksMenu];
 
 export function getMenu(slug: string): Menu | undefined {
   return menus.find((m) => m.slug === slug);
