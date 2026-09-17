@@ -95,6 +95,10 @@ const nextConfig: NextConfig = {
       // Legacy WordPress slugs → new canonical URLs (preserve link equity).
       { source: "/contact-hatch-end", destination: "/contact", permanent: true },
       { source: "/contact-hatch-end/", destination: "/contact", permanent: true },
+      { source: "/:page(whats-on|private-hire|catering|takeaway|menu|bookings|our-story)-hatch-end", destination: "/:page", permanent: true },
+      { source: "/:page(whats-on|private-hire|catering|takeaway|menu|bookings|our-story)-hatch-end/", destination: "/:page", permanent: true },
+      { source: "/book-hatch-end", destination: "/bookings", permanent: true },
+      { source: "/about-us", destination: "/our-story", permanent: true },
       { source: "/home", destination: "/", permanent: true },
       { source: "/review-test", destination: "/", permanent: true },
       { source: "/feed", destination: "/", permanent: true },
