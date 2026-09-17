@@ -157,20 +157,20 @@ export const openingHours: readonly OpeningPeriod[] = [
   {
     days: ["Monday", "Tuesday", "Wednesday", "Thursday"],
     opens: "11:00",
-    closes: "23:00",
-    label: "Monday – Thursday: 11am – 11pm",
+    closes: "22:00",
+    label: "Monday – Thursday: 11am – 10pm",
   },
   {
     days: ["Friday", "Saturday"],
     opens: "08:00",
-    closes: "00:00",
-    label: "Friday – Saturday: 8am – Midnight",
+    closes: "22:00",
+    label: "Friday – Saturday: 8am – 10pm",
   },
   {
     days: ["Sunday"],
     opens: "08:00",
-    closes: "23:00",
-    label: "Sunday: 8am – 11pm",
+    closes: "22:00",
+    label: "Sunday: 8am – 10pm",
   },
 ] as const;
 

@@ -315,7 +315,7 @@ function MenuShowcase() {
           <SectionHeading
             light
             eyebrow="The menus"
-            title="From mezze to midnight cocktails"
+            title="From breakfast manakish to evening cocktails"
             description="Every menu is online in full with prices and allergens. Hover a menu to see what it looks like on the table."
           />
           <Button href="/menu" variant="light" className="shrink-0">
