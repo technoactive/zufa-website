@@ -227,6 +227,13 @@ export function Footer() {
         <div className="container-content flex flex-col gap-4 py-6 text-xs text-smoke sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {COPYRIGHT_YEAR} {site.legalName}. Est. {site.foundingYear}, Tannourine — Hatch End.
+            <span className="mx-2 text-cream/25" aria-hidden>
+              ·
+            </span>
+            Website by{" "}
+            <a href="https://technoactive.co.uk" target="_blank" rel="noopener" className="transition-colors hover:text-cream">
+              TechnoActive
+            </a>
           </p>
           <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {navigation.legal.map((item) => (
