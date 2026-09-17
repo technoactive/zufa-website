@@ -98,8 +98,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         {/* Remove the no-js class as early as possible so reveal animations work. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.remove('no-js')" }} />
-        <link rel="alternate" type="text/markdown" href="/llms.txt" title="llms.txt — AI-readable summary" />
-        <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="llms-full.txt — full AI-readable content" />
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt — AI-readable summary" />
+        <link rel="alternate" type="text/plain" href="/llms-full.txt" title="llms-full.txt — full AI-readable content" />
       </head>
       <body id="top" className="flex min-h-dvh flex-col">
         <a

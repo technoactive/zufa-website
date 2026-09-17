@@ -4,7 +4,9 @@ import { buildLlmsFullTxt } from "@/lib/llms";
 export function GET() {
   return new Response(buildLlmsFullTxt(), {
     headers: {
-      "Content-Type": "text/markdown; charset=utf-8",
+      // text/plain (not text/markdown): the llms.txt convention serves .txt files as plain
+      // text and some AI fetchers refuse unknown text subtypes.
+      "Content-Type": "text/plain; charset=utf-8",
       "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
       "X-Robots-Tag": "noindex",
     },

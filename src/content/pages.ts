@@ -15,8 +15,8 @@ export interface PageEntry {
   section: "Core" | "Menus" | "Events & Services" | "Company";
 }
 
-const CONTENT_UPDATED = "2026-09-15";
-const SERVICES_UPDATED = "2026-09-08";
+const CONTENT_UPDATED = "2026-09-17";
+const SERVICES_UPDATED = "2026-09-17";
 
 export const pages: readonly PageEntry[] = [
   {
