@@ -8,7 +8,7 @@ export default function Image() {
   return renderOgImage({
     title: "Find us in",
     accent: "Hatch End",
-    subtitle: "308 Uxbridge Road, Hatch End HA5 4HR · Mon–Thu 11am–10pm · Fri–Sun 8am–10pm.",
+    subtitle: "308 Uxbridge Road, Hatch End HA5 4HR · Mon–Thu 11am–11pm · Fri–Sat 8am–midnight · Sun 8am–10pm.",
     image: "/images/feast-table.jpg",
   });
 }
