@@ -14,7 +14,7 @@ export const generalFaqs: readonly Faq[] = [
   {
     question: "What are Zufa’s opening hours?",
     answer:
-      "We are open Monday to Thursday from 11am to 11pm, Friday and Saturday from 8am to midnight, and Sunday from 8am to 10pm. Breakfast is served Friday to Sunday, 8am to midday. Our weekday lunch menu is served Monday to Friday, 12pm to 5pm.",
+      "We are open Monday and Tuesday from 11am to 11pm, Wednesday and Thursday from 8am to 11pm, Friday and Saturday from 8am to midnight, and Sunday from 8am to 10pm. Breakfast is served Wednesday to Sunday, 8am to midday. Our weekday lunch menu is served Monday to Friday, 12pm to 5pm.",
   },
   {
     question: "Do I need to book a table at Zufa?",
@@ -91,7 +91,7 @@ export const bookingFaqs: readonly Faq[] = [
   {
     question: "Do I need to book for breakfast?",
     answer:
-      "Breakfast is served Friday to Sunday from 8am to midday. You’re welcome to walk in; for a group, call us and we’ll keep a table.",
+      "Breakfast is served Wednesday to Sunday from 8am to midday. You’re welcome to walk in; for a group, call us and we’ll keep a table.",
   },
 ];
 

@@ -453,10 +453,10 @@ export const breakfastMenu: Menu = {
   title: "Breakfast Menu",
   shortTitle: "Breakfast",
   summary:
-    "Weekend breakfast in Hatch End, Friday to Sunday from 8am: manakish from the saj, Lebanese eggs, foul, labneh and halloumi, breakfast platters from £12.95, eggs Benedict, pancakes, smoothies and Lebanese coffee.",
+    "Lebanese breakfast in Hatch End, Wednesday to Sunday from 8am: manakish from the saj, Lebanese eggs, foul, labneh and halloumi, breakfast platters from £12.95, eggs Benedict, pancakes, smoothies and Lebanese coffee.",
   intro:
-    "Friday to Sunday we open at 8am for a proper Lebanese breakfast: manakish straight from the oven, eggs cooked the village way with sojok or awarma, foul and musabaha with warm bread, and platters made for sharing. If you’d rather go beyond the Levant, there are eggs Benedict on sourdough, brioche pain perdu and buttermilk pancakes, with fresh juices, smoothies and coffee to go with them.",
-  availability: "Friday – Sunday, 8am – midday",
+    "Wednesday to Sunday we open at 8am for a proper Lebanese breakfast: manakish straight from the oven, eggs cooked the village way with sojok or awarma, foul and musabaha with warm bread, and platters made for sharing. If you’d rather go beyond the Levant, there are eggs Benedict on sourdough, brioche pain perdu and buttermilk pancakes, with fresh juices, smoothies and coffee to go with them.",
+  availability: "Wednesday – Sunday, 8am – midday",
   image: "/images/dishes-detail.webp",
   imageAlt: "Lebanese breakfast dishes at Zufa Hatch End",
   pdf: "/menus/zufa-breakfast-menu.pdf",

@@ -15,7 +15,7 @@ export interface PageEntry {
   section: "Core" | "Menus" | "Events & Services" | "Company";
 }
 
-const CONTENT_UPDATED = "2026-09-17";
+const CONTENT_UPDATED = "2026-09-21";
 const SERVICES_UPDATED = "2026-09-17";
 
 export const pages: readonly PageEntry[] = [
@@ -34,7 +34,7 @@ export const pages: readonly PageEntry[] = [
     path: "/menu",
     title: "Menus",
     description:
-      "Explore every Zufa menu: à la carte, sharing platters, weekday lunch, weekend breakfast, kids, desserts and drinks — all with prices and allergen information.",
+      "Explore every Zufa menu: à la carte, sharing platters, weekday lunch, breakfast, kids, desserts and drinks — all with prices and allergen information.",
     changeFrequency: "monthly",
     priority: 0.9,
     lastModified: CONTENT_UPDATED,

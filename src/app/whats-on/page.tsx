@@ -98,10 +98,10 @@ function WeekAtZufa() {
           <SectionHeading
             eyebrow="Plan your week"
             title="Seven days, something on every one of them"
-            description="Breakfast from 8am at the weekend, weekday lunch and cocktail hours, and corkage-free Mondays. Today is highlighted — tap an offer to jump to the details."
+            description="Breakfast from 8am Wednesday to Sunday, weekday lunch and cocktail hours, and corkage-free Mondays. Today is highlighted — tap an offer to jump to the details."
           />
           <p className="inline-flex shrink-0 items-center gap-2 text-sm text-sand">
-            <Clock className="size-4 text-gold" aria-hidden /> Breakfast from 8am Friday to Sunday
+            <Clock className="size-4 text-gold" aria-hidden /> Breakfast from 8am Wednesday to Sunday
           </p>
         </Reveal>
         <Reveal delay={120} className="mt-12">

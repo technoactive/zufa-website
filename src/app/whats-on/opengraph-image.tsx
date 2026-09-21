@@ -8,7 +8,7 @@ export default function Image() {
   return renderOgImage({
     title: "What’s",
     accent: "On",
-    subtitle: "Corkage-free Mondays, 2-for-1 house cocktails, weekend breakfast and weekday lunch deals.",
+    subtitle: "Corkage-free Mondays, 2-for-1 house cocktails, breakfast Wednesday to Sunday and weekday lunch deals.",
     image: "/images/feast-table.jpg",
   });
 }

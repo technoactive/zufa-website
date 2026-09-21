@@ -14,8 +14,8 @@ const breakfast = offers.find((offer) => offer.id === "breakfast");
 export const promo = {
   enabled: true,
   /** Bump when the campaign changes so earlier dismissals no longer apply. */
-  id: "breakfast-2026-09",
-  eyebrow: "New at the weekend",
+  id: "breakfast-wed-sun-2026-09",
+  eyebrow: "Now five days a week",
   title: "Breakfast, the Lebanese way",
   body: "Manakish from the oven, foul, labneh and Lebanese eggs — or eggs Benedict, pain perdu and pancakes, with fresh juices and Lebanese coffee.",
   badge: breakfastService.label,
