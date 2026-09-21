@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { CookieConsent } from "@/components/consent/cookie-consent";
+import { PromoToast } from "@/components/marketing/promo-toast";
 import { JsonLd } from "@/components/seo/json-ld";
 import { restaurantSchema, websiteSchema } from "@/lib/schema";
 import { site, SITE_URL } from "@/content/site";
@@ -114,6 +115,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <CookieConsent />
+        <PromoToast />
         <JsonLd data={[restaurantSchema(), websiteSchema()]} />
         <Analytics />
         <SpeedInsights />

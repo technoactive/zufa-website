@@ -53,12 +53,17 @@ function writeConsent(value: Consent) {
   window.dispatchEvent(new Event(CHANGE_EVENT));
 }
 
+/** Current consent state; "unknown" during SSR, null while the banner is still showing. */
+export function useConsentSnapshot(): Snapshot {
+  return useSyncExternalStore<Snapshot>(subscribe, readConsent, () => "unknown");
+}
+
 /**
  * UK PECR / GDPR-compliant analytics consent using Google Consent Mode v2 ("basic" mode):
  * no analytics script is loaded until the visitor opts in. Honours Global Privacy Control.
  */
 export function CookieConsent() {
-  const consent = useSyncExternalStore<Snapshot>(subscribe, readConsent, () => "unknown");
+  const consent = useConsentSnapshot();
   const [manuallyOpened, setManuallyOpened] = useState(false);
 
   useEffect(() => {
