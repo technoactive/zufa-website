@@ -620,7 +620,7 @@ function Faqs() {
           </div>
         </Reveal>
         <Reveal delay={100}>
-          <FaqList faqs={generalFaqs.slice(0, 6)} light />
+          <FaqList faqs={generalFaqs.slice(0, 7)} light />
         </Reveal>
       </div>
     </Section>

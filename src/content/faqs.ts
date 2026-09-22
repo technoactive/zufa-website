@@ -1,4 +1,5 @@
 import { site } from "./site";
+import { nearbySummary } from "./areas";
 
 export interface Faq {
   question: string;
@@ -10,6 +11,10 @@ export const generalFaqs: readonly Faq[] = [
   {
     question: "Where is Zufa Lebanese restaurant?",
     answer: `Zufa is at ${site.address.full}, on the Uxbridge Road in Hatch End, North West London. We are a short walk from Hatch End Overground station and there is plenty of local parking.`,
+  },
+  {
+    question: "How far is Zufa from Pinner, Harrow and Watford?",
+    answer: `Hatch End sits between them, so Zufa is ${nearbySummary}. The London Overground runs directly from Watford Junction, Bushey and Harrow & Wealdstone to Hatch End station, a few minutes’ walk from the restaurant, and the H12 bus connects Pinner and Stanmore with the Uxbridge Road.`,
   },
   {
     question: "What are Zufa’s opening hours?",

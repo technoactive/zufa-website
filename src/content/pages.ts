@@ -15,8 +15,8 @@ export interface PageEntry {
   section: "Core" | "Menus" | "Events & Services" | "Company";
 }
 
-const CONTENT_UPDATED = "2026-09-21";
-const SERVICES_UPDATED = "2026-09-17";
+const CONTENT_UPDATED = "2026-09-22";
+const SERVICES_UPDATED = "2026-09-22";
 
 export const pages: readonly PageEntry[] = [
   {
@@ -90,7 +90,7 @@ export const pages: readonly PageEntry[] = [
     title: "Lebanese Catering in Harrow, Pinner & NW London | Zufa",
     absoluteTitle: true,
     description:
-      "Lebanese catering for weddings, parties and office lunches across Harrow, Pinner, Northwood and Watford. Mezze and charcoal grills made from scratch.",
+      "Lebanese catering for weddings, parties and office lunches across Harrow, Pinner, Northwood, Watford, Bushey and Uxbridge. Mezze and charcoal grills made from scratch.",
     changeFrequency: "monthly",
     priority: 0.9,
     lastModified: SERVICES_UPDATED,
@@ -124,7 +124,7 @@ export const pages: readonly PageEntry[] = [
     path: "/contact",
     title: "Contact & Find Us",
     description:
-      "Zufa, 308 Uxbridge Road, Hatch End HA5 4HR. Opening hours, phone, WhatsApp, email and directions.",
+      "Zufa, 308 Uxbridge Road, Hatch End HA5 4HR — five minutes from Pinner, ten from Harrow, fifteen from Watford. Opening hours, phone, WhatsApp, email and directions.",
     changeFrequency: "monthly",
     priority: 0.7,
     lastModified: CONTENT_UPDATED,

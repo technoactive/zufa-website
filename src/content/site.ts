@@ -121,7 +121,8 @@ export const site = {
 
   serviceCharge: "A 12.5% discretionary service charge is added to your bill.",
 
-  cateringAreas: ["Northwood", "Pinner", "Ruislip", "Harrow", "Stanmore", "Watford"],
+  /** Towns we cater; each has a matching entry in areas.ts. */
+  cateringAreas: ["Pinner", "Harrow", "Northwood", "Ruislip", "Stanmore", "Watford", "Bushey", "Uxbridge"],
 
   analytics: {
     gaMeasurementId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "G-KZKNT733Z9",

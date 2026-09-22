@@ -107,7 +107,7 @@ export const catering = {
   pricing:
     "Catering is quoted per head. The figure depends on your numbers, the dishes you pick and how far we’re travelling, so ask and we’ll come back with a figure rather than a range.",
   areas: site.cateringAreas,
-  areaNote: "plus the surrounding parts of North West London and Hertfordshire. Further afield? Ask. We’ve driven further for less.",
+  areaNote: "and we cover the surrounding parts of North West London and south Hertfordshire as well.",
 } as const;
 
 /* ------------------------------------------------------------------ */

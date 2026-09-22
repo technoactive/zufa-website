@@ -27,6 +27,6 @@ export const promo = {
   dismissDays: 14,
   /** Longer memory when the visitor actually clicks through. */
   convertedDays: 30,
-  /** Never show on these paths (prefix match): the destination itself and pages where people are mid-transaction. */
-  excludePaths: ["/menu/breakfast", "/bookings", "/takeaway", "/thank-you", "/privacy-policy"],
+  /** Never show on these paths (prefix match): the destination itself and pages where people are booking, ordering or filling in a form. */
+  excludePaths: ["/menu/breakfast", "/bookings", "/takeaway", "/catering", "/private-hire", "/contact", "/thank-you", "/privacy-policy"],
 } as const;

@@ -14,6 +14,7 @@ import { pageMetadata } from "@/lib/metadata";
 import { webPageSchema } from "@/lib/schema";
 import { getPage } from "@/content/pages";
 import { generalFaqs } from "@/content/faqs";
+import { areas, nearbySummary } from "@/content/areas";
 import { breakfastService, lunchService, openingHours, site } from "@/content/site";
 
 export const metadata: Metadata = pageMetadata("/contact");
@@ -170,6 +171,30 @@ export default function ContactPage() {
               </div>
             </a>
           </Reveal>
+        </div>
+
+        <div className="container-content mt-16">
+          <Reveal className="max-w-3xl">
+            <SectionHeading
+              light
+              eyebrow="Coming from nearby?"
+              title="A Lebanese restaurant near Pinner, Harrow and Watford"
+              description={`Hatch End sits between all of them: Zufa is ${nearbySummary}. Here is the easiest way in from each.`}
+            />
+          </Reveal>
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {areas.map((area, index) => (
+              <Reveal as="li" key={area.name} delay={index * 40} className="h-full">
+                <div className="flex h-full flex-col rounded-3xl border border-ink/10 bg-parchment p-6 shadow-card">
+                  <h3 className="font-display text-2xl text-ink">From {area.name}</h3>
+                  <p className="mt-1 text-xs font-medium uppercase tracking-[0.14em] text-gold-dark">
+                    About {area.driveMinutes} min by car
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-ink/70">{area.gettingHere}</p>
+                </div>
+              </Reveal>
+            ))}
+          </ul>
         </div>
 
         <div className="container-content mt-16">

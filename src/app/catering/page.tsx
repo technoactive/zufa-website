@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Check, MapPin } from "lucide-react";
+import { Car, Check, MapPin } from "lucide-react";
 import { PageHero } from "@/components/blocks/page-hero";
 import { FaqList } from "@/components/blocks/faq-list";
 import { CtaBand } from "@/components/blocks/cta-band";
@@ -16,6 +16,7 @@ import { cateringSchema, webPageSchema } from "@/lib/schema";
 import { getPage } from "@/content/pages";
 import { cateringFaqs } from "@/content/faqs";
 import { catering } from "@/content/services";
+import { areas } from "@/content/areas";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = pageMetadata("/catering");
@@ -199,43 +200,49 @@ export default function CateringPage() {
       {/* ---- Areas ---- */}
       <Section tone="charcoal" className="relative overflow-hidden">
         <span aria-hidden className="arabesque-overlay opacity-[0.045]" />
-        <div className="container-content grid gap-12 lg:grid-cols-[1fr_1.3fr] lg:items-center lg:gap-20">
-          <Reveal>
+        <div className="container-content">
+          <Reveal className="max-w-3xl">
             <SectionHeading
               eyebrow="Where we cater"
-              title="Hatch End to Watford, and the roads between"
-              description={`We’re based in ${site.address.locality}, so the towns below are a short drive with hot food still hot, ${catering.areaNote}`}
+              title="Lebanese catering in Pinner, Harrow, Watford and the roads between"
+              description={`Everything is cooked at ${site.address.full}, so every town below is close enough for hot food to arrive hot. Times are from the restaurant door, ${catering.areaNote}`}
             />
             <a
               href={site.maps.google}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-flex items-center gap-2 text-sm text-sand underline-offset-4 hover:text-gold hover:underline"
+              className="mt-6 inline-flex items-center gap-2 text-sm text-sand underline-offset-4 hover:text-gold hover:underline"
             >
               <MapPin className="size-4 text-gold" aria-hidden />
-              {site.address.full}
+              {site.address.locality} · HA5 4HR · home
             </a>
           </Reveal>
-          <Reveal delay={80}>
-            <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {[site.address.locality, ...catering.areas].map((area, index) => (
-                <li
-                  key={area}
-                  className={
-                    index === 0
-                      ? "rounded-2xl border border-gold/50 bg-gold/10 px-5 py-5 font-display text-2xl text-gold"
-                      : "rounded-2xl border border-cream/10 bg-cream/[0.03] px-5 py-5 font-display text-2xl text-cream"
-                  }
-                >
-                  {area}
-                  {index === 0 ? <span className="mt-1 block font-sans text-[0.625rem] uppercase tracking-[0.18em] text-gold/80">Home</span> : null}
-                </li>
-              ))}
-              <li className="flex items-center rounded-2xl border border-dashed border-cream/15 px-5 py-5 text-sm leading-snug text-sand">
-                Plus the rest of North West London and the Herts border
-              </li>
-            </ul>
-          </Reveal>
+          <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {areas.map((area, index) => (
+              <Reveal as="li" key={area.name} delay={index * 40} className="h-full">
+                <article className="flex h-full flex-col rounded-3xl border border-cream/10 bg-cream/[0.03] p-6 transition-colors hover:border-gold/40">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3 className="font-display text-2xl text-cream">Lebanese catering in {area.name}</h3>
+                  </div>
+                  <p className="mt-1 flex items-center gap-2 text-xs font-medium uppercase tracking-[0.14em] text-gold">
+                    <Car className="size-3.5" aria-hidden />
+                    About {area.driveMinutes} min · {area.miles} {area.miles === 1 ? "mile" : "miles"}
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-sand">{area.catering}</p>
+                </article>
+              </Reveal>
+            ))}
+            <Reveal as="li" delay={areas.length * 40} className="h-full">
+              <div className="flex h-full flex-col justify-between rounded-3xl border border-dashed border-cream/15 p-6">
+                <p className="text-sm leading-relaxed text-sand">
+                  Rickmansworth, Edgware, Wembley, Hillingdon and the rest of North West London and south Hertfordshire — if you’re not on the list, ask. We’ve driven further for less.
+                </p>
+                <Button href="#enquire" variant="light" size="sm" className="mt-5 self-start">
+                  Ask about your area
+                </Button>
+              </div>
+            </Reveal>
+          </ul>
         </div>
       </Section>
 
