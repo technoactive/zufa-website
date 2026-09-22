@@ -78,7 +78,7 @@ export const pages: readonly PageEntry[] = [
     path: "/whats-on",
     title: "What’s On",
     description:
-      "Offers and events at Zufa: corkage-free Mondays, 2-for-1 house cocktails, weekend breakfast, weekday lunch deals and private parties.",
+      "Offers and events at Zufa: corkage-free Mondays, 2-for-1 house cocktails, breakfast Wednesday to Sunday, weekday lunch deals and private parties.",
     changeFrequency: "weekly",
     priority: 0.8,
     lastModified: CONTENT_UPDATED,

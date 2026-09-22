@@ -63,7 +63,7 @@ export default function WhatsOnPage() {
             Offers, nights out and <em className="italic text-gold">celebrations</em>
           </>
         }
-        description="Corkage-free Mondays, two-for-one house cocktails, weekend breakfast, weekday lunch deals and private parties — there is always a reason to visit Zufa."
+        description="Corkage-free Mondays, two-for-one house cocktails, breakfast Wednesday to Sunday, weekday lunch deals and private parties — there is always a reason to visit Zufa."
         image={{ src: "/images/feast-table.jpg", alt: "A table of Lebanese dishes at Zufa Hatch End" }}
         crumbs={[{ name: "What’s On", path: "/whats-on" }]}
       >
