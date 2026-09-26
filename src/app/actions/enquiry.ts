@@ -64,17 +64,17 @@ const schema = z
     source: optionalChoice(optionValues("source"), "Please choose an option"),
   })
   .superRefine((data, ctx) => {
-    if (data.topic === "catering" || data.topic === "private-hire") {
-      if (!data.phone || data.phone.replace(/\D/g, "").length < 10) {
-        ctx.addIssue({
-          code: "custom",
-          path: ["phone"],
-          message:
-            data.topic === "catering"
-              ? "Please add a phone number so we can call you about the quote"
-              : "Please add a phone number so we can call you about the booking",
-        });
-      }
+    if (!data.phone || data.phone.replace(/\D/g, "").length < 10) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["phone"],
+        message:
+          data.topic === "catering"
+            ? "Please add a phone number so we can call you about the quote"
+            : data.topic === "private-hire"
+              ? "Please add a phone number so we can call you about the booking"
+              : "Please add a phone number so we can call you back",
+      });
     }
     if (data.topic === "catering") {
       if (!data.occasion) ctx.addIssue({ code: "custom", path: ["occasion"], message: "Please choose the occasion" });

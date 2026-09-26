@@ -38,7 +38,7 @@ export default function PrivacyPolicyPage() {
               <h2>Information we collect</h2>
               <ul>
                 <li>
-                  <strong>Enquiry forms.</strong> When you use our catering, private hire or contact forms we collect your name, email address, phone number (optional), event details and your message so that we can respond. We send a confirmation email to the address you give us, and we email the enquiry to our inbox so the team can reply.
+                  <strong>Enquiry forms.</strong> When you use our catering, private hire or contact forms we collect your name, email address, phone number, event details and your message so that we can respond. We send a confirmation email to the address you give us, and we email the enquiry to our inbox so the team can reply.
                 </li>
                 <li>
                   <strong>Newsletter.</strong> If you join our list we collect your email address, send a welcome email, and then send occasional news from the restaurant. You can unsubscribe from any email in one click.
