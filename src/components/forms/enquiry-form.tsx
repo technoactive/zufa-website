@@ -22,6 +22,7 @@ const initialState: EnquiryState = { status: "idle" };
 
 export function EnquiryForm({ topic, event = true, placeholder, submitLabel = "Send enquiry", className }: EnquiryFormProps) {
   const [state, action, pending] = useActionState(submitEnquiry, initialState);
+  const requirePhone = topic === "private-hire";
 
   return (
     <form action={action} noValidate className={cn("space-y-6 [color-scheme:light]", className)}>
@@ -38,9 +39,25 @@ export function EnquiryForm({ topic, event = true, placeholder, submitLabel = "S
             <input id={id} name="email" type="email" autoComplete="email" inputMode="email" required aria-invalid={invalid} aria-describedby={describedBy} className={inputClass} />
           )}
         </Field>
-        <Field label="Phone number" name="phone" error={state.errors?.phone} optional>
+        <Field
+          label="Phone number"
+          name="phone"
+          error={state.errors?.phone}
+          optional={!requirePhone}
+          hint={requirePhone ? "We’ll call to talk through the booking." : undefined}
+        >
           {({ id, describedBy, invalid }) => (
-            <input id={id} name="phone" type="tel" autoComplete="tel" inputMode="tel" aria-invalid={invalid} aria-describedby={describedBy} className={inputClass} />
+            <input
+              id={id}
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              inputMode="tel"
+              required={requirePhone}
+              aria-invalid={invalid}
+              aria-describedby={describedBy}
+              className={inputClass}
+            />
           )}
         </Field>
         {event ? (
