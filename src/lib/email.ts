@@ -61,6 +61,19 @@ function staffInbox(): string {
   return process.env.ENQUIRY_TO_EMAIL?.trim() || site.email;
 }
 
+/**
+ * Sender for internal notifications. Deliberately the same address as the
+ * staff inbox: Rspamd's SPOOF_REPLYTO rule (+6.0) fires when From and To are
+ * our domain but Reply-To is an outside address — the normal shape of a
+ * contact-form email — unless From equals To, which it treats as a web form.
+ * Sending "from" the inbox itself keeps enquiries out of the Junk folder.
+ */
+function staffFromAddress(): string {
+  const inbox = staffInbox();
+  const bare = inbox.match(/<([^>]+)>/)?.[1] ?? inbox;
+  return `Zufa Website <${bare}>`;
+}
+
 function hoursBlock(): string {
   return openingHours.map((period) => period.label).join(" · ");
 }
@@ -271,6 +284,8 @@ async function deliver(input: {
   html: string;
   text: string;
   replyTo: string;
+  /** Overrides the default public sender (used for internal notifications). */
+  from?: string;
 }): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) {
@@ -282,8 +297,8 @@ async function deliver(input: {
   }
 
   const resend = new Resend(apiKey);
-  const { error } = await resend.emails.send({
-    from: fromAddress(),
+  const { data, error } = await resend.emails.send({
+    from: input.from ?? fromAddress(),
     to: [input.to],
     replyTo: input.replyTo,
     subject: input.subject,
@@ -291,6 +306,8 @@ async function deliver(input: {
     text: input.text,
   });
   if (error) throw new Error(error.message);
+  // Resend message id, so a "didn't arrive" report can be traced in the Vercel logs.
+  console.info(`[email] sent ${data?.id ?? "?"} → ${input.to} “${input.subject}”`);
 }
 
 export async function sendEnquiryEmails(data: EnquiryPayload): Promise<void> {
@@ -299,6 +316,7 @@ export async function sendEnquiryEmails(data: EnquiryPayload): Promise<void> {
   const rows = contactRows(data);
 
   await deliver({
+    from: staffFromAddress(),
     to: staffInbox(),
     subject: `${label} from ${data.name}${data.summary ? ` — ${data.summary}` : ""}`,
     html: staffEnquiryHtml(data),
@@ -321,6 +339,7 @@ export async function sendEnquiryEmails(data: EnquiryPayload): Promise<void> {
 
 export async function sendNewsletterEmails(email: string): Promise<void> {
   await deliver({
+    from: staffFromAddress(),
     to: staffInbox(),
     subject: `Newsletter sign-up: ${email}`,
     html: staffNewsletterHtml(email),
