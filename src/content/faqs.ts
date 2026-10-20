@@ -98,6 +98,10 @@ export const bookingFaqs: readonly Faq[] = [
     answer:
       "Breakfast is served Wednesday to Sunday from 8am to midday. You’re welcome to walk in; for a group, call us and we’ll keep a table.",
   },
+  {
+    question: "Do you have a Christmas menu?",
+    answer: `Yes. Our Christmas menu is a welcome drink, Lebanese starters to share, a main course — mixed grill, lamb shank or spicy tilapia — and dessert, at £44.99 for two courses or £49.99 for three per person, with a full vegetarian menu at £38.99 and £43.99. It suits office parties, family gatherings and groups of friends. Book online for up to ${site.reservations.maxOnlinePartySize}, or call us on ${site.phone.display} for larger tables — December evenings and weekends fill first.`,
+  },
 ];
 
 export const privateHireFaqs: readonly Faq[] = [

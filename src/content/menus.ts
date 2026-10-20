@@ -342,6 +342,116 @@ export const setMenus: Menu = {
 };
 
 /* ------------------------------------------------------------------ */
+/* Christmas (seasonal)                                                */
+/* ------------------------------------------------------------------ */
+
+export const christmasMenu: Menu = {
+  slug: "christmas",
+  title: "Christmas Menu",
+  shortTitle: "Christmas",
+  summary:
+    "Zufa’s Christmas menu 2026 in Hatch End: a welcome drink, Lebanese starters to share, then mixed grill, lamb shank or spicy tilapia and dessert — two courses £44.99, three courses £49.99 per person, with a full vegetarian Christmas menu from £38.99.",
+  intro:
+    "Christmas at Zufa starts with a glass of Prosecco or a festive cocktail, then the table fills with mezze to share before a main course from the charcoal grill or the oven and a Lebanese dessert. Choose two or three courses; there is a full vegetarian menu alongside. Ideal for office parties, family gatherings and friends catching up before the holidays — book early, December evenings and weekends go first.",
+  availability: "Christmas 2026",
+  image: "/images/feast-table.jpg",
+  imageAlt: "A festive Lebanese feast at Zufa with grilled lamb, salads and mezze",
+  pdf: "/menus/zufa-christmas-menu.pdf",
+  sections: [
+    {
+      id: "christmas-menu",
+      title: "Christmas Menu",
+      description:
+        "Two courses are the shared starters and a main; three courses add dessert. A welcome drink is included with both.",
+      items: [
+        {
+          name: "Price per Person",
+          price: [
+            { label: "2 courses", price: 44.99 },
+            { label: "3 courses", price: 49.99 },
+          ],
+        },
+        {
+          name: "Welcome Drink",
+          description: "A glass of Prosecco, or our Christmas cocktail or mocktail, on arrival",
+        },
+        {
+          name: "Starters to Share",
+          description: "Moutabbal, tzatziki, fattoush salad, hommos shawarma chicken, sfiha and kebbeh lahme",
+          allergens: ["sesame", "dairy", "gluten", "nuts"],
+        },
+      ],
+    },
+    {
+      id: "christmas-mains",
+      title: "Main Course",
+      description: "Choose one.",
+      items: [
+        { name: "Mixed Grill", description: "A selection of grilled chicken, minced lamb and lamb cutlets, served with salad and vermicelli rice", allergens: ["gluten"] },
+        { name: "Lamb Shank", description: "Braised slowly with the chef’s special spices, served with vegetables and toasted nuts", allergens: ["nuts"] },
+        { name: "Spicy Lebanese Tilapia", description: "Baked tilapia with spicy sauce, garlic, onions and fresh coriander, served with rice", allergens: ["fish"], diets: ["spicy"] },
+      ],
+    },
+    {
+      id: "christmas-desserts",
+      title: "Dessert",
+      description: "Choose one.",
+      items: [
+        { name: "Cinnamon Pudding", allergens: ["dairy"], diets: ["vegetarian"] },
+        { name: "Mouhallabieh", description: "Milk pudding with orange blossom, rose-water syrup and pistachio", allergens: ["dairy", "nuts"], diets: ["vegetarian"] },
+        { name: "Baklawa Mix", allergens: ["gluten", "nuts"], diets: ["vegetarian"] },
+      ],
+    },
+    {
+      id: "vegetarian-christmas-menu",
+      title: "Vegetarian Christmas Menu",
+      description:
+        "Two courses are the shared starters and a main; three courses add dessert. A welcome drink is included with both.",
+      items: [
+        {
+          name: "Price per Person",
+          price: [
+            { label: "2 courses", price: 38.99 },
+            { label: "3 courses", price: 43.99 },
+          ],
+          diets: ["vegetarian"],
+        },
+        {
+          name: "Welcome Drink",
+          description: "A glass of Prosecco, or our Christmas cocktail or mocktail, on arrival",
+        },
+        {
+          name: "Starters to Share",
+          description: "Hommos, moutabbal, tabbouleh salad, fatayer, spicy potatoes and harra",
+          allergens: ["sesame", "gluten", "nuts", "dairy"],
+          diets: ["vegetarian"],
+        },
+      ],
+    },
+    {
+      id: "vegetarian-christmas-mains",
+      title: "Vegetarian Main Course",
+      description: "Choose one.",
+      items: [
+        { name: "Vegetarian Mixed Grill", description: "Charcoal-grilled sweet potatoes, mushrooms, bell pepper, courgette, baby potatoes, aubergine, shallots, pomegranate sauce", diets: ["vegan"] },
+        { name: "Fattet Batinjen", description: "Layered baked aubergines with creamy yoghurt, tahini, crunchy pita and pomegranate seeds", allergens: ["gluten", "dairy", "sesame"], diets: ["vegetarian"] },
+        { name: "Falafel & Halloumi Salad", description: "Falafel and halloumi on mixed green leaves, tomatoes, cucumber, pickles, crispy bread, sumac and sesame sauce", allergens: ["gluten", "dairy", "sesame", "celery"], diets: ["vegetarian"] },
+      ],
+    },
+    {
+      id: "vegetarian-christmas-desserts",
+      title: "Vegetarian Dessert",
+      description: "Choose one.",
+      items: [
+        { name: "Cinnamon Pudding", allergens: ["dairy"], diets: ["vegetarian"] },
+        { name: "Mouhallabieh", description: "Milk pudding with orange blossom, rose-water syrup and pistachio", allergens: ["dairy", "nuts"], diets: ["vegetarian"] },
+        { name: "Baklawa Mix", allergens: ["gluten", "nuts"], diets: ["vegetarian"] },
+      ],
+    },
+  ],
+};
+
+/* ------------------------------------------------------------------ */
 /* Lunch                                                               */
 /* ------------------------------------------------------------------ */
 
@@ -968,7 +1078,8 @@ export const drinksMenu: Menu = {
   ],
 };
 
-export const menus: readonly Menu[] = [aLaCarte, takeawayMenu, setMenus, lunchMenu, breakfastMenu, kidsMenu, dessertMenu, drinksMenu];
+// Seasonal menus sit near the front while they run; remove `christmasMenu` here after the season.
+export const menus: readonly Menu[] = [aLaCarte, christmasMenu, takeawayMenu, setMenus, lunchMenu, breakfastMenu, kidsMenu, dessertMenu, drinksMenu];
 
 export function getMenu(slug: string): Menu | undefined {
   return menus.find((m) => m.slug === slug);

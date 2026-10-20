@@ -183,7 +183,11 @@ export default function PrivateHirePage() {
                   <Link href="/menu/kids" className="text-gold-dark underline underline-offset-4 hover:text-ink">
                     kids menu
                   </Link>{" "}
-                  are online too. Hosting on a Monday? Corkage on wine is free.
+                  are online too. For a Christmas party, our{" "}
+                  <Link href="/menu/christmas" className="text-gold-dark underline underline-offset-4 hover:text-ink">
+                    Christmas menu
+                  </Link>{" "}
+                  is two or three courses with a welcome drink. Hosting on a Monday? Corkage on wine is free.
                 </p>
               }
             />
@@ -192,6 +196,9 @@ export default function PrivateHirePage() {
           <Reveal delay={120} className="mt-12 flex flex-wrap gap-3">
             <Button href="/menu/set-menus" variant="light" size="sm">
               Sharing platters
+            </Button>
+            <Button href="/menu/christmas" variant="light" size="sm">
+              Christmas menu
             </Button>
             <Button href="/menu/drinks" variant="light" size="sm">
               Drinks
